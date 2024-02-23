@@ -14,31 +14,30 @@
 
 #pragma once
 
-#include <QtCore/qglobal.h>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-	#include <QtGui/QLabel>
-#else
-	#include <QtWidgets/QLabel>
-#endif
+#include <QObject>
 
 namespace trikGui {
 
-/// A label that shows whether or not some connection is open (for example, Mailbox connection)
-class OpenSocketIndicator : public QLabel
+/// A label that shows whether or not some connection is open (for example,
+/// Mailbox connection)
+class OpenSocketIndicator : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool isConnected READ isConnected NOTIFY isConnectedChanged)
 public:
 	/// @param openFilePic - path to picture for open connection status
 	/// @param status - initial connection status
-	OpenSocketIndicator(const QString &openFilePic, bool status, QWidget *parent = 0);
+	OpenSocketIndicator(bool status, QObject *parent = 0);
 
-public slots:
+public Q_SLOTS:
 	/// Changes status of indicator to a given value.
 	void changeStatus(bool status);
 
 private:
-	QPixmap mOpenPic;
+	bool mIsConnected;
+	bool isConnected();
+Q_SIGNALS:
+	void isConnectedChanged();
 };
 
-}
+} // namespace trikGui

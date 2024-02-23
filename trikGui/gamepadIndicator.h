@@ -14,22 +14,23 @@
 
 #pragma once
 
+#include <QObject>
 #include <QtCore/qglobal.h>
-#include <QtWidgets/QLabel>
 
 #include <controller.h>
 
 namespace trikGui {
 
 /// A label that shows gamepad connection status.
-class GamepadIndicator : public QLabel
+class GamepadIndicator : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool isConnected READ isConnected NOTIFY isConnectedChanged)
 public:
 	/// @param controller is used to get the current gamepad info
-	explicit GamepadIndicator(Controller &controller, QWidget *parent = 0);
+	explicit GamepadIndicator(Controller &controller, QObject *parent = 0);
 
-public slots:
+public Q_SLOTS:
 	/// Updates the status to 'connect'.
 	void setOn();
 
@@ -41,6 +42,10 @@ public slots:
 
 private:
 	Controller &mController;
+	bool isConnected();
+	bool mIsConnected{false};
+Q_SIGNALS:
+	void isConnectedChanged();
 };
 
-}
+} // namespace trikGui

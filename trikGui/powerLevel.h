@@ -16,23 +16,29 @@
 
 namespace trikGui {
 
-/// Performs platform-specific querying of current low power threshold that must be set as boot option.
+/// Performs platform-specific querying of current low power threshold that must
+/// be set as boot option.
 class PowerLevel
 {
 public:
-	/// Contains values indicating settings for power threshold. Default value for TRIK is 'twentyVolt' meaning
-	/// that board will automatically switch off when power voltage is lower than 10V (or 9V on older boards).
-	enum class Level
-	{
-		/// Voltage settings for 6V scheme (used by VEX motors and other strange peripherals).
+	/// Contains values indicating settings for power threshold. Default
+	/// value for TRIK is 'twentyVolt' meaning that board will automatically
+	/// switch off when power voltage is lower than 10V (or 9V on older
+	/// boards).
+	enum class Level {
+		/// Voltage settings for 6V scheme (used by VEX motors and other
+		/// strange
+		/// peripherals).
 		sixVolt
 
 		/// Voltage settings for 12V scheme (default).
-		, twelveVolt
+		,
+		twelveVolt
 	};
 
-	/// Retuns currently selected voltage threshold level by querying GPIO pin 56.
+	/// Retuns currently selected voltage threshold level by querying GPIO
+	/// pin 56.
 	static Level currentLevel();
 };
 
-}
+}// namespace trikGui

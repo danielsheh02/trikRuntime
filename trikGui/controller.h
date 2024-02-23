@@ -20,8 +20,6 @@
 #include <trikScriptRunner/trikScriptRunner.h>
 #include <trikTelemetry/trikTelemetry.h>
 
-#include "lazyMainWidget.h"
-
 namespace trikWiFi {
 class TrikWiFi;
 }
@@ -37,47 +35,51 @@ class Controller : public QObject
 	Q_OBJECT
 
 public:
-
 	/// Constructor.
-	/// @param configPath - path to config file for trikControl, for example, /home/root/trik/.
-	explicit Controller(const QString &configPath);
+	/// @param configPath - path to config file for trikControl, for
+	/// example, /home/root/trik/.
+	explicit Controller(const QString &configPath,
+			    QObject *parent = nullptr);
 
 	~Controller() override;
 
-	/// Executes specified file as Qt Script, if it has .qts extension, or as a program otherwise.
+	/// Executes specified file as Qt Script, if it has .qts extension, or
+	/// as a program otherwise.
 	void runFile(const QString &filePath);
 
 	/// Executes given script.
 	void runScript(const QString &script);
 
-	/// Returns reference to Brick object, which provides access to robot hardware.
+	/// Returns reference to Brick object, which provides access to robot
+	/// hardware.
 	trikControl::BrickInterface &brick();
 
-	/// Returns reference to Mailbox object, which provides access to robot-to-robot communications.
-	/// Does not pass ownership to the caller.
+	/// Returns reference to Mailbox object, which provides access to
+	/// robot-to-robot communications. Does not pass ownership to the
+	/// caller.
 	trikNetwork::MailboxInterface *mailbox();
 
 	/// Reference to WiFi manager.
 	trikWiFi::TrikWiFi &wiFi();
 
-	/// Asks controller to correctly close given running widget.
-	void doCloseRunningWidget(MainWidget &widget);
-
-	/// Returns communicator connection status (whether or not both Telemetry and Communicator servers are connected).
+	/// Returns communicator connection status (whether or not both
+	/// Telemetry and Communicator servers are connected).
 	bool communicatorConnectionStatus();
 
 	/// Returns gamepad connection status.
 	bool gamepadConnectionStatus() const;
 
-public slots:
+public Q_SLOTS:
 	/// Cancels execution of current program.
 	void abortExecution();
 
-signals:
-	/// Emitted when a new script starts and therefore a running widget must be shown with the script's name.
+Q_SIGNALS:
+	/// Emitted when a new script starts and therefore a running widget must
+	/// be shown with the script's name.
 	void showRunningWidget(const QString &fileName, int scriptId);
 
-	/// Emitted when running widget for a script with a given id must be closed.
+	/// Emitted when running widget for a script with a given id must be
+	/// closed.
 	void hideRunningWidget(int scriptId);
 
 	/// Emitted when a script stops due to an error.
@@ -89,8 +91,8 @@ signals:
 	/// Emitted when both graphics and running widget must be closed.
 	void hideScriptWidgets();
 
-	/// Emitted when brick has finished deferred deinitialization so we need to refresh display to clear possible
-	/// clutter from videosensors.
+	/// Emitted when brick has finished deferred deinitialization so we need
+	/// to refresh display to clear possible clutter from videosensors.
 	void brickStopped();
 
 	/// Emitted when a robot is disconnected from a gamepad.
@@ -112,10 +114,11 @@ signals:
 	/// Emitted when Mailbox server's status changes.
 	void mailboxStatusChanged(bool connected);
 
-private slots:
+private Q_SLOTS:
 	void scriptExecutionCompleted(const QString &error, int scriptId);
 
-	void scriptExecutionFromFileStarted(const QString &fileName, int scriptId);
+	void scriptExecutionFromFileStarted(const QString &fileName,
+					    int scriptId);
 	void directScriptExecutionStarted(int scriptId);
 
 	void updateCommunicatorStatus();
@@ -129,7 +132,7 @@ private:
 	QScopedPointer<trikWiFi::TrikWiFi> mWiFi;
 	QScopedPointer<AutoRunner> mAutoRunner;
 
-	QHash<int, RunningWidget *> mRunningWidgets;  // Has ownership.
+	QHash<int, RunningWidget *> mRunningWidgets; // Has ownership.
 };
 
-}
+} // namespace trikGui

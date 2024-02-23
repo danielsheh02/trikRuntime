@@ -1,0 +1,8 @@
+Language: Cpp
+IndentWidth: 8
+TabWidth: 8
+UseTab: Always
+AccessModifierOffset: -8
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true

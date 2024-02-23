@@ -14,39 +14,41 @@
 
 #pragma once
 
-#include <QLabel>
+#include <QObject>
 
 #include <controller.h>
-#include <wiFiModeWidget.h>
+#include <wiFiMode.h>
 
 namespace trikGui {
 
 /// A label that shows wifi connection status.
-class WiFiIndicator : public QLabel
+class WiFiIndicator : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(trikGui::WiFiMode::Mode mode READ mode NOTIFY modeChanged)
 public:
 	/// @param controller is used to get the current network info
-	explicit WiFiIndicator(Controller &controller, QWidget *parent = 0);
+	explicit WiFiIndicator(Controller &controller, QObject *parent = 0);
+	Q_INVOKABLE bool isConnected();
 
-private slots:
-	/// Updates the status to 'connected'.
-	void setOn();
+public Q_SLOTS:
+	// /// Updates the status to 'connected'.
+	// void setOn();
 
-	/// Updates the status to 'disconnected'.
-	void setOff();
+	// /// Updates the status to 'disconnected'.
+	// void setOff();
 
-	/// Updates the status to 'access point mode'.
-	void setAPOn();
+	// /// Updates the status to 'access point mode'.
+	// void setAPOn();
 
-	void setLowStrength();
+	// void setLowStrength();
 
-	void setMediumStrength();
+	// void setMediumStrength();
 
-	void setHighStrength();
+	// void setHighStrength();
 
-	/// Updates the status according to mode and connected parameters.
-	void changeMode(WiFiModeWidget::Mode mode);
+	// /// Updates the status according to mode and connected parameters.
+	// void changeMode(WiFiMode::Mode mode);
 
 	/// Requests connection info from the controller and updates the status.
 	void updateStatus();
@@ -54,7 +56,11 @@ private slots:
 private:
 	QTimer mUpdateTimer;
 	Controller &mController;
-	WiFiModeWidget::Mode mMode { WiFiModeWidget::Mode::unknown };
+	WiFiMode::Mode mMode{trikGui::WiFiMode::Mode::Unknown};
+	WiFiMode::Mode mode();
+
+Q_SIGNALS:
+	void modeChanged();
 };
 
-}
+} // namespace trikGui

@@ -14,37 +14,26 @@
 
 #pragma once
 
+#include <QObject>
 #include <QtCore/qglobal.h>
-
-#include <QtWidgets/QWidget>
 
 namespace trikGui {
 
-/// Base class for a widget that can show some reading from sensor, encoder and so on.
-class AbstractIndicator : public QWidget
+/// Base class for a widget that can show some reading from sensor, encoder and
+/// so on.
+class AbstractIndicator : public QObject
 {
 	Q_OBJECT
 
 public:
 	/// Constructor.
-	/// @param parent - parent of this widget in Qt widget parent-child system.
-	explicit AbstractIndicator(QWidget *parent = 0) : QWidget(parent) {}
+	/// @param parent - parent of this widget in Qt widget parent-child
+	/// system.
+	explicit AbstractIndicator(QObject *parent = 0) : QObject(parent) {}
 
-	/// For compatibility with old Qt (until we use 5.10.1 for TRIK firmware)
-	static inline int fontMetricsHorizontalAdvance(const QWidget *w, const QString &text)
-	{
-	#if (QT_VERSION_MAJOR == 5) && (QT_VERSION_MINOR < 11)
-	#define horizontalAdvance width
-	#endif
-		return w->fontMetrics().horizontalAdvance(text);
-	#ifdef horizontalAdvance
-	#undef horizontalAdvance
-	#endif
-	}
-
-public slots:
+public Q_SLOTS:
 	/// Rereads sensor and updates widget contents.
 	virtual void renew() = 0;
 };
 
-}
+} // namespace trikGui

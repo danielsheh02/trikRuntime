@@ -12,42 +12,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * This file was modified by Yurii Litvinov to make it comply with the requirements of trikRuntime
- * project. See git revision history for detailed changes. */
+ * This file was modified by Yurii Litvinov to make it comply with the
+ * requirements of trikRuntime project. See git revision history for detailed
+ * changes. */
 
 #include <QtCore/qglobal.h>
 
 #include <QtCore/QDir>
 
+#include <QsLog.h>
 #include <trikKernel/applicationInitHelper.h>
 #include <trikKernel/deinitializationHelper.h>
-#include <QsLog.h>
 
-#include "trikGuiApplication.h"
-#include "backgroundWidget.h"
+#include "mainMenuManager.h"
+#include "managers.h"
+#include <QApplication>
+#include <QFont>
+#include <QObject>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 using namespace trikGui;
+QQmlApplicationEngine *qQmlEngine = nullptr;
+MotorsManager *motorsManager = nullptr;
+SensorsManager *sensorsManager = nullptr;
+CommunicationSettingsManager *communicationSettingsManager = nullptr;
+WiFiManager *wiFiManager = nullptr;
+TestingManager *testingManager = nullptr;
+LanguageManager *languageManager = nullptr;
 
-int main(int argc, char *argv[])
-{
-	TrikGuiApplication app(argc, argv);
+int main(int argc, char *argv[]) {
+	QApplication app(argc, argv);
 
 	trikKernel::DeinitializationHelper helper;
 	Q_UNUSED(helper);
 
 	trikKernel::ApplicationInitHelper initHelper(app);
+	//  qRegisterMetaType<trikGui::WiFiClient::NetworkInfo>(
+	//      "trikGui::WiFiClient::NetworkInfo");
+	qQmlEngine = new QQmlApplicationEngine(&app);
+	motorsManager = new MotorsManager(qQmlEngine);
+	sensorsManager = new SensorsManager(qQmlEngine);
+	communicationSettingsManager =
+	    new CommunicationSettingsManager(qQmlEngine);
+	wiFiManager = new WiFiManager(qQmlEngine);
+	languageManager = new LanguageManager(qQmlEngine);
 
-	app.setApplicationName("TrikGui");
+	qQmlEngine->rootContext()->setContextProperty("MotorsManager",
+						      motorsManager);
+	qQmlEngine->rootContext()->setContextProperty("SensorsManager",
+						      sensorsManager);
+	qQmlEngine->rootContext()->setContextProperty(
+	    "CommunicationSettingsManager", communicationSettingsManager);
+	qQmlEngine->rootContext()->setContextProperty("WiFiManager",
+						      wiFiManager);
+	qQmlEngine->rootContext()->setContextProperty("LanguageManager",
+						      languageManager);
 
-	QFile File(":/resources/stylesheet.qss");
-	File.open(QFile::ReadOnly);
-	QString styleSheet = QLatin1String(File.readAll());
-	app.setStyleSheet(styleSheet);
-
-
-	initHelper.commandLineParser().addApplicationDescription(
-				QObject::tr("Graphical user interface, TRIK Studio runtime environment and script runner of a robot")
-				);
+	initHelper.commandLineParser().addApplicationDescription(QObject::tr(
+	    "Graphical user interface, TRIK Studio runtime environment "
+	    "and script runner of a robot"));
 
 	if (!initHelper.parseCommandLine()) {
 		return 0;
@@ -61,8 +85,25 @@ int main(int argc, char *argv[])
 
 	QLOG_INFO() << "TrikGui started";
 
-	BackgroundWidget w(initHelper.configPath());
-	w.show();
+	// BackgroundWidget w(initHelper.configPath());
+	// w.setFixedWidth(240);
+	// w.setFixedHeight(320);
+	// w.show();
+
+	MainMenuManager mainMenuManager(initHelper.configPath());
+	qmlRegisterUncreatableType<MainMenuManager>(
+	    "MainMenuManager", 1, 0, "AppType", "Enum is not a type");
+	qQmlEngine->rootContext()->setContextProperty("MainMenuManager",
+						      &mainMenuManager);
+	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+	QObject::connect(
+	    qQmlEngine, &QQmlApplicationEngine::objectCreated, &app,
+	    [url](QObject *obj, const QUrl &objUrl) {
+		    if (!obj && url == objUrl)
+			    QCoreApplication::exit(-1);
+	    },
+	    Qt::QueuedConnection);
+	qQmlEngine->load(url);
 
 	return app.exec();
 }

@@ -14,40 +14,28 @@
 
 #include "scriptHolder.h"
 
-#include <trikKernel/paths.h>
 #include <QsLog.h>
+#include <trikKernel/paths.h>
 
 using namespace trikGui;
 
-ScriptHolder* ScriptHolder::instance()
-{
-	static ScriptHolder* holder = new ScriptHolder();
+ScriptHolder *ScriptHolder::instance() {
+	static ScriptHolder *holder = new ScriptHolder();
 	return holder;
 }
 
-const QStringList &ScriptHolder::titles() const
-{
-	return mTitles;
-}
+const QStringList &ScriptHolder::titles() const { return mTitles; }
 
-const QStringList &ScriptHolder::commands() const
-{
-	return mCommands;
-}
+const QStringList &ScriptHolder::commands() const { return mCommands; }
 
-int ScriptHolder::size() const
-{
-	return mTitles.length();
-}
+int ScriptHolder::size() const { return mTitles.length(); }
 
-void ScriptHolder::setData(const QString &title, const QString &command)
-{
+void ScriptHolder::setData(const QString &title, const QString &command) {
 	mTitles.push_back(title);
 	mCommands.push_back(command);
 }
 
-void ScriptHolder::clear()
-{
+void ScriptHolder::clear() {
 	mTitles.clear();
 	mCommands.clear();
 }
