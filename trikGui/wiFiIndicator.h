@@ -32,23 +32,6 @@ public:
 	Q_INVOKABLE bool isConnected();
 
 public Q_SLOTS:
-	// /// Updates the status to 'connected'.
-	// void setOn();
-
-	// /// Updates the status to 'disconnected'.
-	// void setOff();
-
-	// /// Updates the status to 'access point mode'.
-	// void setAPOn();
-
-	// void setLowStrength();
-
-	// void setMediumStrength();
-
-	// void setHighStrength();
-
-	// /// Updates the status according to mode and connected parameters.
-	// void changeMode(WiFiMode::Mode mode);
 
 	/// Requests connection info from the controller and updates the status.
 	void updateStatus();

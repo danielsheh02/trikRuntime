@@ -26,12 +26,14 @@ Rectangle {
                 anchors.fill: parent
                 anchors.margins: 5
                 radius: 10
+                color: Style.elementsOfListColor
                 Text {
                     id: _nameLabel
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
+                    color: Style.textColor
                 }
                 Text {
                     id: _value
@@ -39,6 +41,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 10
+                    color: Style.textColor
                 }
             }
         }

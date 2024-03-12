@@ -22,6 +22,7 @@ public:
 		CommSettings,
 		Language,
 		SystemSettings,
+		AppearanceMode,
 		Information
 	};
 	Q_ENUM(AppType)

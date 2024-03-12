@@ -20,12 +20,12 @@ Rectangle {
         Button {
             id: _button
             Layout.preferredHeight: parent.height / 10
-            text: qsTr("Search WiFi")
+            text: qsTr("Search Wi-Fi")
             palette.buttonText: "white"
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
             background: Rectangle {
-                color: _button.focus ? "#219D38" : "#7D7D7D"
+                color: _button.focus ? Style.darkTrikColor : "#7D7D7D"
                 radius: 10
             }
 
@@ -47,6 +47,7 @@ Rectangle {
             Layout.fillHeight: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 13
+            color: Style.textColor
         }
 
         Image {
@@ -70,6 +71,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
+                color: Style.textColor
             }
             Text {
                 text: qsTr("Password: ") + (wiFiAP.password ? wiFiAP.password : qsTr(
@@ -78,6 +80,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
+                color: Style.textColor
             }
             Text {
                 text: qsTr("IP address: ") + (wiFiAP.ipValue ? wiFiAP.ipValue : qsTr(
@@ -86,6 +89,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
+                color: Style.textColor
             }
         }
     }

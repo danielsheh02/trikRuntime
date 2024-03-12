@@ -4,126 +4,31 @@ import QtQuick.Controls 2.0
 
 Rectangle {
     id: _languageSelection
-    property var languageSelection: LanguageManager.languageSelection
+    property var languageSelection: LanguageSelection
     property var idList: _listLanguages
     color: Style.backgroundColor
     Component.onCompleted: {
         languageSelection.setQmlParent(_languageSelection)
     }
-    Rectangle {
+    ConfirmAction {
         id: _confirm
-        implicitWidth: parent.width / 1.05
-        implicitHeight: _columnConfirm.implicitHeight
-        z: 1
-        color: "#D8D8D8"
-        radius: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        border.color: "black"
-        border.width: 1
-        property string focusButton: "No"
+        textAction: qsTr("Confirm the change")
+        descrAction: qsTr("Are you sure you want to change the language?")
         property string targetLanguage: ""
-        visible: false
-        Keys.onPressed: {
-            switch (event.key) {
-            case Qt.Key_Right:
-                if (focusButton === "No") {
-                    focusButton = "Yes"
-                }
-                break
-            case Qt.Key_Left:
-                if (focusButton === "Yes") {
-                    focusButton = "No"
-                }
-                break
-            case Qt.Key_Return:
-                if (focusButton === "Yes") {
-                    _buttonYes.clicked()
-                } else if (focusButton === "No") {
-                    _buttonNo.clicked()
-                }
-                break
-            default:
-                break
-            }
+        function noOnClick() {
+            _confirm.visible = false
+            _confirm.targetLanguage = ""
+            _listLanguages.focus = true
         }
-        ColumnLayout {
-            id: _columnConfirm
-            anchors.fill: parent
-            Text {
-                text: qsTr("Confirm the change")
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.pointSize: 12
-                horizontalAlignment: Text.AlignHCenter
-                Layout.topMargin: 6
-            }
-            Rectangle {
-                Layout.preferredWidth: parent.width
-                Layout.preferredHeight: 1
-                color: "black"
-            }
-            RowLayout {
-                Layout.fillWidth: true
-                Image {
-                    source: iconsPath + "warningDel.png"
-                    Layout.preferredWidth: _languageSelection.width
-                                           < 400 ? _languageSelection.width
-                                                   / 7 : _languageSelection.width / 25
-                    Layout.preferredHeight: _languageSelection.width
-                                            < 400 ? _languageSelection.width
-                                                    / 7 : _languageSelection.width / 25
-                    Layout.leftMargin: 5
-                    Layout.rightMargin: 5
-                }
-
-                Text {
-                    text: qsTr("Are you sure you want to change the language?")
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true
-                    font.pointSize: 12
-                    Layout.rightMargin: 5
-                }
-            }
-            RowLayout {
-                Layout.alignment: Qt.AlignRight
-                Layout.bottomMargin: 7
-                Layout.rightMargin: 9
-                Layout.topMargin: 9
-                Button {
-                    id: _buttonNo
-                    text: qsTr("No")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "No" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        _confirm.visible = false
-                        _confirm.targetLanguage = ""
-                        _listLanguages.focus = true
-                    }
-                }
-                Button {
-                    id: _buttonYes
-                    text: qsTr("Yes")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "Yes" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        languageSelection.switchLanguage(
-                                    _confirm.targetLanguage)
-                        _confirm.visible = false
-                        _confirm.focusButton = "No"
-                        _confirm.targetLanguage = ""
-                        _listLanguages.focus = true
-                    }
-                }
-            }
+        function yesOnClick() {
+            languageSelection.switchLanguage(_confirm.targetLanguage)
+            _confirm.visible = false
+            _confirm.focusButton = "No"
+            _confirm.targetLanguage = ""
+            _listLanguages.focus = true
         }
     }
+
     ColumnLayout {
         id: _columMainView
         spacing: 5
@@ -133,6 +38,7 @@ Rectangle {
         Text {
             text: qsTr("Select language:")
             wrapMode: Text.Wrap
+            color: Style.textColor
         }
 
         Rectangle {
@@ -141,7 +47,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-
+            color: Style.managersBackColor
             ListView {
                 id: _listLanguages
                 anchors.fill: parent
@@ -201,7 +107,7 @@ Rectangle {
                         id: _languageName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateLanguages.isCurrent ? "#219D38" : "white"
+                        color: _delegateLanguages.isCurrent ? Style.darkTrikColor : Style.managersBackColor
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 5
@@ -221,7 +127,7 @@ Rectangle {
                                 id: _textName
                                 text: _listLanguages.getLanguage(display, index)
                                 Layout.alignment: Qt.AlignVCenter
-                                color: _delegateLanguages.isCurrent ? "white" : "black"
+                                color: _delegateLanguages.isCurrent ? "white" : Style.namesColor
                                 width: _languageName.width - _languageIcon.width
                                 wrapMode: Text.Wrap
                                 Layout.fillWidth: true

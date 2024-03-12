@@ -19,8 +19,6 @@
 #include "trikControl/brickInterface.h"
 #include "trikControl/utilities.h"
 
-#include "QsLog.h"
-#include "trikKernel/paths.h"
 #include <QPainter>
 #include <managers.h>
 
@@ -42,21 +40,22 @@ QImage Camera::requestImage(const QString &id, QSize *size,
 }
 
 void Camera::renew() {
-	QDir dir(trikKernel::Paths::imagesPath());
+	doPhoto();
+	// QDir dir(trikKernel::Paths::imagesPath());
 
-	if (!dir.exists() && !dir.mkpath(trikKernel::Paths::imagesPath())) {
-		QLOG_ERROR() << "Cannot create directory for images";
-	} else {
-		QImage image(240, 240, QImage::Format_ARGB32_Premultiplied);
-		QPainter painter(&image);
-		painter.fillRect(image.rect(), Qt::white);
-		painter.drawText(image.rect(),
-				 Qt::AlignCenter | Qt::AlignVCenter,
-				 "hello, world " + QString::number(count));
-		mPhoto = image;
-		count++;
-		Q_EMIT imageChanged();
-	}
+	// if (!dir.exists() && !dir.mkpath(trikKernel::Paths::imagesPath())) {
+	// 	QLOG_ERROR() << "Cannot create directory for images";
+	// } else {
+	// 	QImage image(240, 240, QImage::Format_ARGB32_Premultiplied);
+	// 	QPainter painter(&image);
+	// 	painter.fillRect(image.rect(), Qt::white);
+	// 	painter.drawText(image.rect(),
+	// 			 Qt::AlignCenter | Qt::AlignVCenter,
+	// 			 "hello, world " + QString::number(count));
+	// 	mPhoto = image;
+	// 	count++;
+	// 	Q_EMIT imageChanged();
+	// }
 }
 
 void Camera::doPhoto() {
@@ -71,24 +70,26 @@ void Camera::doPhoto() {
 	    trikControl::Utilities::imageFromBytes(photo, 160, 120, "rgb32");
 
 	if (!image.isNull()) {
-		QDir dir(trikKernel::Paths::imagesPath());
+		mPhoto = image;
+		Q_EMIT imageChanged();
+		// QDir dir(trikKernel::Paths::imagesPath());
 
-		if (!dir.exists() &&
-		    !dir.mkpath(trikKernel::Paths::imagesPath())) {
-			QLOG_ERROR() << "Cannot create directory for images";
-		} else {
-			const auto &name =
-			    trikKernel::Paths::imagesPath() + "/photo_" +
-			    QString::number(dir.count() - 1) + ".jpg";
-			if (!image.save(name, "JPG")) {
-				QLOG_ERROR()
-				    << "Failed to save captured image" << name;
-			}
-			mNamePhoto = name;
-			Q_EMIT namePhotoChanged();
-		}
+		// if (!dir.exists() &&
+		//     !dir.mkpath(trikKernel::Paths::imagesPath())) {
+		// 	QLOG_ERROR() << "Cannot create directory for images";
+		// } else {
+		// 	const auto &name =
+		// 	    trikKernel::Paths::imagesPath() + "/photo_" +
+		// 	    QString::number(dir.count() - 1) + ".jpg";
+		// 	if (!image.save(name, "JPG")) {
+		// 		QLOG_ERROR()
+		// 		    << "Failed to save captured image" << name;
+		// 	}
+		// 	mNamePhoto = name;
+		// 	Q_EMIT namePhotoChanged();
+		// }
 	} else {
-		// Notify QML about error
+		Q_EMIT cameraUnavailable();
 	}
 
 	mIsCreatingPhoto.store(false);

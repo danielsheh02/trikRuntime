@@ -66,129 +66,19 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    ConfirmAction {
         id: _confirm
-        width: parent.width / 1.05
-        implicitHeight: _columnConfirm.implicitHeight
-        z: 1
-        color: "#D8D8D8"
-        radius: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        border.color: "black"
-        border.width: 1
-        property string focusButton: "No"
-        property string targetLanguage: ""
-        visible: false
-
-        Keys.onPressed: {
-            switch (event.key) {
-            case Qt.Key_Right:
-                if (focusButton === "No") {
-                    focusButton = "Yes"
-                }
-                break
-            case Qt.Key_Left:
-                if (focusButton === "Yes") {
-                    focusButton = "No"
-                }
-                break
-            case Qt.Key_Return:
-                if (focusButton === "Yes") {
-                    _buttonYes.clicked()
-                } else if (focusButton === "No") {
-                    _buttonNo.clicked()
-                }
-                break
-            case Qt.Key_Escape:
-                _confirm.visible = false
-                break
-            case Qt.Key_PowerOff:
-                if (!event.isAutoRepeat) {
-                    _confirm.visible = false
-                }
-                break
-            case Qt.Key_W:
-                if (!event.isAutoRepeat) {
-                    _confirm.visible = false
-                }
-                break
-            default:
-                break
-            }
+        textAction: qsTr("Confirm the shutdown")
+        descrAction: qsTr("Are you sure you want to shutdown the controller?")
+        function noOnClick() {
+            _confirm.visible = false
+            _gridView.focus = true
         }
-        ColumnLayout {
-            id: _columnConfirm
-            anchors.fill: parent
-            Text {
-                text: qsTr("Confirm the shutdown")
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.pointSize: 12
-                horizontalAlignment: Text.AlignHCenter
-                Layout.topMargin: 6
-            }
-            Rectangle {
-                Layout.preferredWidth: parent.width
-                Layout.preferredHeight: 1
-                color: "black"
-            }
-            RowLayout {
-                Layout.fillWidth: true
-                Image {
-                    source: iconsPath + "warningDel.png"
-                    Layout.preferredWidth: _mainMenuView.width
-                                           < 400 ? _mainMenuView.width
-                                                   / 7 : _mainMenuView.width / 25
-                    Layout.preferredHeight: _mainMenuView.width
-                                            < 400 ? _mainMenuView.width
-                                                    / 7 : _mainMenuView.width / 25
-                    Layout.leftMargin: 5
-                    Layout.rightMargin: 5
-                }
-
-                Text {
-                    text: qsTr("Are you sure you want to shutdown the controller?")
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true
-                    font.pointSize: 12
-                    Layout.rightMargin: 5
-                }
-            }
-            RowLayout {
-                Layout.alignment: Qt.AlignRight
-                Layout.bottomMargin: 7
-                Layout.rightMargin: 9
-                Layout.topMargin: 9
-                Button {
-                    id: _buttonNo
-                    text: qsTr("No")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "No" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        _confirm.visible = false
-                        _confirm.targetLanguage = ""
-                        _gridView.focus = true
-                    }
-                }
-                Button {
-                    id: _buttonYes
-                    text: qsTr("Yes")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "Yes" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        MainMenuManager.shutdown()
-                    }
-                }
-            }
+        function yesOnClick() {
+            MainMenuManager.shutdown()
         }
     }
+
     ListModel {
         id: _menuItems
         ListElement {
@@ -226,18 +116,24 @@ Rectangle {
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
+            color: Style.textColor
         }
         Text {
-            text: qsTr("IP: ") + (network !== null ? network.ip : "")
+            text: qsTr("IP: ")
+                  + (network !== null ? (network.ip !== "" ? network.ip : qsTr(
+                                                                 "no connection")) : qsTr(
+                                            "no connection"))
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
+            color: Style.textColor
         }
         Text {
             text: qsTr("Hull number: ") + (network !== null ? network.hullNumber : "")
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
+            color: Style.textColor
         }
         Item {
             Layout.fillWidth: true
@@ -251,6 +147,18 @@ Rectangle {
                 property real maxTextLen: 12
                 Component.onCompleted: {
                     focus = true
+                }
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Right
+                            && _gridView.currentIndex === _menuItems.count - 1) {
+                        _gridView.currentIndex = 0
+                        event.accepted = true
+                    }
+                    if (event.key === Qt.Key_Left
+                            && _gridView.currentIndex === 0) {
+                        _gridView.currentIndex = _menuItems.count - 1
+                        event.accepted = true
+                    }
                 }
 
                 delegate: ColumnLayout {
@@ -293,8 +201,9 @@ Rectangle {
                             id: _iconWrapper
                             anchors.fill: parent
                             radius: 10
-                            border.color: _delegate.isCurrent ? "#3BB050" : "transparent"
+                            border.color: _delegate.isCurrent ? Style.lightOrStandartGreenColor : "transparent"
                             border.width: _delegate.isCurrent ? 4 : 0
+                            color: Style.elementsOfGridColor
                             Image {
                                 id: _iconMenu
                                 source: iconsPath + model.iconPath
@@ -317,6 +226,7 @@ Rectangle {
                         wrapMode: Text.Wrap
                         font.pointSize: 12
                         Layout.maximumWidth: parent.width
+                        color: Style.textColor
                     }
                 }
             }

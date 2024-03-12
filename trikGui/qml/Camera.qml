@@ -14,22 +14,46 @@ Rectangle {
 
         delegate: Item {
             id: _item
-            anchors.fill: parent
-            Connections {
-                target: display
-                onImageChanged: {
-                    _imageView.source = ""
-                    _imageView.source = "image://cameraImageProvider"
+            height: _listSensors.height
+            width: _listSensors.width
+            property string src: ""
+            Loader {
+                id: _loader
+                anchors.fill: parent
+                sourceComponent: null
+                Connections {
+                    target: display
+                    onImageChanged: {
+                        _loader.sourceComponent = _imageComponent
+                        _item.src = ""
+                        _item.src = "image://cameraImageProvider"
+                    }
+                    onCameraUnavailable: {
+                        _loader.sourceComponent = _txtComponent
+                    }
                 }
             }
-            Image {
-                id: _imageView
-                // source: display.namePhoto ? "file:" + display.namePhoto : ""
-                source: ""
-                width: parent.width
-                height: parent.width
-                fillMode: Image.PreserveAspectFit
-                cache: false
+            Component {
+                id: _txtComponent
+                Text {
+                    id: _txtNotify
+                    text: qsTr("Camera is not available")
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: Style.textColor
+                }
+            }
+            Component {
+                id: _imageComponent
+                Image {
+                    id: _imageView
+                    // source: display.namePhoto ? "file:" + display.namePhoto : ""
+                    source: _item.src
+                    width: parent.width
+                    height: parent.width
+                    fillMode: Image.PreserveAspectFit
+                    cache: false
+                }
             }
         }
     }

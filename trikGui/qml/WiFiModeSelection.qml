@@ -48,7 +48,7 @@ Rectangle {
                 focus: isCurrent
                 anchors.fill: parent
                 radius: 10
-                color: _delegateMode.isCurrent ? "#303BB050" : "white"
+                color: _delegateMode.isCurrent ? Style.focusElementsOfListColor : Style.elementsOfListColor
                 Row {
                     width: parent.width
                     height: parent.height
@@ -65,6 +65,7 @@ Rectangle {
                         id: _textMode
                         text: model.text
                         anchors.verticalCenter: parent.verticalCenter
+                        color: Style.textColor
                     }
                 }
             }

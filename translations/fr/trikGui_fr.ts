@@ -4,8 +4,16 @@
 <context>
     <name>Accelerometer</name>
     <message>
-        <location filename="../../trikGui/qml/Accelerometer.qml" line="+31"/>
+        <location filename="../../trikGui/qml/Accelerometer.qml" line="+29"/>
         <source>Accelerometer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Camera</name>
+    <message>
+        <location filename="../../trikGui/qml/Camera.qml" line="+40"/>
+        <source>Camera is not available</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -17,40 +25,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>(Press &apos;Enter&apos; to edit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Hull number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+104"/>
         <source>Leader IP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>(last two numbers)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+109"/>
         <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmAction</name>
+    <message>
+        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+101"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FileManager</name>
     <message>
-        <location filename="../../trikGui/qml/FileManager.qml" line="+56"/>
+        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
         <source>Confirm delition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+1"/>
         <source>Are you sure you want to delete all the files?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -60,17 +81,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+157"/>
+        <location line="+161"/>
         <source>Delete all ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86,12 +97,12 @@
 <context>
     <name>Information</name>
     <message>
-        <location filename="../../trikGui/qml/Information.qml" line="+22"/>
+        <location filename="../../trikGui/qml/Information.qml" line="+23"/>
         <source>OS version:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -101,7 +112,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>Not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -109,27 +120,17 @@
 <context>
     <name>Language</name>
     <message>
-        <location filename="../../trikGui/qml/Language.qml" line="+54"/>
+        <location filename="../../trikGui/qml/Language.qml" line="+15"/>
         <source>Confirm the change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+1"/>
         <source>Are you sure you want to change the language?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
+        <location line="+23"/>
         <source>Select language:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -142,27 +143,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+48"/>
         <source>Confirm the shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+1"/>
         <source>Are you sure you want to shutdown the controller?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+13"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -182,20 +173,54 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>IP: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>no connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Hull number: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Mode</name>
+    <message>
+        <location filename="../../trikGui/qml/Mode.qml" line="+17"/>
+        <source>Confirm the change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you want to change the theme?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Select mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../trikGui/trikGuiMain.cpp" line="+72"/>
+        <location filename="../../trikGui/trikGuiMain.cpp" line="+61"/>
         <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -232,7 +257,12 @@
     </message>
     <message>
         <location line="+6"/>
-        <source>Version</source>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -244,7 +274,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+15"/>
         <source>only &apos;scripts&apos; directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -273,20 +303,20 @@
     </message>
     <message>
         <location line="+15"/>
-        <location line="+63"/>
-        <location line="+15"/>
+        <location line="+76"/>
+        <location line="+14"/>
         <source>Servo motors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-72"/>
-        <location line="+58"/>
+        <location line="-84"/>
+        <location line="+70"/>
         <location line="+15"/>
         <source>Power motors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-73"/>
         <source>Accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -305,7 +335,7 @@
     <name>WiFiAP</name>
     <message>
         <location filename="../../trikGui/qml/WiFiAP.qml" line="+23"/>
-        <source>Search WiFi</source>
+        <source>Search Wi-Fi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -314,24 +344,24 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+24"/>
         <source>Name: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+8"/>
-        <location line="+8"/>
+        <location line="+9"/>
+        <location line="+9"/>
         <source>not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-9"/>
         <source>Password: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>IP address: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -339,27 +369,17 @@
 <context>
     <name>WiFiClient</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiClient.qml" line="+58"/>
+        <location filename="../../trikGui/qml/WiFiClient.qml" line="+20"/>
         <source>Confirm connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+1"/>
         <source>Are you sure you want to connect to open WiFi network?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
+        <location line="+27"/>
         <source>connecting...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -384,12 +404,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Available networks:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+19"/>
         <source>Scanning...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -402,12 +422,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>Press Escape for break</source>
         <translation type="unfinished"></translation>
     </message>

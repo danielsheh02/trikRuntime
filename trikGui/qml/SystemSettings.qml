@@ -22,6 +22,7 @@ Rectangle {
         Text {
             text: qsTr("Directory 'Files' is ...")
             wrapMode: Text.Wrap
+            color: Style.textColor
         }
 
         Rectangle {
@@ -30,7 +31,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-
+            color: Style.managersBackColor
             ListModel {
                 id: dataModel
                 ListElement {
@@ -84,7 +85,7 @@ Rectangle {
                         id: _settingsName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateSettings.isCurrent ? "#219D38" : "white"
+                        color: _delegateSettings.isCurrent ? Style.darkTrikColor : Style.managersBackColor
                         RowLayout {
                             id: _row
                             anchors.fill: parent
@@ -121,7 +122,7 @@ Rectangle {
                             Text {
                                 id: _textName
                                 text: model.text
-                                color: _delegateSettings.isCurrent ? "white" : "black"
+                                color: _delegateSettings.isCurrent ? "white" : Style.namesColor
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.fillWidth: true
                                 wrapMode: Text.Wrap

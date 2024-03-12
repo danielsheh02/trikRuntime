@@ -15,116 +15,23 @@ Rectangle {
     Component.onCompleted: {
         wiFiClient.setQmlParent(_mainWiFiClient)
     }
-    Rectangle {
+    ConfirmAction {
         id: _confirm
-        implicitWidth: parent.width / 1.05
-        implicitHeight: _columnConfirm.implicitHeight
-        z: 1
-        color: "#D8D8D8"
-        radius: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        border.color: "black"
-        border.width: 1
-        property string focusButton: "No"
-        visible: false
-        Keys.onPressed: {
-            switch (event.key) {
-            case Qt.Key_Right:
-                if (focusButton === "No") {
-                    focusButton = "Yes"
-                }
-                break
-            case Qt.Key_Left:
-                if (focusButton === "Yes") {
-                    focusButton = "No"
-                }
-                break
-            case Qt.Key_Return:
-                if (focusButton === "Yes") {
-                    _buttonYes.clicked()
-                } else if (focusButton === "No") {
-                    _buttonNo.clicked()
-                }
-                break
-            default:
-                break
-            }
+        textAction: qsTr("Confirm connection")
+        descrAction: qsTr("Are you sure you want to connect to open WiFi network?")
+        function noOnClick() {
+            _confirm.visible = false
+            _listNetworks.focus = true
         }
-        ColumnLayout {
-            id: _columnConfirm
-            anchors.fill: parent
-            Text {
-                text: qsTr("Confirm connection")
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.pointSize: 12
-                horizontalAlignment: Text.AlignHCenter
-                Layout.topMargin: 6
-            }
-            Rectangle {
-                Layout.preferredWidth: parent.width
-                Layout.preferredHeight: 1
-                color: "black"
-            }
-            RowLayout {
-                Layout.fillWidth: true
-                Image {
-                    id: _imagewar
-                    source: iconsPath + "warningDel.png"
-                    Layout.preferredWidth: _mainItem.width
-                                           < 400 ? _mainItem.width / 7 : _mainItem.width / 25
-                    Layout.preferredHeight: _mainItem.width
-                                            < 400 ? _mainItem.width / 7 : _mainItem.width / 25
-                    Layout.leftMargin: 5
-                    Layout.rightMargin: 5
-                }
-
-                Text {
-                    text: qsTr("Are you sure you want to connect to open WiFi network?")
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true
-                    Layout.rightMargin: 3
-                    font.pointSize: 12
-                }
-            }
-            RowLayout {
-                Layout.alignment: Qt.AlignRight
-                Layout.bottomMargin: 7
-                Layout.rightMargin: 9
-                Layout.topMargin: 9
-                Button {
-                    id: _buttonNo
-                    text: qsTr("No")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "No" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        _confirm.visible = false
-                        _listNetworks.focus = true
-                    }
-                }
-                Button {
-                    id: _buttonYes
-                    text: qsTr("Yes")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "Yes" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        wiFiClient.connectToSelectedNetwork(
-                                    _listNetworks.currentItem.wiFiSsid)
-                        _confirm.visible = false
-                        _confirm.focusButton = "No"
-                        _listNetworks.focus = true
-                    }
-                }
-            }
+        function yesOnClick() {
+            wiFiClient.connectToSelectedNetwork(
+                        _listNetworks.currentItem.wiFiSsid)
+            _confirm.visible = false
+            _confirm.focusButton = "No"
+            _listNetworks.focus = true
         }
     }
+
     Connections {
         target: wiFiClient
         onModelReset: {
@@ -164,7 +71,7 @@ Rectangle {
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
             background: Rectangle {
-                color: _button.focus ? "#219D38" : "#7D7D7D"
+                color: _button.focus ? Style.darkTrikColor : Style.buttonsColor
                 radius: 10
             }
 
@@ -204,11 +111,13 @@ Rectangle {
                 id: _ipValue
                 text: qsTr("IP: ") + ipValue
                 anchors.verticalCenter: parent.verticalCenter
+                color: Style.textColor
             }
         }
         Text {
             id: _availableNet
             text: qsTr("Available networks:")
+            color: Style.textColor
         }
 
         Rectangle {
@@ -217,6 +126,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
+            color: Style.managersBackColor
             ColumnLayout {
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -228,8 +138,9 @@ Rectangle {
                     text: qsTr("Scanning...")
                     wrapMode: Text.Wrap
                     width: parent.width / 1.2
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    Layout.alignment: Qt.AlignHCenter
                     horizontalAlignment: Text.AlignHCenter
+                    color: Style.textColor
                 }
                 ProgressBar {
                     indeterminate: true
@@ -244,7 +155,8 @@ Rectangle {
             ListView {
                 id: _listNetworks
                 anchors.fill: parent
-                anchors.margins: 5
+                anchors.topMargin: 4
+                anchors.bottomMargin: 4
                 model: wiFiClient
                 visible: !isScanning
                 spacing: 7
@@ -258,11 +170,24 @@ Rectangle {
                     } else if (displaySecurity === "none") {
                         return iconsPath + "openWiFiBigLock.png"
                     } else {
-                        return iconsPath + "passwordedWiFiBigLock.png"
+                        return iconsPath + "passwordedWiFi.png"
                     }
                 }
                 Component.onCompleted: {
                     currentIndex = 0
+                }
+                ScrollBar.vertical: ScrollBar {
+                    id: _scroll
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    contentItem: Rectangle {
+                        implicitWidth: 5
+                        radius: 10
+                        color: "#B6B5B5"
+                    }
+                    policy: _listNetworks.contentHeight
+                            > _listNetworks.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
                 }
                 delegate: Item {
                     id: _delegateNetworks
@@ -302,8 +227,10 @@ Rectangle {
                         anchors.fill: parent
                         radius: 10
                         color: _delegateNetworks.isCurrent
-                               && _listNetworks.focus ? "#303BB050" : "white"
-                        Row {
+                               && _listNetworks.focus ? Style.focusElementsOfListNetworksColor : Style.managersBackColor
+                        anchors.leftMargin: 9
+                        anchors.rightMargin: 9
+                        RowLayout {
                             width: parent.width
                             height: parent.height
                             anchors.left: parent.left
@@ -313,17 +240,19 @@ Rectangle {
                             Image {
                                 id: _wiFiStatus
                                 source: connectionWiFiStateIconPath ? connectionWiFiStateIconPath : ""
-                                width: connectionWiFiStateIconPath ? _mainWiFiClient.width < 400 ? _mainWiFiClient.width / 9 : _mainWiFiClient.width / 25 : 0
-                                height: connectionWiFiStateIconPath ? _mainWiFiClient.width < 400 ? _mainWiFiClient.width / 9 : _mainWiFiClient.width / 25 : 0
-                                anchors.verticalCenter: parent.verticalCenter
+                                Layout.preferredWidth: connectionWiFiStateIconPath ? _mainWiFiClient.width < 400 ? _mainWiFiClient.width / 9 : _mainWiFiClient.width / 25 : 0
+                                Layout.preferredHeight: connectionWiFiStateIconPath ? _mainWiFiClient.width < 400 ? _mainWiFiClient.width / 9 : _mainWiFiClient.width / 25 : 0
+                                Layout.alignment: Qt.AlignVCenter
                             }
                             Text {
                                 id: _textSsid
                                 text: display.ssid
                                 font.bold: display.ssid === _listNetworks.currentSsid
-                                width: _wiFiSsid.width - _wiFiStatus.width
-                                anchors.verticalCenter: parent.verticalCenter
+                                Layout.fillWidth: true
+                                Layout.rightMargin: 7
+                                Layout.alignment: Qt.AlignVCenter
                                 wrapMode: Text.Wrap
+                                color: Style.textColor
                             }
                         }
                     }

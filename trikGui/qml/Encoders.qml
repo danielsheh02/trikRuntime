@@ -27,12 +27,14 @@ Rectangle {
                 anchors.leftMargin: 6
                 anchors.rightMargin: 6
                 radius: 10
+                color: Style.elementsOfListColor
                 Text {
                     id: _nameLabel
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
+                    color: Style.textColor
                 }
                 Text {
                     id: _value
@@ -40,6 +42,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 10
+                    color: Style.textColor
                 }
                 Item {
                     width: parent.height
@@ -50,7 +53,7 @@ Rectangle {
                         anchors.fill: parent
                         anchors.margins: 8
                         color: "lightgrey"
-                        border.color: "black"
+                        border.color: "#353535"
                         radius: width / 2
 
                         Rectangle {
@@ -60,11 +63,10 @@ Rectangle {
                             height: _dial.height / 2
                             transformOrigin: Item.Top
                             rotation: display.value
-                            color: "red"
                             Rectangle {
                                 width: _dial.width / 6
                                 height: _dial.width / 6
-                                color: Style.trikColor
+                                color: Style.lightOrStandartGreenColor
                                 radius: _dial.width / 2
                                 anchors.bottom: parent.bottom
                                 anchors.horizontalCenter: parent.horizontalCenter

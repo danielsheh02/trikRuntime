@@ -62,7 +62,11 @@ HEADERS += \
         $$PWD/accelerometerMock.h \
         $$PWD/encoderMock.h \
         $$PWD/gyroscopeMock.h \
-        $$PWD/sensorMock.h
+        $$PWD/sensorMock.h \
+        $$PWD/modeManager.h \
+    wiFiAPMock.h \
+    wiFiClientMock.h \
+    wiFiModeMock.h
 
 SOURCES += \
 	$$PWD/autoRunner.cpp \
@@ -106,7 +110,11 @@ SOURCES += \
         $$PWD/accelerometerMock.cpp \
         $$PWD/encoderMock.cpp \
         $$PWD/gyroscopeMock.cpp \
-        $$PWD/sensorMock.cpp
+        $$PWD/sensorMock.cpp \
+        $$PWD/modeManager.cpp \
+    wiFiAPMock.cpp \
+    wiFiClientMock.cpp \
+    wiFiModeMock.cpp
 
 TRANSLATIONS = \
 	$$PWD/../translations/ru/trikGui_ru.ts \

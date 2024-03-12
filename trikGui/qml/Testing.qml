@@ -46,13 +46,13 @@ Rectangle {
             type: Type.Sensors
         }
         ListElement {
-            iconPath: "servo.png"
+            iconPath: "servoMotor.png"
             filePath: "Motors.qml"
             text: qsTr("Servo motors")
             type: Type.ServoMotor
         }
         ListElement {
-            iconPath: "power.png"
+            iconPath: "powerMotor.png"
             filePath: "Motors.qml"
             text: qsTr("Power motors")
             type: Type.PowerMotor
@@ -87,9 +87,24 @@ Rectangle {
         id: _listTesting
         anchors.fill: parent
         model: dataModelTesting
-        spacing: 4
+        spacing: 5
         anchors.topMargin: 4
         anchors.bottomMargin: 4
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Down
+                    && _listTesting.currentIndex === dataModelTesting.count - 1) {
+                _listTesting.currentIndex = 0
+                _listTesting.positionViewAtIndex(0, ListView.Beginning)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Up
+                       && _listTesting.currentIndex === 0) {
+                _listTesting.currentIndex = dataModelTesting.count - 1
+                _listTesting.positionViewAtIndex(dataModelTesting.count - 1,
+                                                 ListView.End)
+                event.accepted = true
+            }
+        }
         ScrollBar.vertical: ScrollBar {
             id: _scroll
             anchors.top: parent.top
@@ -106,39 +121,52 @@ Rectangle {
         delegate: Item {
             id: _delegateMode
             width: _listTesting.width
-            height: _listTesting.height / 5.5
+            height: _listTesting.height / 5.6
             property bool isCurrent: ListView.isCurrentItem
+            function chooseTestingType() {
+                if (model.text === qsTr("Servo motors") || model.text === qsTr(
+                            "Power motors")) {
+                    testingManager.createMotors(model.type)
+                } else {
+                    testingManager.createSensors(model.type)
+                }
+                var TestingComponent = Qt.createComponent(model.filePath)
+                if (TestingComponent.status === Component.Ready) {
+                    var objectTesting = TestingComponent.createObject(_mainItem)
+                    if (objectTesting === null) {
+                        console.log("Error creating object")
+                    }
+                    stack.push(objectTesting)
+                    objectTesting.idList.focus = true
+                    if (model.text === qsTr("Servo motors")
+                            || model.text === qsTr("Power motors")) {
+                        objectTesting.motors.setQmlParent(objectTesting)
+                    } else {
+                        objectTesting.sensors.setQmlParent(objectTesting)
+                    }
+                } else if (TestingComponent.status === Component.Error) {
+                    console.error("Error loading component:",
+                                  TestingComponent.errorString())
+                }
+            }
+
             Keys.onPressed: {
                 switch (event.key) {
                 case Qt.Key_Return:
-                    if (model.text === qsTr("Servo motors")
-                            || model.text === qsTr("Power motors")) {
-                        testingManager.createMotors(model.type)
-                    } else {
-                        testingManager.createSensors(model.type)
-                    }
-                    var TestingComponent = Qt.createComponent(model.filePath)
-                    if (TestingComponent.status === Component.Ready) {
-                        var objectTesting = TestingComponent.createObject(
-                                    _mainItem)
-                        if (objectTesting === null) {
-                            console.log("Error creating object")
-                        }
-                        stack.push(objectTesting)
-                        objectTesting.idList.focus = true
-                        if (model.text === qsTr("Servo motors")
-                                || model.text === qsTr("Power motors")) {
-                            objectTesting.motors.setQmlParent(objectTesting)
-                        } else {
-                            objectTesting.sensors.setQmlParent(objectTesting)
-                        }
-                    } else if (TestingComponent.status === Component.Error) {
-                        console.error("Error loading component:",
-                                      TestingComponent.errorString())
-                    }
+                    _delegateMode.chooseTestingType()
                     break
                 default:
                     break
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    _listTesting.currentIndex = model.index
+                }
+
+                onClicked: {
+                    _delegateMode.chooseTestingType()
                 }
             }
             Rectangle {
@@ -148,7 +176,7 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
                 radius: 10
-                color: _delegateMode.isCurrent ? "#303BB050" : "white"
+                color: _delegateMode.isCurrent ? Style.focusElementsOfListColor : Style.elementsOfListColor
                 RowLayout {
                     id: _row
                     anchors.fill: parent
@@ -171,6 +199,7 @@ Rectangle {
                         Layout.fillWidth: true
                         Layout.rightMargin: 7
                         Layout.alignment: Qt.AlignVCenter
+                        color: Style.textColor
                     }
                 }
             }

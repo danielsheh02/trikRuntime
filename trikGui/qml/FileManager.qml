@@ -12,124 +12,32 @@ Rectangle {
     Component.onCompleted: {
         fileManager.setQmlParent(_fileManager)
     }
-    Rectangle {
-        id: _confirm
-        implicitWidth: parent.width / 1.05
-        implicitHeight: _columnConfirm.implicitHeight
-        z: 1
-        color: "#D8D8D8"
-        radius: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        border.color: "black"
-        border.width: 1
-        property string focusButton: "No"
-        property bool deleteAll: false
-        visible: false
-        Keys.onPressed: {
-            switch (event.key) {
-            case Qt.Key_Right:
-                if (focusButton === "No") {
-                    focusButton = "Yes"
-                }
-                break
-            case Qt.Key_Left:
-                if (focusButton === "Yes") {
-                    focusButton = "No"
-                }
-                break
-            case Qt.Key_Return:
-                if (focusButton === "Yes") {
-                    _buttonYes.clicked()
-                } else if (focusButton === "No") {
-                    _buttonNo.clicked()
-                }
-                break
-            default:
-                break
-            }
-        }
-        ColumnLayout {
-            id: _columnConfirm
-            anchors.fill: parent
-            Text {
-                text: qsTr("Confirm delition")
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.pointSize: 12
-                horizontalAlignment: Text.AlignHCenter
-                Layout.topMargin: 6
-            }
-            Rectangle {
-                Layout.preferredWidth: parent.width
-                Layout.preferredHeight: 1
-                color: "black"
-            }
-            RowLayout {
-                Layout.fillWidth: true
-                Image {
-                    source: iconsPath + "warningDel.png"
-                    Layout.preferredWidth: _fileManager.width
-                                           < 400 ? _fileManager.width / 7 : _fileManager.width / 25
-                    Layout.preferredHeight: _fileManager.width
-                                            < 400 ? _fileManager.width / 7 : _fileManager.width / 25
-                    Layout.leftMargin: 5
-                    Layout.rightMargin: 5
-                }
 
-                Text {
-                    text: _confirm.deleteAll ? qsTr("Are you sure you want to delete all the files?") : qsTr(
-                                                   "Are you sure you want to delete file?")
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true
-                    Layout.rightMargin: 3
-                    font.pointSize: 12
-                }
+    ConfirmAction {
+        id: _confirm
+        textAction: qsTr("Confirm delition")
+        descrAction: _confirm.deleteAll ? qsTr("Are you sure you want to delete all the files?") : qsTr(
+                                              "Are you sure you want to delete file?")
+        property bool deleteAll: false
+        function noOnClick() {
+            if (!_confirm.deleteAll) {
+                _listFiles.focus = true
+            } else {
+                _buttonDeleteAll.focus = true
             }
-            RowLayout {
-                Layout.alignment: Qt.AlignRight
-                Layout.bottomMargin: 7
-                Layout.rightMargin: 9
-                Layout.topMargin: 9
-                Button {
-                    id: _buttonNo
-                    text: qsTr("No")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "No" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        if (!_confirm.deleteAll) {
-                            _listFiles.focus = true
-                        } else {
-                            _buttonDeleteAll.focus = true
-                        }
-                        _confirm.visible = false
-                    }
-                }
-                Button {
-                    id: _buttonYes
-                    text: qsTr("Yes")
-                    palette.buttonText: "white"
-                    background: Rectangle {
-                        color: _confirm.focusButton === "Yes" ? "#3BB050" : "#7D7D7D"
-                        radius: 10
-                    }
-                    onClicked: {
-                        if (!_confirm.deleteAll) {
-                            fileManager.remove(visualModel.modelIndex(
-                                                   _listFiles.currentIndex))
-                            _listFiles.focus = true
-                        } else {
-                            fileManager.removeAll()
-                            _buttonDeleteAll.focus = true
-                        }
-                        _confirm.visible = false
-                        _confirm.focusButton = "No"
-                    }
-                }
+            _confirm.visible = false
+        }
+        function yesOnClick() {
+            if (!_confirm.deleteAll) {
+                fileManager.remove(visualModel.modelIndex(
+                                       _listFiles.currentIndex))
+                _listFiles.focus = true
+            } else {
+                fileManager.removeAll()
+                _buttonDeleteAll.focus = true
             }
+            _confirm.visible = false
+            _confirm.focusButton = "No"
         }
     }
     ColumnLayout {
@@ -142,14 +50,16 @@ Rectangle {
             text: _columMainView.currentPath
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            color: Style.textColor
         }
 
         Rectangle {
             id: _mainView
             Layout.fillWidth: true
             Layout.fillHeight: true
-            radius: 10
+            radius: 13
             clip: true
+            color: Style.managersBackColor
             Connections {
                 target: FileManagerServer
                 onFileSystemModelChanged: {
@@ -237,7 +147,7 @@ Rectangle {
                                 anchors.fill: parent
                                 radius: 10
                                 color: _delegateFiles.isCurrent
-                                       && _listFiles.focus ? "#219D38" : "white"
+                                       && _listFiles.focus ? Style.darkTrikColor : Style.managersBackColor
                                 RowLayout {
                                     anchors.fill: parent
                                     anchors.leftMargin: 5
@@ -254,7 +164,7 @@ Rectangle {
                                         id: _textName
                                         text: display
                                         color: _delegateFiles.isCurrent
-                                               && _listFiles.focus ? "white" : "black"
+                                               && _listFiles.focus ? "white" : Style.namesColor
                                         Layout.fillWidth: true
                                         Layout.rightMargin: 7
                                         Layout.alignment: Qt.AlignVCenter
@@ -270,7 +180,7 @@ Rectangle {
                     text: qsTr("Delete all ...")
                     palette.buttonText: "white"
                     background: Rectangle {
-                        color: _buttonDeleteAll.focus ? "#219D38" : "#7D7D7D"
+                        color: _buttonDeleteAll.focus ? Style.darkTrikColor : Style.buttonsColor
                         radius: 10
                     }
                     Layout.alignment: Qt.AlignBottom

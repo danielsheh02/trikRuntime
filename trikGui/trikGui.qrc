@@ -13,7 +13,6 @@
         <file>resources/openWifi.png</file>
         <file>resources/passwordedWifi.png</file>
         <file>resources/wait.png</file>
-        <file>resources/gamepad_on.png</file>
         <file>resources/stylesheet.qss</file>
         <file>resources/wifi-signal-high.png</file>
         <file>resources/wifi-signal-low.png</file>
@@ -51,8 +50,7 @@
         <file>resourcesQml/gyroscope.png</file>
         <file>resourcesQml/analog.png</file>
         <file>resourcesQml/encoder.png</file>
-        <file>resourcesQml/power.png</file>
-        <file>resourcesQml/servo.png</file>
+        <file>resourcesQml/servoMotor.png</file>
         <file>resourcesQml/digital.png</file>
         <file>qml/Language.qml</file>
         <file>resourcesQml/ru.png</file>
@@ -76,11 +74,18 @@
         <file>resourcesQml/accessPoint.png</file>
         <file>resourcesQml/wiFiIndicator.png</file>
         <file>resourcesQml/mailbox.png</file>
-        <file>resourcesQml/gamepad_on.png</file>
         <file>resourcesQml/communicatorConnected.png</file>
         <file>qml/RunningCodeComponent.qml</file>
         <file>qml/WiFiModeSelection.qml</file>
         <file>qml/Camera.qml</file>
         <file>resourcesQml/pwmcapture.png</file>
+        <file>resourcesQml/powerMotor.png</file>
+        <file>qml/ConfirmAction.qml</file>
+        <file>qml/Mode.qml</file>
+        <file>resourcesQml/palette.png</file>
+        <file>resourcesQml/moon.png</file>
+        <file>resourcesQml/sun.png</file>
+        <file>resourcesQml/gamepad.png</file>
+        <file>qml/qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

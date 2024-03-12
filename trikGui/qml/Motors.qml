@@ -59,15 +59,17 @@ Rectangle {
                 anchors.rightMargin: 10
                 radius: 10
                 border {
-                    color: "#3BB050"
+                    color: Style.trikColor
                     width: _delegateLever.isCurrent ? 3 : 0
                 }
+                color: Style.elementsOfListColor
                 Text {
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.leftMargin: 10
                     anchors.topMargin: 5
+                    color: Style.textColor
                 }
 
                 Switch {
@@ -93,15 +95,15 @@ Rectangle {
                         width: parent.width
                         height: parent.height
                         radius: 13
-                        color: display.isOn ? "#3BB050" : "#ffffff"
-                        border.color: display.isOn ? "#3BB050" : "#cccccc"
+                        color: display.isOn ? Style.trikColor : Style.switchBorderColor3
+                        border.color: display.isOn ? Style.trikColor : Style.switchBorderColor1
                         Rectangle {
                             x: display.isOn ? parent.width - width : 0
                             width: parent.width / 2
                             height: parent.height
                             radius: 13
-                            color: control.down ? "#cccccc" : "#ffffff"
-                            border.color: display.isOn ? "#3BB050" : "#999999"
+                            color: control.down ? "#CCCCCC" : Style.switchBorderColor3
+                            border.color: display.isOn ? Style.trikColor : Style.switchBorderColor2
                         }
                     }
                 }
@@ -113,7 +115,7 @@ Rectangle {
                     width: parent.width / 2
                     height: parent.height / 2.3
                     font.pointSize: 13
-                    anchors.bottomMargin: 0
+                    // anchors.bottomMargin: 1
                     value: display.power
                     from: display.minPower
                     to: display.maxPower
@@ -128,7 +130,7 @@ Rectangle {
 
                     contentItem: Rectangle {
                         id: _counter
-                        border.color: "#D8D8D8"
+                        border.color: "#7D7D7D"
                         anchors.right: _up.left
                         anchors.top: parent.top
                         anchors.left: _down.right
@@ -147,7 +149,7 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.top: parent.top
                         color: _sb.up.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: enabled ? "#21be2b" : "#bdbebf"
+                        border.color: enabled ? Style.spinBorderColor : "#bdbebf"
                         Text {
                             text: '+'
                             font.pointSize: 17
@@ -161,7 +163,7 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         color: _sb.down.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: enabled ? Style.trikColor : "#bdbebf"
+                        border.color: enabled ? Style.spinBorderColor : "#E3E3E3"
                         Text {
                             text: '-'
                             font.pointSize: 17

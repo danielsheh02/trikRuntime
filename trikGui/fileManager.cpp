@@ -19,9 +19,7 @@
 #include "fileManager.h"
 
 #include <QtCore/QDir>
-#include <QtCore/QSettings>
 
-#include "managers.h"
 #include <QQmlContext>
 #include <QsLog.h>
 #include <trikKernel/exceptions/trikRuntimeException.h>

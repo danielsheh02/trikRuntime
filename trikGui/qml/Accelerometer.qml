@@ -14,8 +14,6 @@ Item {
         model: sensors
         delegate: Item {
             id: _listDelegateSensors
-            anchors.fill: parent
-
             Column {
                 Rectangle {
                     id: _coordsInfo
@@ -23,25 +21,29 @@ Item {
                     height: _accelerometer.height * 0.4
                     color: Style.backgroundColor
                     Column {
-                        spacing: 10
+                        spacing: 7
                         anchors.fill: parent
                         anchors.margins: 10
 
                         Text {
                             text: qsTr("Accelerometer:")
                             anchors.left: parent.left
+                            color: Style.textColor
                         }
                         Text {
                             text: "x: " + coords[0].toString()
                             anchors.left: parent.left
+                            color: Style.textColor
                         }
                         Text {
                             text: "y: " + coords[1].toString()
                             anchors.left: parent.left
+                            color: Style.textColor
                         }
                         Text {
                             text: "z: " + coords[2].toString()
                             anchors.left: parent.left
+                            color: Style.textColor
                         }
                     }
                 }
@@ -57,7 +59,8 @@ Item {
                         width: _tester.circleRadius * 2
                         height: _tester.circleRadius * 2
                         radius: _tester.circleRadius
-                        border.color: "black"
+                        border.color: Style.gyroAccelBordersColor
+                        color: Style.gyroAccelBackColor
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             verticalCenter: parent.verticalCenter
@@ -65,14 +68,14 @@ Item {
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: "black"
+                            color: Style.gyroAccelBordersColor
                             x: 0
                             y: _circle.height / 2
                         }
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: "black"
+                            color: Style.gyroAccelBordersColor
                             x: _circle.width / 2
                             y: 0
                             transform: Rotation {
@@ -84,7 +87,7 @@ Item {
                             id: innerCircle
                             width: _tester.innerCircleRadius * 2
                             height: _tester.innerCircleRadius * 2
-                            color: Style.trikColor
+                            color: Style.lightTrikColor
                             radius: _tester.innerCircleRadius
                             x: _tester.circleRadius - _tester.innerCircleRadius
                             y: _tester.circleRadius - _tester.innerCircleRadius

@@ -1,11 +1,19 @@
-#include "mainMenuManager.h"
+#ifdef DESKTOP
+#include "wiFiModeMock.h"
+#endif
+
 #include "batteryIndicator.h"
+#include "communicationSettings.h"
 #include "fileManager.h"
 #include "gamepadIndicator.h"
 #include "information.h"
+#include "languageSelection.h"
+#include "mainMenuManager.h"
 #include "managers.h"
+#include "modeManager.h"
 #include "network.h"
 #include "openSocketIndicator.h"
+#include "testingManager.h"
 #include "wiFiIndicator.h"
 #include <QApplication>
 #include <QProcess>
@@ -69,13 +77,18 @@ void MainMenuManager::createApp(AppType appType) {
 					{"0"});
 		QProcess::startDetached("/etc/trik/init-ov7670-320x240.sh",
 					{"1"});
-		testingManager = new TestingManager(mController, this);
+		TestingManager *testingManager =
+		    new TestingManager(mController, this);
 		qQmlEngine->rootContext()->setContextProperty("TestingManager",
 							      testingManager);
 		break;
 	}
 	case AppType::Network: {
+#ifndef DESKTOP
 		WiFiMode *wiFiMode = new WiFiMode(mController.wiFi(), this);
+#else
+		WiFiModeMock *wiFiMode = new WiFiModeMock(this);
+#endif
 		qQmlEngine->rootContext()->setContextProperty("WiFiModeServer",
 							      wiFiMode);
 		break;
@@ -85,7 +98,8 @@ void MainMenuManager::createApp(AppType appType) {
 			CommunicationSettings *communicationSettings =
 			    new CommunicationSettings(*mController.mailbox(),
 						      this);
-			communicationSettingsManager->setCommunicationSettings(
+			qQmlEngine->rootContext()->setContextProperty(
+			    "CommunicationSettingsServer",
 			    communicationSettings);
 		} else {
 			Q_ASSERT(!"Mailbox is disabled but "
@@ -98,7 +112,8 @@ void MainMenuManager::createApp(AppType appType) {
 	case AppType::Language: {
 		LanguageSelection *languageSelection =
 		    new LanguageSelection(this);
-		languageManager->setLanguageSelection(languageSelection);
+		qQmlEngine->rootContext()->setContextProperty(
+		    "LanguageSelection", languageSelection);
 		break;
 	}
 	case AppType::SystemSettings: {
@@ -108,6 +123,12 @@ void MainMenuManager::createApp(AppType appType) {
 			this, &MainMenuManager::changeFileManagerRoot);
 		qQmlEngine->rootContext()->setContextProperty(
 		    "SystemSettingsComponent", systemSettings);
+		break;
+	}
+	case AppType::AppearanceMode: {
+		ModeManager *modeManager = new ModeManager(this);
+		qQmlEngine->rootContext()->setContextProperty("ModeManager",
+							      modeManager);
 		break;
 	}
 	case AppType::Information: {

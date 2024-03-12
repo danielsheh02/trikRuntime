@@ -35,19 +35,21 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Style.textColor
         }
         Text {
             text: qsTr("Please wait")
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Style.textColor
         }
         ProgressBar {
             indeterminate: true
             palette.dark: Style.trikColor
             Layout.fillWidth: true
             background: Rectangle {
-                color: "white"
+                color: Style.progressBarWiFiInitColor
                 radius: 3
             }
         }
@@ -57,6 +59,7 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Style.textColor
         }
     }
 }

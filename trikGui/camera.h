@@ -53,6 +53,7 @@ private:
 Q_SIGNALS:
 	void namePhotoChanged();
 	void imageChanged();
+	void cameraUnavailable();
 };
 
 } // namespace trikGui

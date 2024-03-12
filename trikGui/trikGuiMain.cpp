@@ -26,20 +26,18 @@
 
 #include "mainMenuManager.h"
 #include "managers.h"
+#include "modeManager.h"
 #include <QApplication>
 #include <QFont>
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QSettings>
 
 using namespace trikGui;
 QQmlApplicationEngine *qQmlEngine = nullptr;
 MotorsManager *motorsManager = nullptr;
 SensorsManager *sensorsManager = nullptr;
-CommunicationSettingsManager *communicationSettingsManager = nullptr;
-WiFiManager *wiFiManager = nullptr;
-TestingManager *testingManager = nullptr;
-LanguageManager *languageManager = nullptr;
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
@@ -48,27 +46,18 @@ int main(int argc, char *argv[]) {
 	Q_UNUSED(helper);
 
 	trikKernel::ApplicationInitHelper initHelper(app);
-	//  qRegisterMetaType<trikGui::WiFiClient::NetworkInfo>(
-	//      "trikGui::WiFiClient::NetworkInfo");
+
 	qQmlEngine = new QQmlApplicationEngine(&app);
+
 	motorsManager = new MotorsManager(qQmlEngine);
 	sensorsManager = new SensorsManager(qQmlEngine);
-	communicationSettingsManager =
-	    new CommunicationSettingsManager(qQmlEngine);
-	wiFiManager = new WiFiManager(qQmlEngine);
-	languageManager = new LanguageManager(qQmlEngine);
 
 	qQmlEngine->rootContext()->setContextProperty("MotorsManager",
 						      motorsManager);
 	qQmlEngine->rootContext()->setContextProperty("SensorsManager",
 						      sensorsManager);
-	qQmlEngine->rootContext()->setContextProperty(
-	    "CommunicationSettingsManager", communicationSettingsManager);
-	qQmlEngine->rootContext()->setContextProperty("WiFiManager",
-						      wiFiManager);
-	qQmlEngine->rootContext()->setContextProperty("LanguageManager",
-						      languageManager);
 
+	ModeManager::initMode();
 	initHelper.commandLineParser().addApplicationDescription(QObject::tr(
 	    "Graphical user interface, TRIK Studio runtime environment "
 	    "and script runner of a robot"));
@@ -85,11 +74,6 @@ int main(int argc, char *argv[]) {
 
 	QLOG_INFO() << "TrikGui started";
 
-	// BackgroundWidget w(initHelper.configPath());
-	// w.setFixedWidth(240);
-	// w.setFixedHeight(320);
-	// w.show();
-
 	MainMenuManager mainMenuManager(initHelper.configPath());
 	qmlRegisterUncreatableType<MainMenuManager>(
 	    "MainMenuManager", 1, 0, "AppType", "Enum is not a type");
@@ -104,6 +88,8 @@ int main(int argc, char *argv[]) {
 	    },
 	    Qt::QueuedConnection);
 	qQmlEngine->load(url);
+	qputenv("QT_QUICK_CONTROLS_STYLE", QByteArray("Material"));
+	qputenv("QT_QUICK_CONTROLS_MATERIAL_THEME", QByteArray("Dark"));
 
 	return app.exec();
 }

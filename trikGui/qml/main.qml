@@ -11,11 +11,12 @@ Window {
     maximumHeight: 320
     maximumWidth: 240
     title: qsTr("TRIK")
+
     property string iconsPath: "../resourcesQml/"
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 0
+        spacing: -1
 
         StatusBar {
             id: _statusBar
@@ -61,6 +62,7 @@ Window {
                                 stack.pop()
                             }
                             stack.currentItem.idList.focus = true
+                            stack.currentItem.idList.currentIndex = 0
                             if (stack.currentItem === _mainMenu) {
                                 stack.currentItem.timer.start()
                             }

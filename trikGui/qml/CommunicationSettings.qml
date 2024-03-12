@@ -5,7 +5,7 @@ import QtQml.Models 2.1
 Rectangle {
     id: _communication
     color: Style.backgroundColor
-    property var communicationSettings: CommunicationSettingsManager.communicationSettings
+    property var communicationSettings: CommunicationSettingsServer
     property var objectForQmlParentSetting: communicationSettings
     property var idList: _listDigitsHull
 
@@ -25,17 +25,20 @@ Rectangle {
             text: qsTr("Comm settings")
             font.pointSize: 15
             font.bold: true
+            color: Style.textColor
         }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("(Press 'Enter' to edit)")
             font.pointSize: 8
+            color: Style.textColor
         }
         Text {
             anchors.left: parent.left
             anchors.leftMargin: 10
             text: qsTr("Hull number:")
             font.pointSize: 15
+            color: Style.textColor
         }
         Item {
             width: parent.width / 3.5
@@ -69,6 +72,7 @@ Rectangle {
                         width: parent.width / 2
                         height: parent.height
                         radius: 5
+                        color: Style.cellsColor
                         property int currentValue: parseInt(
                                                        _listDigitsHull.hullNumberStr[index])
                         border {
@@ -76,8 +80,7 @@ Rectangle {
                                     && _listsDigits.whatFocused === "hull"
                                     && _listDigitsHull.currentIndex
                                     === index) ? "red" : (_listsDigits.whatFocused === "hull"
-                                                          && _listDigitsHull.currentIndex
-                                                          === index) ? "#219D38" : "black"
+                                                          && _listDigitsHull.currentIndex === index) ? Style.lightOrStandartGreenColor : Style.commSettingsBorderColor
                             width: (_listDigitsHull.focusDigit
                                     && _listsDigits.whatFocused === "hull"
                                     && _listDigitsHull.currentIndex
@@ -89,6 +92,7 @@ Rectangle {
                             anchors.centerIn: parent
                             text: currentValue
                             font.pointSize: 13
+                            color: Style.textColor
                         }
                         Keys.onPressed: {
                             switch (event.key) {
@@ -138,12 +142,14 @@ Rectangle {
             anchors.leftMargin: 10
             text: qsTr("Leader IP:")
             font.pointSize: 15
+            color: Style.textColor
         }
         Text {
             anchors.left: parent.left
             anchors.leftMargin: 10
             text: qsTr("(last two numbers)")
             font.pointSize: 10
+            color: Style.textColor
         }
         Item {
             width: parent.width / 1.5
@@ -172,14 +178,13 @@ Rectangle {
                         property var currentValue: index !== _listDigitsIp.indexOfSeparator ? parseInt(_listDigitsIp.ip[index]) : "."
                         property real maxValue: index === 0
                                                 || index === 4 ? 3 : 6
-                        color: index
-                               !== _listDigitsIp.indexOfSeparator ? "white" : Style.backgroundColor
+                        color: index !== _listDigitsIp.indexOfSeparator ? Style.cellsColor : Style.backgroundColor
                         border {
                             color: (_listDigitsIp.focusDigit
                                     && _listsDigits.whatFocused === "ip"
                                     && _listDigitsIp.currentIndex
                                     === index) ? "red" : (_listsDigits.whatFocused === "ip"
-                                                          && _listDigitsIp.currentIndex === index) ? "#219D38" : (index !== _listDigitsIp.indexOfSeparator) ? "black" : "transparent"
+                                                          && _listDigitsIp.currentIndex === index) ? Style.lightOrStandartGreenColor : (index !== _listDigitsIp.indexOfSeparator) ? Style.commSettingsBorderColor : "transparent"
                             width: (_listDigitsIp.focusDigit
                                     && _listsDigits.whatFocused === "ip"
                                     && _listDigitsIp.currentIndex
@@ -192,6 +197,7 @@ Rectangle {
                             anchors.centerIn: parent
                             text: currentValue
                             font.pointSize: index !== _listDigitsIp.indexOfSeparator ? 13 : 25
+                            color: Style.textColor
                         }
 
                         Keys.onPressed: {
@@ -256,7 +262,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.margins: 8
             background: Rectangle {
-                color: _button.focus ? "#219D38" : "#7D7D7D"
+                color: _button.focus ? Style.darkTrikColor : Style.buttonsColor
                 radius: 10
             }
             function onConnectButtonClicked() {

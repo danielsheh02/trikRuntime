@@ -46,7 +46,7 @@ public:
 		PowerMotor,
 		ServoMotor,
 	};
-	// Q_ENUM(MotorType)
+
 	/// Constructor
 	/// @param brick - reference to trikControl::Brick instance.
 	/// @param type - type of motors we want to test.

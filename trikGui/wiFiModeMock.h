@@ -14,16 +14,13 @@
 
 #pragma once
 
-#include "wiFiClient.h"
 #include <QEventLoop>
 #include <trikKernel/rcReader.h>
 #include <trikWiFi/trikWiFi.h>
 
 namespace trikGui {
 
-/// Widget which allows to set wi-fi mode (client or access point) and then
-/// opens corresponding configuration widget.
-class WiFiMode : public QObject
+class WiFiModeMock : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString initStatus READ initStatus NOTIFY initStatusChanged)
@@ -32,11 +29,7 @@ public:
 	enum class Mode { AccessPoint, Client, Unknown };
 	Q_ENUM(Mode)
 
-	/// Constructor
-	/// @param parent - parent of this widget in Qt object hierarchy.
-	explicit WiFiMode(trikWiFi::TrikWiFi &wiFi, QObject *parent = 0);
-
-	~WiFiMode();
+	explicit WiFiModeMock(QObject *parent = 0);
 
 	QString initStatus();
 
@@ -49,9 +42,8 @@ public Q_SLOTS:
 	void setMode(Mode mode);
 
 private:
-	trikWiFi::TrikWiFi &mWiFi;
-	trikKernel::RcReader mRcReader;
 	QString mInitStatus;
+	Mode mCurrentMode;
 
 Q_SIGNALS:
 	void initStatusChanged();

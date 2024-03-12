@@ -36,9 +36,15 @@ Rectangle {
             appType: AppType.SystemSettings
         }
         ListElement {
+            iconPath: "palette.png"
+            filePath: "Mode.qml"
+            text: qsTr("Appearance")
+            appType: AppType.AppearanceMode
+        }
+        ListElement {
             iconPath: "version.png"
             filePath: "Information.qml"
-            text: qsTr("Version")
+            text: qsTr("About")
             appType: AppType.Information
         }
     }
@@ -46,9 +52,37 @@ Rectangle {
     ListView {
         id: _listSettings
         anchors.fill: parent
-        anchors.margins: 7
+        anchors.topMargin: 4
+        anchors.bottomMargin: 4
         model: dataModelSettings
         spacing: 7
+        ScrollBar.vertical: ScrollBar {
+            id: _scroll
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            contentItem: Rectangle {
+                implicitWidth: 5
+                radius: 10
+                color: "#B6B5B5"
+            }
+            policy: _listSettings.contentHeight
+                    > _listSettings.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
+        }
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Down
+                    && _listSettings.currentIndex === dataModelSettings.count - 1) {
+                _listSettings.currentIndex = 0
+                _listSettings.positionViewAtIndex(0, ListView.Beginning)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Up
+                       && _listSettings.currentIndex === 0) {
+                _listSettings.currentIndex = dataModelSettings.count - 1
+                _listSettings.positionViewAtIndex(dataModelSettings.count - 1,
+                                                  ListView.End)
+                event.accepted = true
+            }
+        }
         delegate: Item {
             id: _delegate
             width: _listSettings.width
@@ -92,8 +126,10 @@ Rectangle {
                 id: _mode
                 focus: isCurrent
                 anchors.fill: parent
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
                 radius: 10
-                color: _delegate.isCurrent ? "#303BB050" : "white"
+                color: _delegate.isCurrent ? Style.focusElementsOfListColor : Style.elementsOfListColor
 
                 RowLayout {
                     id: _row
@@ -116,6 +152,7 @@ Rectangle {
                         Layout.fillWidth: true
                         Layout.rightMargin: 3
                         Layout.alignment: Qt.AlignVCenter
+                        color: Style.textColor
                     }
                 }
             }
