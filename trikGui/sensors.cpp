@@ -20,12 +20,8 @@ Sensors::Sensors(trikControl::BrickInterface &brick, const QStringList &ports,
 		 SensorType sensorType, QObject *parent)
     : QAbstractListModel(parent), mBrick(brick), mInterval(100),
       mSensorType(sensorType) {
-	if (mSensorType == Sensors::SensorType::Camera) {
-		mTimer.setInterval(10);
-		qInfo() << "10MS";
-	} else {
-		mTimer.setInterval(mInterval);
-	}
+	mTimer.setInterval(mInterval);
+
 	int i = 0;
 	if (mSensorType == Sensors::SensorType::Gyroscope ||
 	    mSensorType == Sensors::SensorType::Accelerometer ||

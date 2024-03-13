@@ -8,27 +8,7 @@ Rectangle {
     property var idList: _listModes
     color: Style.backgroundColor
     Component.onCompleted: {
-        console.log("ya tuta")
-        console.log(modeSelection)
         modeSelection.setQmlParent(_modeSelection)
-    }
-    ConfirmAction {
-        id: _confirm
-        textAction: qsTr("Confirm the change")
-        descrAction: qsTr("Are you sure you want to change the theme?")
-        property string targetMode: ""
-        function noOnClick() {
-            _confirm.visible = false
-            _confirm.targetMode = null
-            _listModes.focus = true
-        }
-        function yesOnClick() {
-            modeSelection.switchMode(_confirm.targetMode)
-            _confirm.visible = false
-            _confirm.focusButton = "No"
-            _confirm.targetMode = null
-            _listModes.focus = true
-        }
     }
 
     ColumnLayout {
@@ -88,10 +68,15 @@ Rectangle {
                     property var isCurrent: ListView.isCurrentItem
                     Keys.onPressed: {
                         switch (event.key) {
-                        case Qt.Key_Return:
-                            _confirm.targetMode = model.mode
-                            _confirm.focus = true
-                            _confirm.visible = true
+                        case Qt.Key_Up:
+                            if (_listModes.currentIndex > 0) {
+                                modeSelection.switchMode("light")
+                            }
+                            break
+                        case Qt.Key_Down:
+                            if (_listModes.currentIndex < _listModes.count - 1) {
+                                modeSelection.switchMode("dark")
+                            }
                             break
                         default:
                             break

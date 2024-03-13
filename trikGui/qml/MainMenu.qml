@@ -8,10 +8,12 @@ Rectangle {
     property var network: Network
     property var idList: _gridView
     property var timer: _holdTimer
+    property var confirmWindow: _confirm
 
     Connections {
         target: RunningCode
         property var runningCodeObject: null
+
         onShowRunningCodeComponent: {
             var RunningCodeComponent = Qt.createComponent(
                         "RunningCodeComponent.qml")
@@ -20,8 +22,11 @@ Rectangle {
                 if (object === null) {
                     console.log("Error creating object")
                 }
-                object.idText.text = qsTr("Running ") + programName
-                object.idText.color = "black"
+                if (programName === "direct command") {
+                    object.idText.text = qsTr("Running direct command")
+                } else {
+                    object.idText.text = qsTr("Running ") + programName
+                }
                 runningCodeObject = object
                 object.focus = true
                 stack.push(object)
@@ -58,24 +63,55 @@ Rectangle {
 
     Timer {
         id: _holdTimer
-        interval: 2000
-
+        interval: 1800
+        repeat: true
+        property int count: 0
         onTriggered: {
-            _confirm.focus = true
-            _confirm.visible = true
+            if (_holdTimer.count === 0) {
+                _confirm.focus = true
+                _confirm.visible = true
+                count++
+            } else {
+                MainMenuManager.shutdown()
+            }
         }
     }
 
-    ConfirmAction {
+    Rectangle {
         id: _confirm
-        textAction: qsTr("Confirm the shutdown")
-        descrAction: qsTr("Are you sure you want to shutdown the controller?")
-        function noOnClick() {
-            _confirm.visible = false
-            _gridView.focus = true
-        }
-        function yesOnClick() {
-            MainMenuManager.shutdown()
+        width: parent.width / 1.05
+        height: parent.height / 3.8
+        z: 1
+        color: Style.confirmWindowColor
+        radius: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        border.color: Style.delimeterLineColor
+        border.width: 1
+        visible: false
+
+        RowLayout {
+            id: _rowConfrim
+            anchors.fill: parent
+            anchors.margins: 10
+            Image {
+                source: iconsPath + "warningDel.png"
+                Layout.preferredWidth: _mainMenuView.width
+                                       < 400 ? _mainMenuView.width / 7 : _mainMenuView.width / 25
+                Layout.preferredHeight: _mainMenuView.width
+                                        < 400 ? _mainMenuView.width / 7 : _mainMenuView.width / 25
+                Layout.leftMargin: 5
+                Layout.rightMargin: 5
+            }
+
+            Text {
+                text: qsTr("Keep holding to turn off the controller.")
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.pointSize: 12
+                Layout.rightMargin: 5
+                color: Style.textColor
+            }
         }
     }
 

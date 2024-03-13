@@ -5,6 +5,7 @@ import WiFiMode 1.0
 Rectangle {
     color: Style.statusBarColor
     property var network: Network
+
     Connections {
         target: WiFiIndicator
         onModeChanged: {
@@ -90,5 +91,6 @@ Rectangle {
         anchors.left: parent.left
         height: 1
         color: Style.delimeterLineColor
+        anchors.bottomMargin: -1
     }
 }

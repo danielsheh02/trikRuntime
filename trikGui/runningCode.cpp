@@ -27,8 +27,6 @@ RunningCode::RunningCode(Controller &controller, QObject *parent)
 		&RunningCode::showError);
 	connect(&mController, &Controller::hideRunningWidget, this,
 		&RunningCode::hideRunningCode);
-	// connect(&mController, &Controller::hideGraphicsWidget, this,
-	// 	&RunningCode::hideGraphicsWidget);
 	connect(&mController, &Controller::hideScriptWidgets, this,
 		&RunningCode::hideScript);
 }
@@ -51,6 +49,7 @@ int RunningCode::scriptId() const { return mScriptId; }
 
 void RunningCode::showRunningCode(const QString &fileName, int scriptId) {
 	setProgram(fileName, scriptId);
+
 	Q_EMIT showRunningCodeComponent(fileName);
 }
 

@@ -35,13 +35,17 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Style.textColor
         }
 
         Text {
             text: qsTr("Press Power to abort")
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            Layout.bottomMargin: 15
+            Layout.alignment: Qt.AlignBottom
             horizontalAlignment: Text.AlignHCenter
+            color: Style.textColor
         }
     }
 }

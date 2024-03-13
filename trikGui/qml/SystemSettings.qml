@@ -43,6 +43,7 @@ Rectangle {
                     type: RootType.AllFS
                 }
             }
+
             ListView {
                 id: _listSettings
                 anchors.fill: parent
@@ -81,6 +82,7 @@ Rectangle {
                             break
                         }
                     }
+
                     Rectangle {
                         id: _settingsName
                         anchors.fill: parent

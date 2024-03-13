@@ -116,6 +116,26 @@
         <source>Not found</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+13"/>
+        <source>Icons by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Icons8,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Flaticon,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Svgrepo</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Language</name>
@@ -126,7 +146,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Are you sure you want to change the language?</source>
+        <source>The controller will be restarted. Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -138,18 +158,18 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../../trikGui/qml/MainMenu.qml" line="+23"/>
+        <location filename="../../trikGui/qml/MainMenu.qml" line="+26"/>
+        <source>Running direct command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Running </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+48"/>
-        <source>Confirm the shutdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Are you sure you want to shutdown the controller?</source>
+        <location line="+80"/>
+        <source>Keep holding to turn off the controller.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -192,17 +212,7 @@
 <context>
     <name>Mode</name>
     <message>
-        <location filename="../../trikGui/qml/Mode.qml" line="+17"/>
-        <source>Confirm the change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Are you sure you want to change the theme?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
+        <location filename="../../trikGui/qml/Mode.qml" line="+21"/>
         <source>Select mode:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,7 +238,7 @@
 <context>
     <name>RunningCodeComponent</name>
     <message>
-        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+41"/>
+        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+42"/>
         <source>Press Power to abort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -448,16 +458,8 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../../trikGui/qml/main.qml" line="+13"/>
+        <location filename="../../trikGui/qml/main.qml" line="+14"/>
         <source>TRIK</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>trikGui::Controller</name>
-    <message>
-        <location filename="../../trikGui/controller.cpp" line="+205"/>
-        <source>direct command</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

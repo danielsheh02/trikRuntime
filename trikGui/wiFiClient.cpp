@@ -88,6 +88,7 @@ void WiFiClient::onNetworksInfoUpdated() {
 	}
 
 	// Q_EMIT availableNetworksChanged();
+
 	isScanning = false;
 	Q_EMIT endResetModel();
 }

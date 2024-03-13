@@ -13,7 +13,7 @@ Rectangle {
     ConfirmAction {
         id: _confirm
         textAction: qsTr("Confirm the change")
-        descrAction: qsTr("Are you sure you want to change the language?")
+        descrAction: qsTr("The controller will be restarted. Do you want to continue?")
         property string targetLanguage: ""
         function noOnClick() {
             _confirm.visible = false

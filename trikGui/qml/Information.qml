@@ -59,13 +59,13 @@ Rectangle {
                 Text {
                     text: qsTr("Icons by")
                     wrapMode: Text.Wrap
-                    font.pointSize: 13
+                    font.pointSize: 11
                     color: Style.informationColor
                 }
                 Text {
                     text: qsTr("Icons8,")
                     wrapMode: Text.Wrap
-                    font.pointSize: 13
+                    font.pointSize: 11
                     color: Style.informationColor
                     font.underline: true
                     MouseArea {
@@ -79,7 +79,7 @@ Rectangle {
                 Text {
                     text: qsTr("Flaticon,")
                     wrapMode: Text.Wrap
-                    font.pointSize: 13
+                    font.pointSize: 11
                     color: Style.informationColor
                     font.underline: true
                     MouseArea {
@@ -93,7 +93,7 @@ Rectangle {
                 Text {
                     text: qsTr("Svgrepo")
                     wrapMode: Text.Wrap
-                    font.pointSize: 13
+                    font.pointSize: 11
                     color: Style.informationColor
                     font.underline: true
                     MouseArea {

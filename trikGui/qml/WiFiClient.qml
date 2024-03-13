@@ -24,11 +24,11 @@ Rectangle {
             _listNetworks.focus = true
         }
         function yesOnClick() {
-            wiFiClient.connectToSelectedNetwork(
-                        _listNetworks.currentItem.wiFiSsid)
             _confirm.visible = false
             _confirm.focusButton = "No"
             _listNetworks.focus = true
+            wiFiClient.connectToSelectedNetwork(
+                        _listNetworks.currentItem.wiFiSsid)
         }
     }
 

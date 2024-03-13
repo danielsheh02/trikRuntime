@@ -6,12 +6,12 @@ QtObject {
 
     property string mode: ThemeMode
     property color backgroundColor: mode === "light" ? '#70D8D8D8' : '#313131'
-    property color progressBarWiFiInitColor: mode === "light" ? 'white' : '#505050'
+    property color progressBarWiFiInitColor: mode === "light" ? 'white' : 'dimgray'
     property color statusBarColor: mode === "light" ? 'white' : '#232323'
     property color textColor: mode === "light" ? 'black' : 'white'
-    property color managersBackColor: mode === "light" ? 'white' : '#505050'
+    property color managersBackColor: mode === "light" ? 'white' : 'dimgray'
     property color delimeterLineColor: mode === "light" ? 'black' : '#979797'
-    property color confirmWindowColor: mode === "light" ? "#D8D8D8" : "#505050"
+    property color confirmWindowColor: mode === "light" ? "#D8D8D8" : "dimgray"
     property color buttonsColor: mode === "light" ? "#7D7D7D" : "#949494"
     property color cellsColor: mode === "light" ? "white" : "#949494"
     property color namesColor: mode === "light" ? "black" : "white"

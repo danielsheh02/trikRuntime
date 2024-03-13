@@ -85,8 +85,11 @@ void LanguageSelection::switchLanguage(QString targetLanguage) {
 			   QSettings::IniFormat);
 	settings.setValue("locale", targetLanguage);
 	settings.sync();
-	trikKernel::TranslationsHelper::initLocale(false);
-	qQmlEngine->retranslate();
+	QApplication::exit();
+	// Translation does not work in real time on Qt version 5.10.
+	// Uncomment these lines when updating the Qt version in Trik.
+	// trikKernel::TranslationsHelper::initLocale(false);
+	// qQmlEngine->retranslate();
 }
 
 void LanguageSelection::setQmlParent(QObject *parent) { setParent(parent); }

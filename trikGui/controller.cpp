@@ -202,5 +202,5 @@ void Controller::scriptExecutionFromFileStarted(const QString &fileName,
 }
 
 void Controller::directScriptExecutionStarted(int scriptId) {
-	scriptExecutionFromFileStarted(tr("direct command"), scriptId);
+	scriptExecutionFromFileStarted("direct command", scriptId);
 }

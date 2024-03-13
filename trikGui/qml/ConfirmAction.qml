@@ -101,7 +101,7 @@ Rectangle {
                 text: qsTr("No")
                 palette.buttonText: "white"
                 background: Rectangle {
-                    color: _confirm.focusButton === "No" ? Style.trikColor : Style.buttonsColor
+                    color: _confirm.focusButton === "No" ? Style.darkTrikColor : Style.buttonsColor
                     radius: 10
                 }
                 onClicked: {
@@ -113,7 +113,7 @@ Rectangle {
                 text: qsTr("Yes")
                 palette.buttonText: "white"
                 background: Rectangle {
-                    color: _confirm.focusButton === "Yes" ? Style.trikColor : Style.buttonsColor
+                    color: _confirm.focusButton === "Yes" ? Style.darkTrikColor : Style.buttonsColor
                     radius: 10
                 }
                 onClicked: {

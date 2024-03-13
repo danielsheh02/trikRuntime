@@ -131,6 +131,26 @@
         <source>Not found</source>
         <translation>Не найден</translation>
     </message>
+    <message>
+        <location line="+13"/>
+        <source>Icons by</source>
+        <translation>Иконки</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Icons8,</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Flaticon,</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Svgrepo</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>Language</name>
@@ -140,9 +160,8 @@
         <translation>Подтвердите изменение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to change the language?</source>
-        <translation>Вы уверены, что хотите сменить язык?</translation>
+        <translation type="vanished">Вы уверены, что хотите сменить язык?</translation>
     </message>
     <message>
         <source>No</source>
@@ -151,6 +170,19 @@
     <message>
         <source>Yes</source>
         <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <source>Confirm the change language</source>
+        <translation type="vanished">Подтвердите изменение</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The controller will be restarted. Do you want to continue?</source>
+        <translation>Контроллер будет перезагружен. Продолжить?</translation>
+    </message>
+    <message>
+        <source>The application will be restarted. Do you want to continue?</source>
+        <translation type="vanished">Приложение будет перезапущено. Продолжить?</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -161,19 +193,17 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../../trikGui/qml/MainMenu.qml" line="+23"/>
+        <location filename="../../trikGui/qml/MainMenu.qml" line="+28"/>
         <source>Running </source>
         <translation>Выполняется </translation>
     </message>
     <message>
-        <location line="+48"/>
         <source>Confirm the shutdown</source>
-        <translation>Подтвердите выключение</translation>
+        <translation type="vanished">Подтвердите выключение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to shutdown the controller?</source>
-        <translation>Вы уверены, что хотите выключить контроллер?</translation>
+        <translation type="vanished">Вы уверены, что хотите выключить контроллер?</translation>
     </message>
     <message>
         <source>No</source>
@@ -184,7 +214,7 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+93"/>
         <source>Files</source>
         <translation>Файлы</translation>
     </message>
@@ -203,7 +233,21 @@
         <translation type="vanished">Камера</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="-107"/>
+        <source>Running direct command</source>
+        <translation>Выполняется команда с компьютера</translation>
+    </message>
+    <message>
+        <source>Keep holding to turn off the controller</source>
+        <translation type="vanished">Удерживайте кнопку для выключения</translation>
+    </message>
+    <message>
+        <location line="+82"/>
+        <source>Keep holding to turn off the controller.</source>
+        <translation>Удерживайте кнопку для выключения.</translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <source>Name: </source>
         <translation>Имя: </translation>
     </message>
@@ -227,17 +271,15 @@
 <context>
     <name>Mode</name>
     <message>
-        <location filename="../../trikGui/qml/Mode.qml" line="+17"/>
         <source>Confirm the change</source>
-        <translation>Подтвердите изменение</translation>
+        <translation type="vanished">Подтвердите изменение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to change the theme?</source>
-        <translation>Вы уверены, что хотите сменить тему?</translation>
+        <translation type="vanished">Вы уверены, что хотите сменить тему?</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location filename="../../trikGui/qml/Mode.qml" line="+21"/>
         <source>Select mode:</source>
         <translation>Выберите тему:</translation>
     </message>
@@ -263,7 +305,7 @@
 <context>
     <name>RunningCodeComponent</name>
     <message>
-        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+41"/>
+        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+42"/>
         <source>Press Power to abort</source>
         <translation>Нажмите кнопку Питание для выхода</translation>
     </message>
@@ -354,7 +396,7 @@
     <message>
         <location line="-9"/>
         <source>PWM capture</source>
-        <translation>Захват PWM</translation>
+        <translation>Захват ШИМ</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -430,7 +472,7 @@
     <message>
         <location filename="../../trikGui/qml/WiFiClient.qml" line="+20"/>
         <source>Confirm connection</source>
-        <translation>Подтверждите подключение</translation>
+        <translation>Подтвердите подключение</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -526,7 +568,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../../trikGui/qml/main.qml" line="+13"/>
+        <location filename="../../trikGui/qml/main.qml" line="+14"/>
         <source>TRIK</source>
         <translation>ТРИК</translation>
     </message>
@@ -696,9 +738,8 @@
 <context>
     <name>trikGui::Controller</name>
     <message>
-        <location filename="../../trikGui/controller.cpp" line="+205"/>
         <source>direct command</source>
-        <translation>команда с компьютера</translation>
+        <translation type="vanished">команда с компьютера</translation>
     </message>
 </context>
 <context>

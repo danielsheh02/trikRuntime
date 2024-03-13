@@ -179,6 +179,7 @@ Rectangle {
                     id: _buttonDeleteAll
                     text: qsTr("Delete all ...")
                     palette.buttonText: "white"
+
                     background: Rectangle {
                         color: _buttonDeleteAll.focus ? Style.darkTrikColor : Style.buttonsColor
                         radius: 10

@@ -30,7 +30,6 @@ void WiFiModeMock::createWiFiAP() {
 }
 
 void WiFiModeMock::setMode(Mode mode) {
-	qInfo() << "setMode";
 	if (mCurrentMode != mode) {
 		WiFiInit wiFiInit;
 		qQmlEngine->rootContext()->setContextProperty("WiFiInitServer",

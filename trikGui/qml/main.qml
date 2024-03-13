@@ -2,8 +2,9 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
+import QtQuick.Controls.Material 2.0
 
-Window {
+ApplicationWindow {
     id: root
     visible: true
     minimumHeight: 320
@@ -48,7 +49,7 @@ Window {
                             stack.currentItem.destroy()
                             stack.pop()
                         }
-                        stack.currentItem.idList.focus = true
+                        stack.currentItem.idList.currentIndex = 0
                         if (stack.currentItem === _mainMenu) {
                             stack.currentItem.timer.start()
                         }
@@ -61,7 +62,6 @@ Window {
                                 stack.currentItem.destroy()
                                 stack.pop()
                             }
-                            stack.currentItem.idList.focus = true
                             stack.currentItem.idList.currentIndex = 0
                             if (stack.currentItem === _mainMenu) {
                                 stack.currentItem.timer.start()
@@ -79,6 +79,9 @@ Window {
                     if (!event.isAutoRepeat
                             && stack.currentItem === _mainMenu) {
                         stack.currentItem.timer.stop()
+                        stack.currentItem.timer.count = 0
+                        stack.currentItem.confirmWindow.visible = false
+                        stack.currentItem.idList.focus = true
                     }
                     break
                 case Qt.Key_W:
@@ -86,6 +89,9 @@ Window {
                         if (!event.isAutoRepeat
                                 && stack.currentItem === _mainMenu) {
                             stack.currentItem.timer.stop()
+                            stack.currentItem.timer.count = 0
+                            stack.currentItem.confirmWindow.visible = false
+                            stack.currentItem.idList.focus = true
                         }
                     }
                     break
