@@ -16,31 +16,28 @@
 
 #include <QtCore/QFileInfo>
 
-#include <trikKernel/paths.h>
 #include <QsLog.h>
+#include <trikKernel/paths.h>
 
 #include "controller.h"
 
 using namespace trikGui;
 
-AutoRunner::AutoRunner(Controller &controller)
-	: mController(controller)
-{
+AutoRunner::AutoRunner(Controller &controller) : mController(controller) {
 	QFileInfo autorunFileInfo(fileName());
 	if (autorunFileInfo.exists() && autorunFileInfo.isReadable()) {
 		/// Timer is needed to wait for trikControl to initialize.
-		/// @todo Make underlying components emit signal when they are ready for script execution.
+		/// @todo Make underlying components emit signal when they are
+		/// ready for script execution.
 		QTimer::singleShot(1000, this, SLOT(doLaunch()));
 	}
 }
 
-void AutoRunner::doLaunch()
-{
+void AutoRunner::doLaunch() {
 	QLOG_INFO() << "Launching autorun file:" << fileName();
 	mController.runFile(fileName());
 }
 
-QString AutoRunner::fileName()
-{
+QString AutoRunner::fileName() {
 	return trikKernel::Paths::userScriptsPath() + "autorun.js";
 }

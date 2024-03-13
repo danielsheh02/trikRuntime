@@ -14,6 +14,8 @@
 
 #pragma once
 
+#include <QTranslator>
+#include <QVector>
 #include <QtCore/QString>
 
 namespace trikKernel {
@@ -23,11 +25,13 @@ class TranslationsHelper
 {
 public:
 	/// Initializes locale and loads translations.
-	/// @param localizationDisabled - if true, no translations will be loaded and default English locale will be used.
+	/// @param localizationDisabled - if true, no translations will be
+	/// loaded and default English locale will be used.
 	static void initLocale(bool localizationDisabled);
 
 private:
 	static void loadTranslators(const QString &locale);
+	static QVector<QTranslator *> mCurrentTranslators;
 };
 
-}
+} // namespace trikKernel

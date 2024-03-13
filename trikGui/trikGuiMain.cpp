@@ -12,42 +12,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * This file was modified by Yurii Litvinov to make it comply with the requirements of trikRuntime
- * project. See git revision history for detailed changes. */
+ * This file was modified by Yurii Litvinov to make it comply with the
+ * requirements of trikRuntime project. See git revision history for detailed
+ * changes. */
 
 #include <QtCore/qglobal.h>
 
 #include <QtCore/QDir>
 
+#include <QsLog.h>
 #include <trikKernel/applicationInitHelper.h>
 #include <trikKernel/deinitializationHelper.h>
-#include <QsLog.h>
 
-#include "trikGuiApplication.h"
-#include "backgroundWidget.h"
+#include "mainMenuManager.h"
+#include "managers.h"
+#include "modeManager.h"
+#include <QApplication>
+#include <QFont>
+#include <QObject>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QSettings>
 
 using namespace trikGui;
+QQmlApplicationEngine *qQmlEngine = nullptr;
+MotorsManager *motorsManager = nullptr;
+SensorsManager *sensorsManager = nullptr;
 
-int main(int argc, char *argv[])
-{
-	TrikGuiApplication app(argc, argv);
+int main(int argc, char *argv[]) {
+	QApplication app(argc, argv);
 
 	trikKernel::DeinitializationHelper helper;
 	Q_UNUSED(helper);
 
 	trikKernel::ApplicationInitHelper initHelper(app);
 
-	app.setApplicationName("TrikGui");
+	qQmlEngine = new QQmlApplicationEngine(&app);
 
-	QFile File(":/resources/stylesheet.qss");
-	File.open(QFile::ReadOnly);
-	QString styleSheet = QLatin1String(File.readAll());
-	app.setStyleSheet(styleSheet);
+	motorsManager = new MotorsManager(qQmlEngine);
+	sensorsManager = new SensorsManager(qQmlEngine);
 
+	qQmlEngine->rootContext()->setContextProperty("MotorsManager",
+						      motorsManager);
+	qQmlEngine->rootContext()->setContextProperty("SensorsManager",
+						      sensorsManager);
 
-	initHelper.commandLineParser().addApplicationDescription(
-				QObject::tr("Graphical user interface, TRIK Studio runtime environment and script runner of a robot")
-				);
+	ModeManager::initMode();
+	initHelper.commandLineParser().addApplicationDescription(QObject::tr(
+	    "Graphical user interface, TRIK Studio runtime environment "
+	    "and script runner of a robot"));
 
 	if (!initHelper.parseCommandLine()) {
 		return 0;
@@ -61,8 +74,20 @@ int main(int argc, char *argv[])
 
 	QLOG_INFO() << "TrikGui started";
 
-	BackgroundWidget w(initHelper.configPath());
-	w.show();
+	MainMenuManager mainMenuManager(initHelper.configPath());
+	qmlRegisterUncreatableType<MainMenuManager>(
+	    "MainMenuManager", 1, 0, "AppType", "Enum is not a type");
+	qQmlEngine->rootContext()->setContextProperty("MainMenuManager",
+						      &mainMenuManager);
+	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+	QObject::connect(
+	    qQmlEngine, &QQmlApplicationEngine::objectCreated, &app,
+	    [url](QObject *obj, const QUrl &objUrl) {
+		    if (!obj && url == objUrl)
+			    QCoreApplication::exit(-1);
+	    },
+	    Qt::QueuedConnection);
+	qQmlEngine->load(url);
 
 	return app.exec();
 }

@@ -25,13 +25,13 @@ class ScriptHolder
 {
 public:
 	/// Deleted
-	ScriptHolder(ScriptHolder const&) = delete;
+	ScriptHolder(ScriptHolder const &) = delete;
 
 	/// Deleted
-	ScriptHolder& operator=(ScriptHolder const&) = delete;
+	ScriptHolder &operator=(ScriptHolder const &) = delete;
 
 	/// Creates instance of ScriptHolder.
-	static ScriptHolder* instance();
+	static ScriptHolder *instance();
 
 	/// Returns list which contains titles of commands.
 	const QStringList &titles() const;
@@ -58,4 +58,4 @@ private:
 	QStringList mCommands;
 };
 
-}
+}// namespace trikGui

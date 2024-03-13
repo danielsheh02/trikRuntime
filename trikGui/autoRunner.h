@@ -28,10 +28,11 @@ class AutoRunner : QObject
 
 public:
 	/// Constructor.
-	/// @param parent - parent of this widget in Qt widget parent-child system.
+	/// @param parent - parent of this widget in Qt widget parent-child
+	/// system.
 	explicit AutoRunner(Controller &controller);
 
-private slots:
+private Q_SLOTS:
 	void doLaunch();
 
 private:
@@ -40,4 +41,4 @@ private:
 	Controller &mController;
 };
 
-}
+} // namespace trikGui

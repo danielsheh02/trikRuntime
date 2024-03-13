@@ -7,3 +7,6 @@
 [submodule "qslog/qslog"]
 	path = qslog/qslog
 	url = https://bitbucket.org/codeimproved/qslog.git
+[submodule "Qt-QrCodeGenerator"]
+	path = Qt-QrCodeGenerator
+	url = git@github.com:alex-spataru/Qt-QrCodeGenerator.git

@@ -2,137 +2,673 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
-    <name>FileSystemFilter</name>
+    <name>Accelerometer</name>
     <message>
-        <location filename="../../trikGui/fileSystemFilter.cpp" line="+26"/>
-        <source>Delete all...</source>
-        <translation>Удалить всё...</translation>
+        <location filename="../../trikGui/qml/Accelerometer.qml" line="+29"/>
+        <source>Accelerometer:</source>
+        <translation>Акселерометр:</translation>
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>Camera</name>
     <message>
-        <location filename="../../trikGui/trikGuiMain.cpp" line="+49"/>
-        <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
-        <translation>Графический интерфейс, среда времени выполнения для TRIK Studio и исполнитель скриптов на роботе</translation>
-    </message>
-</context>
-<context>
-    <name>trikGui::AccelerometerWidget</name>
-    <message>
-        <location filename="../../trikGui/accelerometerWidget.cpp" line="+29"/>
-        <source>Accelerometer</source>
-        <translation>Акселерометр</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-</context>
-<context>
-    <name>trikGui::CameraWidget</name>
-    <message>
-        <location filename="../../trikGui/cameraWidget.cpp" line="+30"/>
-        <source>Camera</source>
-        <translation>Камера</translation>
-    </message>
-    <message>
-        <location line="+55"/>
+        <location filename="../../trikGui/qml/Camera.qml" line="+40"/>
         <source>Camera is not available</source>
         <translation>Камера недоступна</translation>
     </message>
 </context>
 <context>
-    <name>trikGui::CommandSettingsWidget</name>
+    <name>CommunicationSettings</name>
     <message>
-        <location filename="../../trikGui/commandSettingsWidget.cpp" line="+29"/>
-        <source>Continue</source>
-        <translation>Продолжить</translation>
+        <location filename="../../trikGui/qml/CommunicationSettings.qml" line="+25"/>
+        <source>Comm settings</source>
+        <translation>Взаимодействие</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>(Press &apos;Enter&apos; to edit)</source>
+        <translation>(Нажмите &apos;Enter&apos; для изменения)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Hull number:</source>
+        <translation>Бортномер:</translation>
+    </message>
+    <message>
+        <location line="+104"/>
+        <source>Leader IP:</source>
+        <translation>IP ведущего:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>(last two numbers)</source>
+        <translation>(последние два числа)</translation>
+    </message>
+    <message>
+        <location line="+109"/>
+        <source>Connect</source>
+        <translation>Подключиться</translation>
+    </message>
+</context>
+<context>
+    <name>ConfirmAction</name>
+    <message>
+        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+101"/>
+        <source>No</source>
+        <translation>Нет</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Yes</source>
+        <translation>Да</translation>
+    </message>
+</context>
+<context>
+    <name>FileManager</name>
+    <message>
+        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
+        <source>Confirm delition</source>
+        <translation>Подтвердите удаление</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you want to delete all the files?</source>
+        <translation>Вы уверены, что хотите удалить все файлы?</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Are you sure you want to delete file?</source>
+        <translation>Вы уверены, что хотите удалить файл?</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="vanished">Нет</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <location line="+161"/>
+        <source>Delete all ...</source>
+        <translation>Удалить все ...</translation>
+    </message>
+</context>
+<context>
+    <name>FileSystemFilter</name>
+    <message>
+        <source>Delete all...</source>
+        <translation type="vanished">Удалить всё...</translation>
+    </message>
+</context>
+<context>
+    <name>Gyroscope</name>
+    <message>
+        <location filename="../../trikGui/qml/Gyroscope.qml" line="+34"/>
+        <source>Gyroscope:</source>
+        <translation>Гироскоп:</translation>
+    </message>
+</context>
+<context>
+    <name>Information</name>
+    <message>
+        <location filename="../../trikGui/qml/Information.qml" line="+23"/>
+        <source>OS version:</source>
+        <translation>версия ОС:</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unknown</source>
+        <translation>Неизвестна</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>MAC address:</source>
+        <translation>MAC адресс:</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Not found</source>
+        <translation>Не найден</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Icons by</source>
+        <translation>Иконки</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Icons8,</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Flaticon,</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Svgrepo</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Language</name>
+    <message>
+        <location filename="../../trikGui/qml/Language.qml" line="+15"/>
+        <source>Confirm the change</source>
+        <translation>Подтвердите изменение</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to change the language?</source>
+        <translation type="vanished">Вы уверены, что хотите сменить язык?</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="vanished">Нет</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <source>Confirm the change language</source>
+        <translation type="vanished">Подтвердите изменение</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The controller will be restarted. Do you want to continue?</source>
+        <translation>Контроллер будет перезагружен. Продолжить?</translation>
+    </message>
+    <message>
+        <source>The application will be restarted. Do you want to continue?</source>
+        <translation type="vanished">Приложение будет перезапущено. Продолжить?</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Select language:</source>
+        <translation>Выберите язык:</translation>
+    </message>
+</context>
+<context>
+    <name>MainMenu</name>
+    <message>
+        <location filename="../../trikGui/qml/MainMenu.qml" line="+28"/>
+        <source>Running </source>
+        <translation>Выполняется </translation>
+    </message>
+    <message>
+        <source>Confirm the shutdown</source>
+        <translation type="vanished">Подтвердите выключение</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to shutdown the controller?</source>
+        <translation type="vanished">Вы уверены, что хотите выключить контроллер?</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="vanished">Нет</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <location line="+93"/>
+        <source>Files</source>
+        <translation>Файлы</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Testing</source>
+        <translation>Тестирование</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Settings</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Камера</translation>
+    </message>
+    <message>
+        <location line="-107"/>
+        <source>Running direct command</source>
+        <translation>Выполняется команда с компьютера</translation>
+    </message>
+    <message>
+        <source>Keep holding to turn off the controller</source>
+        <translation type="vanished">Удерживайте кнопку для выключения</translation>
+    </message>
+    <message>
+        <location line="+82"/>
+        <source>Keep holding to turn off the controller.</source>
+        <translation>Удерживайте кнопку для выключения.</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Name: </source>
+        <translation>Имя: </translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>IP: </source>
+        <translation>IP: </translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>no connection</source>
+        <translation>нет соединения</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Hull number: </source>
+        <translation>Бортномер: </translation>
+    </message>
+</context>
+<context>
+    <name>Mode</name>
+    <message>
+        <source>Confirm the change</source>
+        <translation type="vanished">Подтвердите изменение</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to change the theme?</source>
+        <translation type="vanished">Вы уверены, что хотите сменить тему?</translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/qml/Mode.qml" line="+21"/>
+        <source>Select mode:</source>
+        <translation>Выберите тему:</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Light</source>
+        <translation>Светлая</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Dark</source>
+        <translation>Темная</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../trikGui/trikGuiMain.cpp" line="+61"/>
+        <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
+        <translation>Графический интерфейс, среда времени выполнения для TRIK Studio и исполнитель скриптов на роботе</translation>
+    </message>
+</context>
+<context>
+    <name>RunningCodeComponent</name>
+    <message>
+        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+42"/>
+        <source>Press Power to abort</source>
+        <translation>Нажмите кнопку Питание для выхода</translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <location filename="../../trikGui/qml/Settings.qml" line="+17"/>
+        <source>Network</source>
+        <translation>Сеть</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Comm settings</source>
+        <translation>Взаимодействие</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Language</source>
+        <translation>Язык / Language</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>System settings</source>
+        <translation>Настройки системы</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Appearance</source>
+        <translation>Вид</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>About</source>
+        <translation>О системе</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="vanished">Версия ПО</translation>
+    </message>
+</context>
+<context>
+    <name>SystemSettings</name>
+    <message>
+        <location filename="../../trikGui/qml/SystemSettings.qml" line="+23"/>
+        <source>Directory &apos;Files&apos; is ...</source>
+        <translation>Папка &apos;Файлы&apos; - это ...</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>only &apos;scripts&apos; directory</source>
+        <translation>папка со скриптами</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>full the system</source>
+        <translation>вся файловая система</translation>
+    </message>
+</context>
+<context>
+    <name>Testing</name>
+    <message>
+        <source>Analog sensors</source>
+        <translation type="vanished">Аналоговые датчики</translation>
+    </message>
+    <message>
+        <source>Digital sensors</source>
+        <translation type="vanished">Цифровые датчики</translation>
+    </message>
+    <message>
+        <source>Test servo motors</source>
+        <translation type="vanished">Сервоприводы</translation>
+    </message>
+    <message>
+        <source>Test power motors</source>
+        <translation type="vanished">Силовые моторы</translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/qml/Testing.qml" line="+63"/>
+        <source>Encoders</source>
+        <translation>Энкодеры</translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <source>Sensors</source>
+        <translation>Сенсоры</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>PWM capture</source>
+        <translation>Захват ШИМ</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+76"/>
+        <location line="+14"/>
+        <source>Servo motors</source>
+        <translation>Сервоприводы</translation>
+    </message>
+    <message>
+        <location line="-84"/>
+        <location line="+70"/>
+        <location line="+15"/>
+        <source>Power motors</source>
+        <translation>Силовые моторы</translation>
+    </message>
+    <message>
+        <location line="-73"/>
+        <source>Accelerometer</source>
+        <translation>Акселерометр</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Gyroscope</source>
+        <translation>Гироскоп</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Camera</source>
+        <translation>Камера</translation>
+    </message>
+</context>
+<context>
+    <name>WiFiAP</name>
+    <message>
+        <source>Search WiFi</source>
+        <translation type="vanished">Поиск WiFi</translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/qml/WiFiAP.qml" line="+23"/>
+        <source>Search Wi-Fi</source>
+        <translation>Поиск Wi-Fi</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Network parameters:</source>
+        <translation>Параметры сети:</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Name: </source>
+        <translation>Имя: </translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+9"/>
+        <location line="+9"/>
+        <source>not found</source>
+        <translation>не найдено</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>Password: </source>
+        <translation>Пароль: </translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>IP address: </source>
+        <translation>IP-адрес: </translation>
+    </message>
+</context>
+<context>
+    <name>WiFiClient</name>
+    <message>
+        <location filename="../../trikGui/qml/WiFiClient.qml" line="+20"/>
+        <source>Confirm connection</source>
+        <translation>Подтвердите подключение</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you want to connect to open WiFi network?</source>
+        <translation>Вы действительно хотите подключиться к незащищённой сети?</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="vanished">Нет</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>connecting...</source>
+        <translation>соединение...</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>no connection</source>
+        <translation>нет соединения</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>error</source>
+        <translation>ошибка</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Enable access point</source>
+        <translation>Включить точку доступа</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>IP: </source>
+        <translation>IP: </translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Available networks:</source>
+        <translation>Доступные сети:</translation>
     </message>
     <message>
         <location line="+19"/>
+        <source>Scanning...</source>
+        <translation>Поиск...</translation>
+    </message>
+</context>
+<context>
+    <name>WiFiInit</name>
+    <message>
+        <location filename="../../trikGui/qml/WiFiInit.qml" line="+34"/>
+        <source>Network initialization in process</source>
+        <translation>Инициализация сети</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Please wait</source>
+        <translation>Пожалуйста, подождите</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Press Escape for break</source>
+        <translation>Нажмите Escape, чтобы выйти</translation>
+    </message>
+</context>
+<context>
+    <name>WiFiMode</name>
+    <message>
+        <source>Wi-Fi client</source>
+        <translation type="vanished">Wi-Fi клиент</translation>
+    </message>
+    <message>
+        <source>Wi-Fi access point</source>
+        <translation type="vanished">Wi-Fi точка доступа</translation>
+    </message>
+</context>
+<context>
+    <name>WiFiModeSelection</name>
+    <message>
+        <location filename="../../trikGui/qml/WiFiModeSelection.qml" line="+16"/>
+        <source>Wi-Fi client</source>
+        <translation>Wi-Fi клиент</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Wi-Fi access point</source>
+        <translation>Wi-Fi точка доступа</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../../trikGui/qml/main.qml" line="+14"/>
+        <source>TRIK</source>
+        <translation>ТРИК</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::AccelerometerWidget</name>
+    <message>
+        <source>Accelerometer</source>
+        <translation type="vanished">Акселерометр</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">Ошибка</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::CameraWidget</name>
+    <message>
+        <source>Camera</source>
+        <translation type="vanished">Камера</translation>
+    </message>
+    <message>
+        <source>Camera is not available</source>
+        <translation type="vanished">Камера недоступна</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::CommandSettingsWidget</name>
+    <message>
+        <source>Continue</source>
+        <translation type="vanished">Продолжить</translation>
+    </message>
+    <message>
         <source>Command Settings</source>
-        <translation>Настройки команды</translation>
+        <translation type="vanished">Настройки команды</translation>
     </message>
 </context>
 <context>
     <name>trikGui::CommandsListWidget</name>
     <message>
-        <location filename="../../trikGui/commandsListWidget.cpp" line="+29"/>
         <source>Choose command:</source>
-        <translation>Выберите команду:</translation>
+        <translation type="vanished">Выберите команду:</translation>
     </message>
     <message>
         <source>Clear</source>
         <translation type="obsolete">Очистить</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Play Tone</source>
-        <translation>Играть звук</translation>
+        <translation type="vanished">Играть звук</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Smile</source>
-        <translation>Смайлик</translation>
+        <translation type="vanished">Смайлик</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Sad Smile</source>
-        <translation>Грустный смайлик</translation>
+        <translation type="vanished">Грустный смайлик</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Timer</source>
-        <translation>Таймер</translation>
+        <translation type="vanished">Таймер</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Motor Forward</source>
-        <translation>Моторы вперёд</translation>
+        <translation type="vanished">Моторы вперёд</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Motor Backward</source>
-        <translation>Моторы назад</translation>
+        <translation type="vanished">Моторы назад</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Motors Stop</source>
-        <translation>Моторы стоп</translation>
+        <translation type="vanished">Моторы стоп</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wait for Light</source>
-        <translation>Ждать свет</translation>
+        <translation type="vanished">Ждать свет</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wait for Ultrasonic Distance</source>
-        <translation>Ждать УЗ датчик</translation>
+        <translation type="vanished">Ждать УЗ датчик</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wait for Infrared Distance</source>
-        <translation>Ждать ИК датчик</translation>
+        <translation type="vanished">Ждать ИК датчик</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>Commands List</source>
-        <translation>Список команд</translation>
+        <translation type="vanished">Список команд</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>Choose waiting time (ms):</source>
-        <translation>Выберите время
+        <translation type="vanished">Выберите время
 ожидания
 (в миллисекундах):</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Delay %1 ms</source>
-        <translation>Задержка %1 мс</translation>
+        <translation type="vanished">Задержка %1 мс</translation>
     </message>
     <message>
         <source>Motor</source>
@@ -143,71 +679,74 @@
         <translation type="obsolete">Ждать</translation>
     </message>
     <message>
-        <location line="+40"/>
         <source>&lt; add command &gt;</source>
-        <translation>&lt; новая команда &gt;</translation>
+        <translation type="vanished">&lt; новая команда &gt;</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>Choose motors power (%): </source>
-        <translation>Выберите мощность
+        <translation type="vanished">Выберите мощность
  моторов
 (в процентах):</translation>
     </message>
     <message>
-        <location line="-124"/>
         <source>Wait for Encoder</source>
-        <translation>Ждать энкодер</translation>
+        <translation type="vanished">Ждать энкодер</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::CommunicationSettings</name>
+    <message>
+        <source>Comm settings</source>
+        <translation type="vanished">Взаимодействие</translation>
     </message>
 </context>
 <context>
     <name>trikGui::CommunicationSettingsWidget</name>
     <message>
-        <location filename="../../trikGui/communicationSettingsWidget.cpp" line="+25"/>
         <source>&lt;b&gt;Comm settings&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Взаимодействие&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Взаимодействие&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Hull number:</source>
-        <translation>Бортномер:</translation>
+        <translation type="vanished">Бортномер:</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Leader IP:</source>
-        <translation>IP ведущего:</translation>
+        <translation type="vanished">IP ведущего:</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Connect</source>
-        <translation>Подключиться</translation>
+        <translation type="vanished">Подключиться</translation>
     </message>
     <message>
-        <location line="+52"/>
         <source>Comm settings</source>
-        <translation>Взаимодействие</translation>
+        <translation type="vanished">Взаимодействие</translation>
     </message>
     <message>
         <source>Press &apos;Enter&apos; to edit</source>
         <translation type="obsolete">&apos;Enter&apos; для изменения</translation>
     </message>
     <message>
-        <location line="-60"/>
         <source>(Press &apos;Enter&apos; to edit)</source>
-        <translation>(&apos;Enter&apos; для изменения)</translation>
+        <translation type="vanished">(&apos;Enter&apos; для изменения)</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>(last two numbers)</source>
-        <translation>(последние два числа)</translation>
+        <translation type="vanished">(последние два числа)</translation>
     </message>
 </context>
 <context>
     <name>trikGui::Controller</name>
     <message>
-        <location filename="../../trikGui/controller.cpp" line="+199"/>
         <source>direct command</source>
-        <translation>команда с компьютера</translation>
+        <translation type="vanished">команда с компьютера</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::FileManager</name>
+    <message>
+        <source>File Manager</source>
+        <translation type="vanished">Файлы</translation>
     </message>
 </context>
 <context>
@@ -232,179 +771,167 @@
         <translation type="obsolete">Удалить всё</translation>
     </message>
     <message>
-        <location filename="../../trikGui/fileManagerWidget.cpp" line="+67"/>
         <source>Delete all...</source>
-        <translation>Удалить всё...</translation>
+        <translation type="vanished">Удалить всё...</translation>
     </message>
     <message>
-        <location line="+40"/>
         <source>File Manager</source>
-        <translation>Файлы</translation>
+        <translation type="vanished">Файлы</translation>
     </message>
     <message>
-        <location line="+29"/>
-        <location line="+11"/>
         <source>Confirm deletion</source>
-        <translation>Удаление</translation>
+        <translation type="vanished">Удаление</translation>
     </message>
     <message>
-        <location line="-10"/>
         <source>Are you sure you want to delete file?</source>
-        <translation>Вы уверены, что хотите удалить файл?</translation>
+        <translation type="vanished">Вы уверены, что хотите удалить файл?</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Are you sure you want to delete all files?</source>
-        <translation>Вы уверены, что хотите удалить все файлы?</translation>
+        <translation type="vanished">Вы уверены, что хотите удалить все файлы?</translation>
     </message>
 </context>
 <context>
     <name>trikGui::GyroscopeIndicator</name>
     <message>
-        <location filename="../../trikGui/gyroscopeIndicator.cpp" line="+30"/>
         <source>Gyroscope</source>
-        <translation>Гироскоп</translation>
+        <translation type="vanished">Гироскоп</translation>
     </message>
     <message>
-        <location line="+24"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::Information</name>
+    <message>
+        <source>Version</source>
+        <translation type="obsolete">Версия ПО</translation>
     </message>
 </context>
 <context>
     <name>trikGui::InformationWidget</name>
     <message>
-        <location filename="../../trikGui/informationWidget.cpp" line="+30"/>
         <source>Not found</source>
-        <translation>Не найден</translation>
+        <translation type="vanished">Не найден</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>MAC address</source>
-        <translation>MAC-адрес</translation>
+        <translation type="vanished">MAC-адрес</translation>
     </message>
     <message>
-        <location line="-13"/>
         <source>OS version</source>
-        <translation>Версия ОС</translation>
+        <translation type="vanished">Версия ОС</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Version</source>
-        <translation>Версия ПО</translation>
+        <translation type="vanished">Версия ПО</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Unknown</source>
-        <translation>Неизвестна</translation>
+        <translation type="vanished">Неизвестна</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::LanguageSelection</name>
+    <message>
+        <source>Language</source>
+        <translation type="vanished">Язык / Language</translation>
     </message>
 </context>
 <context>
     <name>trikGui::LanguageSelectionWidget</name>
     <message>
-        <location filename="../../trikGui/languageSelectionWidget.cpp" line="+32"/>
         <source>Select language:</source>
-        <translation>Выберите язык:</translation>
+        <translation type="vanished">Выберите язык:</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>English</source>
-        <translation>English</translation>
+        <translation type="vanished">English</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>Language</source>
-        <translation>Язык / Language</translation>
+        <translation type="vanished">Язык / Language</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation type="vanished">Внимание</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>GUI will now restart. Do you want to continue?</source>
-        <translation>Контроллер сейчас перегрузится. Вы действительно хотите продолжить?</translation>
+        <translation type="vanished">Контроллер сейчас перегрузится. Вы действительно хотите продолжить?</translation>
     </message>
 </context>
 <context>
     <name>trikGui::MotorLever</name>
     <message>
-        <location filename="../../trikGui/motorLever.cpp" line="+37"/>
-        <location line="+17"/>
-        <location line="+58"/>
         <source>off</source>
-        <translation>выкл</translation>
+        <translation type="vanished">выкл</translation>
     </message>
     <message>
-        <location line="-57"/>
-        <location line="+54"/>
         <source>on</source>
-        <translation>вкл</translation>
+        <translation type="vanished">вкл</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::Motors</name>
+    <message>
+        <source>Test power motors</source>
+        <translation type="vanished">Силовые моторы</translation>
+    </message>
+    <message>
+        <source>Test servo motors</source>
+        <translation type="vanished">Сервоприводы</translation>
     </message>
 </context>
 <context>
     <name>trikGui::MotorsWidget</name>
     <message>
-        <location filename="../../trikGui/motorsWidget.cpp" line="+80"/>
         <source>Test power motors</source>
-        <translation>Силовые моторы</translation>
+        <translation type="vanished">Силовые моторы</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Test servo motors</source>
-        <translation>Сервоприводы</translation>
+        <translation type="vanished">Сервоприводы</translation>
     </message>
 </context>
 <context>
     <name>trikGui::NetworkWidget</name>
     <message>
-        <location filename="../../trikGui/networkWidget.cpp" line="+32"/>
-        <location line="+39"/>
         <source>Hull number:</source>
-        <translation type="unfinished">Бортномер:</translation>
+        <translation type="vanished">Бортномер:</translation>
     </message>
     <message>
-        <location line="-15"/>
         <source>IP: </source>
-        <translation>IP: </translation>
+        <translation type="vanished">IP: </translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Name: </source>
-        <translation>Имя: </translation>
+        <translation type="vanished">Имя: </translation>
     </message>
 </context>
 <context>
     <name>trikGui::ProgrammingWidget</name>
     <message>
-        <location filename="../../trikGui/programmingWidget.cpp" line="+28"/>
         <source>Add commands to list</source>
-        <translation>Добавьте команду
+        <translation type="vanished">Добавьте команду
 в список</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <location line="+85"/>
         <source>&lt; add command &gt;</source>
-        <translation>&lt; новая команда &gt;</translation>
+        <translation type="vanished">&lt; новая команда &gt;</translation>
     </message>
     <message>
-        <location line="-80"/>
-        <location line="+82"/>
         <source>Run program</source>
-        <translation>Запустить программу</translation>
+        <translation type="vanished">Запустить программу</translation>
     </message>
     <message>
-        <location line="-70"/>
         <source>Programming</source>
-        <translation>Программирование</translation>
+        <translation type="vanished">Программирование</translation>
     </message>
     <message>
-        <location line="-10"/>
-        <location line="+82"/>
         <source>Clear list</source>
-        <translation>Очистить список</translation>
+        <translation type="vanished">Очистить список</translation>
     </message>
 </context>
 <context>
@@ -420,14 +947,12 @@
  чтобы выйти</translation>
     </message>
     <message>
-        <location filename="../../trikGui/runningWidget.cpp" line="+54"/>
         <source>Running </source>
-        <translation>Выполняется </translation>
+        <translation type="vanished">Выполняется </translation>
     </message>
     <message>
-        <location line="-23"/>
         <source>Press Power to abort</source>
-        <translation>Нажмите кнопку Питание для выхода</translation>
+        <translation type="vanished">Нажмите кнопку Питание для выхода</translation>
     </message>
 </context>
 <context>
@@ -437,26 +962,22 @@
         <translation type="obsolete">Выберите расстояние:</translation>
     </message>
     <message>
-        <location filename="../../trikGui/sensorSettingsWidget.cpp" line="+48"/>
         <source>Continue</source>
-        <translation>Продолжить</translation>
+        <translation type="vanished">Продолжить</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Sensor Settings</source>
-        <translation>Настройки датчиков</translation>
+        <translation type="vanished">Настройки датчиков</translation>
     </message>
     <message>
-        <location line="-27"/>
         <source>Select distance:
 </source>
-        <translation>Выберите расстояние:</translation>
+        <translation type="vanished">Выберите расстояние:</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Select tacho limit:
 </source>
-        <translation>Выберите предел оборотов:</translation>
+        <translation type="vanished">Выберите предел оборотов:</translation>
     </message>
 </context>
 <context>
@@ -466,113 +987,93 @@
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../../trikGui/startWidget.cpp" line="+49"/>
         <source>TRIK</source>
-        <translation>ТРИК</translation>
+        <translation type="vanished">ТРИК</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+67"/>
         <source>Testing</source>
-        <translation>Тестирование</translation>
+        <translation type="vanished">Тестирование</translation>
     </message>
     <message>
-        <location line="-56"/>
         <source>More...</source>
-        <translation>Еще...</translation>
+        <translation type="vanished">Еще...</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+84"/>
         <source>Analog sensors</source>
-        <translation>Аналоговые датчики</translation>
+        <translation type="vanished">Аналоговые датчики</translation>
     </message>
     <message>
-        <location line="-82"/>
-        <location line="+89"/>
         <source>PWM Capture</source>
-        <translation>ШИМ захват</translation>
+        <translation type="vanished">ШИМ захват</translation>
     </message>
     <message>
-        <location line="-83"/>
-        <location line="+90"/>
         <source>Digital sensors</source>
-        <translation>Цифровые датчики</translation>
+        <translation type="vanished">Цифровые датчики</translation>
     </message>
     <message>
-        <location line="-88"/>
-        <location line="+95"/>
         <source>Encoders</source>
-        <translation>Энкодеры</translation>
+        <translation type="vanished">Энкодеры</translation>
     </message>
     <message>
-        <location line="-93"/>
-        <location line="+100"/>
         <source>Gyroscope</source>
-        <translation>Гироскоп</translation>
+        <translation type="vanished">Гироскоп</translation>
     </message>
     <message>
-        <location line="-98"/>
-        <location line="+103"/>
         <source>Accelerometer</source>
-        <translation>Акселерометр</translation>
+        <translation type="vanished">Акселерометр</translation>
     </message>
     <message>
-        <location line="-101"/>
-        <location line="+106"/>
         <source>Camera</source>
-        <translation>Камера</translation>
+        <translation type="vanished">Камера</translation>
+    </message>
+</context>
+<context>
+    <name>trikGui::SystemSettings</name>
+    <message>
+        <source>System settings</source>
+        <translation type="obsolete">Настройки системы</translation>
     </message>
 </context>
 <context>
     <name>trikGui::SystemSettingsWidget</name>
     <message>
-        <location filename="../../trikGui/systemSettingsWidget.cpp" line="+31"/>
         <source>Directory &apos;Files&apos; is ...</source>
-        <translation>Папка &apos;Файлы&apos; - это ...</translation>
+        <translation type="vanished">Папка &apos;Файлы&apos; - это ...</translation>
     </message>
     <message>
-        <location line="+43"/>
         <source>System settings</source>
-        <translation>Настройки системы</translation>
+        <translation type="vanished">Настройки системы</translation>
     </message>
     <message>
-        <location line="-40"/>
         <source>full file system</source>
-        <translation>файловая система</translation>
+        <translation type="vanished">файловая система</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>only &apos;scripts&apos; directory</source>
-        <translation>папка со скриптами</translation>
+        <translation type="vanished">папка со скриптами</translation>
     </message>
 </context>
 <context>
     <name>trikGui::UpdateWidget</name>
     <message>
-        <location filename="../../trikGui/updateWidget.cpp" line="+30"/>
         <source>Update is started...</source>
-        <translation>Обновление начато...</translation>
+        <translation type="vanished">Обновление начато...</translation>
     </message>
     <message>
-        <location line="+18"/>
         <source>Update</source>
-        <translation>Обновление ПО</translation>
+        <translation type="vanished">Обновление ПО</translation>
     </message>
     <message>
-        <location line="+40"/>
         <source>Update is failed</source>
-        <translation>Во время обновления (update) произошла ошибка</translation>
+        <translation type="vanished">Во время обновления (update) произошла ошибка</translation>
     </message>
     <message>
-        <location line="-5"/>
         <source>Update and Upgrade is successfully finished</source>
-        <translation>Обновление успешно завершено</translation>
+        <translation type="vanished">Обновление успешно завершено</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Upgrade is failed</source>
-        <translation>Во время обновления (upgrade) произошла ошибка</translation>
+        <translation type="vanished">Во время обновления (upgrade) произошла ошибка</translation>
     </message>
 </context>
 <context>
@@ -593,145 +1094,126 @@
 <context>
     <name>trikGui::WiFiAPWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiAPWidget.cpp" line="+39"/>
         <source>Network parameters</source>
-        <translation>Параметры сети</translation>
+        <translation type="vanished">Параметры сети</translation>
     </message>
     <message>
-        <location line="+45"/>
         <source>IP address: </source>
-        <translation>IP-адрес: </translation>
+        <translation type="vanished">IP-адрес: </translation>
     </message>
     <message>
-        <location line="-44"/>
         <source>Name not found</source>
-        <translation>Имя не найдено</translation>
+        <translation type="vanished">Имя не найдено</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Password not found</source>
-        <translation>Пароль не найден</translation>
+        <translation type="vanished">Пароль не найден</translation>
     </message>
     <message>
-        <location line="+26"/>
         <source>Name: </source>
-        <translation>Имя: </translation>
+        <translation type="vanished">Имя: </translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Password: </source>
-        <translation>Пароль: </translation>
+        <translation type="vanished">Пароль: </translation>
     </message>
     <message>
-        <location line="-32"/>
         <source>IP address not found</source>
-        <translation>IP-адрес не найден</translation>
+        <translation type="vanished">IP-адрес не найден</translation>
     </message>
 </context>
 <context>
     <name>trikGui::WiFiClientWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiClientWidget.cpp" line="+52"/>
         <source>IP:</source>
-        <translation>IP:</translation>
+        <translation type="vanished">IP:</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Available networks:</source>
-        <translation>Доступные сети:</translation>
+        <translation type="vanished">Доступные сети:</translation>
     </message>
     <message>
-        <location line="+132"/>
         <source>connecting...</source>
-        <translation>соединение...</translation>
+        <translation type="vanished">соединение...</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>no connection</source>
-        <translation>нет соединения</translation>
+        <translation type="vanished">нет соединения</translation>
     </message>
     <message>
-        <location line="-141"/>
         <source>Name:</source>
-        <translation>Имя:</translation>
+        <translation type="vanished">Имя:</translation>
     </message>
     <message>
-        <location line="+145"/>
         <source>error</source>
-        <translation>ошибка</translation>
+        <translation type="vanished">ошибка</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <location line="+68"/>
         <source>Scanning...</source>
-        <translation>Поиск...</translation>
+        <translation type="vanished">Поиск...</translation>
     </message>
     <message>
-        <location line="-13"/>
         <source>Confirm connection</source>
-        <translation>Подтверждение</translation>
+        <translation type="vanished">Подтверждение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to connect to open WiFi network?</source>
-        <translation>Вы действительно хотите подключиться к незащищённой сети?</translation>
+        <translation type="vanished">Вы действительно хотите подключиться к незащищённой сети?</translation>
     </message>
 </context>
 <context>
     <name>trikGui::WiFiInitWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiInitWidget.cpp" line="+32"/>
         <source>Please wait</source>
-        <translation>Пожалуйста,
+        <translation type="vanished">Пожалуйста,
 подождите</translation>
     </message>
     <message>
-        <location line="-2"/>
         <source>Network initialization
 in process</source>
-        <translation>Идёт инициализация
+        <translation type="vanished">Идёт инициализация
 сети</translation>
     </message>
     <message>
-        <location line="+95"/>
         <source>Network initialization
 failed</source>
-        <translation>Не удалось
+        <translation type="vanished">Не удалось
 произвести
 инициализацию
 сети</translation>
     </message>
     <message>
-        <location line="-92"/>
         <source>Press Escape
 for break</source>
-        <translation>Чтобы прервать
+        <translation type="vanished">Чтобы прервать
 процесс, нажмите
 Escape</translation>
     </message>
 </context>
 <context>
+    <name>trikGui::WiFiMode</name>
+    <message>
+        <source>Network Config</source>
+        <translation type="vanished">Сеть</translation>
+    </message>
+</context>
+<context>
     <name>trikGui::WiFiModeWidget</name>
     <message>
-        <location filename="../../trikGui/wiFiModeWidget.cpp" line="+32"/>
         <source>Choose mode:</source>
-        <translation>Выберите режим:</translation>
+        <translation type="vanished">Выберите режим:</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+27"/>
         <source>Wi-Fi client</source>
-        <translation>Wi-Fi клиент</translation>
+        <translation type="vanished">Wi-Fi клиент</translation>
     </message>
     <message>
-        <location line="-26"/>
         <source>Wi-Fi access point</source>
-        <translation>Wi-Fi точка доступа</translation>
+        <translation type="vanished">Wi-Fi точка доступа</translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Network Config</source>
-        <translation>Сеть</translation>
+        <translation type="vanished">Сеть</translation>
     </message>
 </context>
 </TS>

@@ -14,12 +14,11 @@
 
 #include "translationsHelper.h"
 
-#include <QtCore/QLocale>
-#include <QtCore/QSettings>
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QDirIterator>
-#include <QtCore/QTranslator>
-#include <QtCore/QCoreApplication>
+#include <QtCore/QLocale>
+#include <QtCore/QSettings>
 
 #include <QsLog.h>
 
@@ -27,31 +26,38 @@
 #include "rcReader.h"
 
 using namespace trikKernel;
-
-void TranslationsHelper::loadTranslators(const QString &locale)
-{
+QVector<QTranslator *> TranslationsHelper::mCurrentTranslators;
+void TranslationsHelper::loadTranslators(const QString &locale) {
 	const QDir translationsDirectory(Paths::translationsPath() + locale);
-
-	QLOG_INFO() << "Loading translations from" << translationsDirectory.absolutePath();
-
-	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
+	QLOG_INFO() << "Loading translations from"
+		    << translationsDirectory.absolutePath();
+	QDirIterator directories(translationsDirectory,
+				 QDirIterator::Subdirectories);
+	if (mCurrentTranslators.size() > 0) {
+		for (QTranslator *translator : qAsConst(mCurrentTranslators)) {
+			QCoreApplication::removeTranslator(translator);
+		}
+		mCurrentTranslators.clear();
+	}
 	while (directories.hasNext()) {
-		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
+		for (const QFileInfo &translatorFile :
+		     QDir(directories.next()).entryInfoList(QDir::Files)) {
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
+			mCurrentTranslators.append(translator);
 			QCoreApplication::installTranslator(translator);
 		}
 	}
 }
 
-void TranslationsHelper::initLocale(bool localizationDisabled)
-{
+void TranslationsHelper::initLocale(bool localizationDisabled) {
 	if (localizationDisabled) {
 		QLocale::setDefault(QLocale::English);
 		return;
 	}
 
-	QSettings settings(trikKernel::Paths::localSettings(), QSettings::IniFormat);
+	QSettings settings(trikKernel::Paths::localSettings(),
+			   QSettings::IniFormat);
 	QString locale = settings.value("locale", "").toString();
 	const QString lastLocale = locale;
 

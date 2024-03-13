@@ -14,82 +14,100 @@
 
 #include "controller.h"
 
-#include <QtCore/QProcess>
 #include <QtCore/QFileInfo>
+#include <QtCore/QProcess>
 
 #include <QtXml/QDomDocument>
 
-#include <trikKernel/configurer.h>
-#include <trikKernel/fileUtils.h>
-#include <trikKernel/paths.h>
-#include <trikKernel/exceptions/internalErrorException.h>
+#include <QsLog.h>
+
 #include <trikControl/brickFactory.h>
 #include <trikControl/gamepadInterface.h>
+#include <trikKernel/configurer.h>
+#include <trikKernel/exceptions/internalErrorException.h>
+#include <trikKernel/fileUtils.h>
+#include <trikKernel/paths.h>
 #include <trikNetwork/mailboxFactory.h>
 #include <trikWiFi/trikWiFi.h>
 
-#include "runningWidget.h"
 #include "autoRunner.h"
+#include "runningCode.h"
 
 using namespace trikGui;
 
 const int communicatorPort = 8888;
 const int telemetryPort = 9000;
 
-Controller::Controller(const QString &configPath)
-	: mBrick(trikControl::BrickFactory::create(configPath, trikKernel::Paths::mediaPath()))
-{
+Controller::Controller(const QString &configPath, QObject *parent)
+    : QObject(parent), mBrick(trikControl::BrickFactory::create(
+			   configPath, trikKernel::Paths::mediaPath())) {
 	if (configPath.isEmpty()) {
-		throw trikKernel::InternalErrorException("Config path is empty");
+		throw trikKernel::InternalErrorException(
+		    "Config path is empty");
 	}
 
-	auto correctedConfigPath = configPath.endsWith('/') ? configPath : configPath + '/';
+	auto correctedConfigPath =
+	    configPath.endsWith('/') ? configPath : configPath + '/';
 
-	trikKernel::Configurer configurer(correctedConfigPath + "system-config.xml"
-			, correctedConfigPath + "model-config.xml");
+	trikKernel::Configurer configurer(
+	    correctedConfigPath + "system-config.xml",
+	    correctedConfigPath + "model-config.xml");
 
-	connect(mBrick->gamepad(), &trikControl::GamepadInterface::disconnected
-			, this, &Controller::gamepadDisconnected);
-	connect(mBrick->gamepad(), &trikControl::GamepadInterface::connected
-			, this, &Controller::gamepadConnected);
+	connect(mBrick->gamepad(), &trikControl::GamepadInterface::disconnected,
+		this, &Controller::gamepadDisconnected);
+	connect(mBrick->gamepad(), &trikControl::GamepadInterface::connected,
+		this, &Controller::gamepadConnected);
 
 	mMailbox.reset(trikNetwork::MailboxFactory::create(configurer));
 	mTelemetry.reset(new trikTelemetry::TrikTelemetry(*mBrick));
-	mScriptRunner.reset(new trikScriptRunner::TrikScriptRunner(*mBrick, mMailbox.data()));
-	mCommunicator.reset(new trikCommunicator::TrikCommunicator(*mScriptRunner, configurer.version()));
+	mScriptRunner.reset(
+	    new trikScriptRunner::TrikScriptRunner(*mBrick, mMailbox.data()));
+	mCommunicator.reset(new trikCommunicator::TrikCommunicator(
+	    *mScriptRunner, configurer.version()));
 
-	mWiFi.reset(new trikWiFi::TrikWiFi("/tmp/trikwifi", "/var/run/wpa_supplicant/wlan0", this));
-	connect(mWiFi.data(), &trikWiFi::TrikWiFi::connected, this, &Controller::wiFiConnected);
-	connect(mWiFi.data(), &trikWiFi::TrikWiFi::disconnected, this, &Controller::wiFiDisconnected);
+	mWiFi.reset(new trikWiFi::TrikWiFi(
+	    "/tmp/trikwifi", "/var/run/wpa_supplicant/wlan0", this));
+	connect(mWiFi.data(), &trikWiFi::TrikWiFi::connected, this,
+		&Controller::wiFiConnected);
+	connect(mWiFi.data(), &trikWiFi::TrikWiFi::disconnected, this,
+		&Controller::wiFiDisconnected);
 
-	connect(mCommunicator.data(), &trikCommunicator::TrikCommunicator::stopCommandReceived
-			, this, &Controller::abortExecution);
-	connect(mCommunicator.data(), &trikCommunicator::TrikCommunicator::connected
-			, this, &Controller::updateCommunicatorStatus);
-	connect(mCommunicator.data(), &trikCommunicator::TrikCommunicator::disconnected
-			, this, &Controller::updateCommunicatorStatus);
-	connect(mTelemetry.data(), &trikTelemetry::TrikTelemetry::connected
-			, this, &Controller::updateCommunicatorStatus);
-	connect(mTelemetry.data(), &trikTelemetry::TrikTelemetry::disconnected
-			, this, &Controller::updateCommunicatorStatus);
-	connect(mMailbox.data(), &trikNetwork::MailboxInterface::connectionStatusChanged
-			, this, &Controller::mailboxStatusChanged);
+	connect(mCommunicator.data(),
+		&trikCommunicator::TrikCommunicator::stopCommandReceived, this,
+		&Controller::abortExecution);
+	connect(mCommunicator.data(),
+		&trikCommunicator::TrikCommunicator::connected, this,
+		&Controller::updateCommunicatorStatus);
+	connect(mCommunicator.data(),
+		&trikCommunicator::TrikCommunicator::disconnected, this,
+		&Controller::updateCommunicatorStatus);
+	connect(mTelemetry.data(), &trikTelemetry::TrikTelemetry::connected,
+		this, &Controller::updateCommunicatorStatus);
+	connect(mTelemetry.data(), &trikTelemetry::TrikTelemetry::disconnected,
+		this, &Controller::updateCommunicatorStatus);
+	connect(mMailbox.data(),
+		&trikNetwork::MailboxInterface::connectionStatusChanged, this,
+		&Controller::mailboxStatusChanged);
 
-	connect(mScriptRunner.data(), &trikScriptRunner::TrikScriptRunner::completed
-			, this, &Controller::scriptExecutionCompleted);
+	connect(mScriptRunner.data(),
+		&trikScriptRunner::TrikScriptRunner::completed, this,
+		&Controller::scriptExecutionCompleted);
 
-	connect(mScriptRunner.data(), &trikScriptRunner::TrikScriptRunner::textInStdOut
-		, mScriptRunner.data(), [](const QString &m){
-		QTextStream(stdout) << m;
-	});
+	connect(mScriptRunner.data(),
+		&trikScriptRunner::TrikScriptRunner::textInStdOut,
+		mScriptRunner.data(),
+		[](const QString &m) { QTextStream(stdout) << m; });
 
-	connect(mScriptRunner.data(), &trikScriptRunner::TrikScriptRunner::startedScript
-			, this, &Controller::scriptExecutionFromFileStarted);
+	connect(mScriptRunner.data(),
+		&trikScriptRunner::TrikScriptRunner::startedScript, this,
+		&Controller::scriptExecutionFromFileStarted);
 
-	connect(mScriptRunner.data(), &trikScriptRunner::TrikScriptRunner::startedDirectScript
-			, this, &Controller::directScriptExecutionStarted);
+	connect(mScriptRunner.data(),
+		&trikScriptRunner::TrikScriptRunner::startedDirectScript, this,
+		&Controller::directScriptExecutionStarted);
 
-	connect(mBrick.data(), &trikControl::BrickInterface::stopped, this, &Controller::brickStopped);
+	connect(mBrick.data(), &trikControl::BrickInterface::stopped, this,
+		&Controller::brickStopped);
 
 	mCommunicator->startServer(communicatorPort);
 	mTelemetry->startServer(telemetryPort);
@@ -99,66 +117,57 @@ Controller::Controller(const QString &configPath)
 	mBrick->led()->green();
 }
 
-Controller::~Controller()
-{
-	mBrick->led()->orange();
-}
+Controller::~Controller() { mBrick->led()->orange(); }
 
-void Controller::runFile(const QString &filePath)
-{
+void Controller::runFile(const QString &filePath) {
 	const QFileInfo fileInfo(filePath);
 	if (fileInfo.suffix() == "qts" || fileInfo.suffix() == "js") {
-		mScriptRunner->run(trikKernel::FileUtils::readFromFile(fileInfo.canonicalFilePath()), fileInfo.baseName());
+		mScriptRunner->run(trikKernel::FileUtils::readFromFile(
+				       fileInfo.canonicalFilePath()),
+				   fileInfo.baseName());
 	} else if (fileInfo.suffix() == "wav" || fileInfo.suffix() == "mp3") {
-		mScriptRunner->run("brick.playSound(\"" + fileInfo.canonicalFilePath() + "\");", fileInfo.baseName());
+		mScriptRunner->run("brick.playSound(\"" +
+				       fileInfo.canonicalFilePath() + "\");",
+				   fileInfo.baseName());
 	} else if (fileInfo.suffix() == "sh") {
 		QProcess::startDetached("sh", {filePath});
 	} else if (fileInfo.suffix() == "exe") {
 		QProcess::startDetached("mono", {filePath});
 	} else if (fileInfo.suffix() == "py") {
-		mScriptRunner->run(trikKernel::FileUtils::readFromFile(fileInfo.canonicalFilePath()),
-						   trikScriptRunner::ScriptType::PYTHON, fileInfo.baseName());
+		mScriptRunner->run(trikKernel::FileUtils::readFromFile(
+				       fileInfo.canonicalFilePath()),
+				   trikScriptRunner::ScriptType::PYTHON,
+				   fileInfo.baseName());
 	} else if (fileInfo.isExecutable()) {
 		QProcess::startDetached(filePath, {});
 	}
 }
 
-void Controller::runScript(const QString &script)
-{
+void Controller::runScript(const QString &script) {
 	mScriptRunner->run(script);
 }
 
-void Controller::abortExecution()
-{
+void Controller::abortExecution() {
 	emit hideScriptWidgets();
 	mScriptRunner->abort();
 
-	// Now script engine will stop (after some time maybe) and send "completed" signal, which will be caught and
-	// processed as if a script finished by itself.
+	// Now script engine will stop (after some time maybe) and send
+	// "completed" signal, which will be caught and processed as if a script
+	// finished by itself.
 }
 
-trikControl::BrickInterface &Controller::brick()
-{
-	return *mBrick;
+trikControl::BrickInterface &Controller::brick() { return *mBrick; }
+
+trikNetwork::MailboxInterface *Controller::mailbox() { return mMailbox.data(); }
+
+trikWiFi::TrikWiFi &Controller::wiFi() { return *mWiFi; }
+
+bool Controller::communicatorConnectionStatus() {
+	return mTelemetry->activeConnections() > 0 &&
+	       mCommunicator->activeConnections() > 0;
 }
 
-trikNetwork::MailboxInterface *Controller::mailbox()
-{
-	return mMailbox.data();
-}
-
-trikWiFi::TrikWiFi &Controller::wiFi()
-{
-	return *mWiFi;
-}
-
-bool Controller::communicatorConnectionStatus()
-{
-	return mTelemetry->activeConnections() > 0 && mCommunicator->activeConnections() > 0;
-}
-
-bool Controller::gamepadConnectionStatus() const
-{
+bool Controller::gamepadConnectionStatus() const {
 	if (mBrick->gamepad() != nullptr) {
 		return mBrick->gamepad()->isConnected();
 	} else {
@@ -166,13 +175,11 @@ bool Controller::gamepadConnectionStatus() const
 	}
 }
 
-void Controller::updateCommunicatorStatus()
-{
+void Controller::updateCommunicatorStatus() {
 	emit communicatorStatusChanged(communicatorConnectionStatus());
 }
 
-void Controller::scriptExecutionCompleted(const QString &error, int scriptId)
-{
+void Controller::scriptExecutionCompleted(const QString &error, int scriptId) {
 	if (error.isEmpty()) {
 		emit hideRunningWidget(scriptId);
 	} else {
@@ -189,12 +196,11 @@ void Controller::scriptExecutionCompleted(const QString &error, int scriptId)
 	mBrick->led()->green();
 }
 
-void Controller::scriptExecutionFromFileStarted(const QString &fileName, int scriptId)
-{
+void Controller::scriptExecutionFromFileStarted(const QString &fileName,
+						int scriptId) {
 	emit showRunningWidget(fileName, scriptId);
 }
 
-void Controller::directScriptExecutionStarted(int scriptId)
-{
-	scriptExecutionFromFileStarted(tr("direct command"), scriptId);
+void Controller::directScriptExecutionStarted(int scriptId) {
+	scriptExecutionFromFileStarted("direct command", scriptId);
 }
