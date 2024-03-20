@@ -67,7 +67,6 @@ Rectangle {
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    // anchors.top: parent.top
                     anchors.leftMargin: 10
                     anchors.topMargin: 5
                     color: Style.textColor
@@ -76,7 +75,6 @@ Rectangle {
                 Switch {
                     id: control
                     anchors.right: parent.right
-                    // anchors.top: parent.top
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 8
                     anchors.topMargin: 6
@@ -154,7 +152,7 @@ Rectangle {
                             text: '+'
                             font.pointSize: 17
                             anchors.centerIn: parent
-                            color: enabled ? "black" : "#ADADAD"
+                            color: enabled ? "black" : "#919191"
                         }
                     }
                     down.indicator: Rectangle {
@@ -170,7 +168,7 @@ Rectangle {
                             text: '-'
                             font.pointSize: 17
                             anchors.centerIn: parent
-                            color: enabled ? "black" : "#ADADAD"
+                            color: enabled ? "black" : "#919191"
                         }
                     }
                 }
