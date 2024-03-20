@@ -114,7 +114,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     width: parent.width / 2
                     height: parent.height / 2.3
-                    font.pointSize: 13
+                    font.weight: Font.Medium
                     value: display.power
                     from: display.minPower
                     to: display.maxPower
@@ -132,11 +132,6 @@ Rectangle {
                         border.color: Style.spinBorderColor
                         anchors.fill: parent
                         radius: 10
-                        Text {
-                            id: _textCounter
-                            text: _sb.value
-                            anchors.centerIn: parent
-                        }
                     }
 
                     up.indicator: Rectangle {
