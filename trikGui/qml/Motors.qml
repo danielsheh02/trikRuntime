@@ -78,8 +78,8 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 8
                     anchors.topMargin: 6
-                    width: parent.width / 5.3
-                    height: parent.height / 3.3
+                    width: parent.width / 6
+                    height: parent.height / 3.7
 
                     MouseArea {
                         anchors.fill: parent
