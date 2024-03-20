@@ -1,22 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/connected.png</file>
-        <file>resources/notConnected.png</file>
-        <file>resources/unknownConnectionStatus.png</file>
-        <file>resources/wifipoint.png</file>
-        <file>resources/wifion.png</file>
-        <file>resources/wifioff.png</file>
-        <file>resources/communicatorConnected.png</file>
-        <file>resources/mailboxConnected.png</file>
-        <file>resources/connectedWifi.png</file>
-        <file>resources/knownWifi.png</file>
-        <file>resources/openWifi.png</file>
-        <file>resources/passwordedWifi.png</file>
-        <file>resources/wait.png</file>
-        <file>resources/stylesheet.qss</file>
-        <file>resources/wifi-signal-high.png</file>
-        <file>resources/wifi-signal-low.png</file>
-        <file>resources/wifi-signal-medium.png</file>
         <file>qml/Motors.qml</file>
         <file>qml/Accelerometer.qml</file>
         <file>qml/AnalogDigitalSensors.qml</file>
@@ -86,6 +69,5 @@
         <file>resourcesQml/moon.png</file>
         <file>resourcesQml/sun.png</file>
         <file>resourcesQml/gamepad.png</file>
-        <file>qml/qtquickcontrols2.conf</file>
     </qresource>
 </RCC>
