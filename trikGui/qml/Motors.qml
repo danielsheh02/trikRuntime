@@ -66,7 +66,7 @@ Rectangle {
                 Text {
                     text: display.nameLabel
                     anchors.left: parent.left
-                    anchors.top: parent.top
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
                     anchors.topMargin: 5
                     color: Style.textColor
@@ -75,7 +75,7 @@ Rectangle {
                 Switch {
                     id: control
                     anchors.right: parent.right
-                    anchors.top: parent.top
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 8
                     anchors.topMargin: 6
                     width: parent.width / 5.3
@@ -111,11 +111,10 @@ Rectangle {
                 SpinBox {
                     id: _sb
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
+                    anchors.verticalCenter: parent.verticalCenter
                     width: parent.width / 2
                     height: parent.height / 2.3
                     font.pointSize: 13
-                    // anchors.bottomMargin: 1
                     value: display.power
                     from: display.minPower
                     to: display.maxPower
@@ -128,13 +127,11 @@ Rectangle {
                         }
                     }
 
-                    contentItem: Rectangle {
+                    background: Rectangle {
                         id: _counter
-                        border.color: "#7D7D7D"
-                        anchors.right: _up.left
-                        anchors.top: parent.top
-                        anchors.left: _down.right
-                        anchors.bottom: parent.bottom
+                        border.color: Style.spinBorderColor
+                        anchors.fill: parent
+                        radius: 10
                         Text {
                             id: _textCounter
                             text: _sb.value
@@ -149,11 +146,13 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.top: parent.top
                         color: _sb.up.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: enabled ? Style.spinBorderColor : "#bdbebf"
+                        border.color: Style.spinBorderColor
+                        radius: 10
                         Text {
                             text: '+'
                             font.pointSize: 17
                             anchors.centerIn: parent
+                            color: enabled ? "black" : "#919191"
                         }
                     }
                     down.indicator: Rectangle {
@@ -163,11 +162,13 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         color: _sb.down.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: enabled ? Style.spinBorderColor : "#E3E3E3"
+                        border.color: Style.spinBorderColor
+                        radius: 10
                         Text {
                             text: '-'
                             font.pointSize: 17
                             anchors.centerIn: parent
+                            color: enabled ? "black" : "#919191"
                         }
                     }
                 }
