@@ -55,7 +55,7 @@ Rectangle {
         }
         Image {
             id: _gamepadIndicator
-            source: GamepadIndicator.isConnected ? iconsPath + "gamepad_on.png" : ""
+            source: GamepadIndicator.isConnected ? iconsPath + "gamepad.png" : ""
             // source: iconsPath + "gamepad.png"
             Layout.preferredHeight: _voltageValue.height
             Layout.preferredWidth: 20
