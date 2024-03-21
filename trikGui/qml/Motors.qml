@@ -112,8 +112,9 @@ Rectangle {
                     id: _sb
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width / 2
+                    width: parent.width / 1.8
                     height: parent.height / 2.3
+                    font.pointSize: 13
                     font.weight: Font.Medium
                     value: display.power
                     from: display.minPower
@@ -137,7 +138,7 @@ Rectangle {
                     up.indicator: Rectangle {
                         id: _up
                         height: parent.height
-                        width: parent.width / 3
+                        width: parent.width / 3.1
                         anchors.right: parent.right
                         anchors.top: parent.top
                         color: _sb.up.pressed ? "#e4e4e4" : "#f6f6f6"
@@ -147,13 +148,13 @@ Rectangle {
                             text: '+'
                             font.pointSize: 17
                             anchors.centerIn: parent
-                            color: enabled ? "black" : "#919191"
+                            color: enabled ? "black" : "#9E9E9E"
                         }
                     }
                     down.indicator: Rectangle {
                         id: _down
                         height: parent.height
-                        width: parent.width / 3
+                        width: parent.width / 3.2
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         color: _sb.down.pressed ? "#e4e4e4" : "#f6f6f6"
@@ -163,7 +164,7 @@ Rectangle {
                             text: '-'
                             font.pointSize: 17
                             anchors.centerIn: parent
-                            color: enabled ? "black" : "#919191"
+                            color: enabled ? "black" : "#9E9E9E"
                         }
                     }
                 }
