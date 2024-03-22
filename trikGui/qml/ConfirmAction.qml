@@ -16,17 +16,21 @@ Rectangle {
     property string focusButton: "No"
     property string textAction: ""
     property string descrAction: ""
+    property var buttonNo: _buttonNo
 
     Keys.onPressed: {
         switch (event.key) {
         case Qt.Key_Right:
+
             if (focusButton === "No") {
                 focusButton = "Yes"
+                _buttonYes.focus = true
             }
             break
         case Qt.Key_Left:
             if (focusButton === "Yes") {
                 focusButton = "No"
+                _buttonNo.focus = true
             }
             break
         case Qt.Key_Return:
@@ -93,17 +97,14 @@ Rectangle {
         }
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            Layout.bottomMargin: 7
+            Layout.bottomMargin: 5
             Layout.rightMargin: 9
-            Layout.topMargin: 9
+            Layout.topMargin: 6
             Button {
                 id: _buttonNo
                 text: qsTr("No")
-                palette.buttonText: "white"
-                background: Rectangle {
-                    color: _confirm.focusButton === "No" ? Style.darkTrikColor : Style.buttonsColor
-                    radius: 10
-                }
+                Layout.preferredHeight: _columnConfirm.width / 6.8
+                Layout.preferredWidth: _columnConfirm.width / 3.8
                 onClicked: {
                     noOnClick()
                 }
@@ -111,11 +112,8 @@ Rectangle {
             Button {
                 id: _buttonYes
                 text: qsTr("Yes")
-                palette.buttonText: "white"
-                background: Rectangle {
-                    color: _confirm.focusButton === "Yes" ? Style.darkTrikColor : Style.buttonsColor
-                    radius: 10
-                }
+                Layout.preferredHeight: _columnConfirm.width / 6.8
+                Layout.preferredWidth: _columnConfirm.width / 3.8
                 onClicked: {
                     yesOnClick()
                 }

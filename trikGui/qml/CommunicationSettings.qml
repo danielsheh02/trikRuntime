@@ -103,6 +103,9 @@ Rectangle {
                                 if (_listDigitsHull.focusDigit) {
                                     currentValue = (currentValue + 1) % 10
                                     _listDigitsHull.onHullNumberChanged()
+                                } else {
+                                    _listsDigits.whatFocused = "button"
+                                    _button.focus = true
                                 }
                                 break
                             case Qt.Key_Down:
@@ -255,16 +258,12 @@ Rectangle {
         }
         Button {
             id: _button
-            height: parent.height / 10
             text: qsTr("Connect")
-            palette.buttonText: "white"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 8
-            background: Rectangle {
-                color: _button.focus ? Style.darkTrikColor : Style.buttonsColor
-                radius: 10
-            }
+            height: parent.height / 10
+
             function onConnectButtonClicked() {
                 var result = ""
                 for (var i = 0; i < _listDigitsIp.count; i++) {
@@ -283,6 +282,11 @@ Rectangle {
                     break
                 case Qt.Key_Return:
                     _button.onConnectButtonClicked()
+                    break
+                case Qt.Key_Down:
+                    _listsDigits.whatFocused = "hull"
+                    _listDigitsHull.itemAt(
+                                _listDigitsHull.currentIndex).focus = true
                     break
                 default:
                     break

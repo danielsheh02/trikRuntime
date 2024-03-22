@@ -1,0 +1,16 @@
+import QtQuick 2.0
+import QtQuick.Templates 2.0 as T
+
+T.Button {
+    background: Rectangle {
+        color: parent.focus ? Style.darkTrikColor : Style.buttonsColor
+        radius: 10
+    }
+
+    contentItem: Text {
+        text: parent.text
+        color: "white"
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+    }
+}

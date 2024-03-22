@@ -15,7 +15,20 @@ Rectangle {
         spacing: 4
         anchors.topMargin: 4
         anchors.bottomMargin: 4
-
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Down
+                    && _listMotorsLevers.currentIndex === _listMotorsLevers.count - 1) {
+                _listMotorsLevers.currentIndex = 0
+                _listMotorsLevers.positionViewAtIndex(0, ListView.Beginning)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Up
+                       && _listMotorsLevers.currentIndex === 0) {
+                _listMotorsLevers.currentIndex = _listMotorsLevers.count - 1
+                _listMotorsLevers.positionViewAtIndex(
+                            _listMotorsLevers.count - 1, ListView.End)
+                event.accepted = true
+            }
+        }
         ScrollBar.vertical: ScrollBar {
             id: _scroll
             anchors.top: parent.top
@@ -91,21 +104,6 @@ Rectangle {
                             control.down = true
                         }
                     }
-                    indicator: Rectangle {
-                        width: parent.width
-                        height: parent.height
-                        radius: 13
-                        color: display.isOn ? Style.trikColor : Style.switchBorderColor3
-                        border.color: display.isOn ? Style.trikColor : Style.switchBorderColor1
-                        Rectangle {
-                            x: display.isOn ? parent.width - width : 0
-                            width: parent.width / 2
-                            height: parent.height
-                            radius: 13
-                            color: control.down ? "#CCCCCC" : Style.switchBorderColor3
-                            border.color: display.isOn ? Style.trikColor : Style.switchBorderColor2
-                        }
-                    }
                 }
 
                 SpinBox {
@@ -114,8 +112,6 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     width: parent.width / 1.8
                     height: parent.height / 2.3
-                    font.pointSize: 13
-                    font.weight: Font.Medium
                     value: display.power
                     from: display.minPower
                     to: display.maxPower
@@ -125,46 +121,6 @@ Rectangle {
                         // Check against binding loop
                         if (display.power !== value) {
                             display.power = value
-                        }
-                    }
-
-                    background: Rectangle {
-                        id: _counter
-                        border.color: Style.spinBorderColor
-                        anchors.fill: parent
-                        radius: 10
-                    }
-
-                    up.indicator: Rectangle {
-                        id: _up
-                        height: parent.height
-                        width: parent.width / 3.1
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        color: _sb.up.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: Style.spinBorderColor
-                        radius: 10
-                        Text {
-                            text: '+'
-                            font.pointSize: 17
-                            anchors.centerIn: parent
-                            color: enabled ? "black" : "#9E9E9E"
-                        }
-                    }
-                    down.indicator: Rectangle {
-                        id: _down
-                        height: parent.height
-                        width: parent.width / 3.2
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        color: _sb.down.pressed ? "#e4e4e4" : "#f6f6f6"
-                        border.color: Style.spinBorderColor
-                        radius: 10
-                        Text {
-                            text: '-'
-                            font.pointSize: 17
-                            anchors.centerIn: parent
-                            color: enabled ? "black" : "#9E9E9E"
                         }
                     }
                 }

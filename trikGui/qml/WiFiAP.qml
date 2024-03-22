@@ -21,13 +21,8 @@ Rectangle {
             id: _button
             Layout.preferredHeight: parent.height / 10
             text: qsTr("Search Wi-Fi")
-            palette.buttonText: "white"
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
-            background: Rectangle {
-                color: _button.focus ? Style.darkTrikColor : "#7D7D7D"
-                radius: 10
-            }
 
             Keys.onPressed: {
                 switch (event.key) {
