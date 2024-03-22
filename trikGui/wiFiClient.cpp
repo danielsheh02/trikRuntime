@@ -84,7 +84,11 @@ void WiFiClient::onNetworksInfoUpdated() {
 		/// filter them here. It is perceived as a bug by users, so we
 		/// sacrifice correctness in sake of simplicity.
 		mNetworks.insert(network.mSsid, network);
-		mAvailableNetworks.append(network);
+		if (network.mSsid == mCurrentSsid && network.mIsKnown == true) {
+			mAvailableNetworks.prepend(network);
+		} else {
+			mAvailableNetworks.append(network);
+		}
 	}
 
 	// Q_EMIT availableNetworksChanged();
