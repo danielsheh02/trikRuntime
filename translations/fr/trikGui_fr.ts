@@ -45,7 +45,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+108"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,12 +53,12 @@
 <context>
     <name>ConfirmAction</name>
     <message>
-        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+101"/>
+        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+105"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+17"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,7 +81,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+162"/>
         <source>Delete all ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -349,7 +349,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+16"/>
         <source>Network parameters:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -385,7 +385,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Are you sure you want to connect to open WiFi network?</source>
+        <source>Are you sure you want to connect to open Wi-Fi network?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -409,7 +409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+38"/>
         <source>IP: </source>
         <translation type="unfinished"></translation>
     </message>

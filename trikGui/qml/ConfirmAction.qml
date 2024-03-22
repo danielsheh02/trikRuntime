@@ -97,9 +97,9 @@ Rectangle {
         }
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            Layout.bottomMargin: 5
+            Layout.bottomMargin: 4
             Layout.rightMargin: 9
-            Layout.topMargin: 6
+            Layout.topMargin: 4
             Button {
                 id: _buttonNo
                 text: qsTr("No")
