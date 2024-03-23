@@ -35,7 +35,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+107"/>
         <source>Leader IP:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,7 +58,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+9"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -67,7 +67,7 @@
     <name>FileManager</name>
     <message>
         <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
-        <source>Confirm delition</source>
+        <source>Confirm deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -81,7 +81,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+162"/>
+        <location line="+166"/>
         <source>Delete all ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -409,7 +409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+48"/>
         <source>IP: </source>
         <translation type="unfinished"></translation>
     </message>

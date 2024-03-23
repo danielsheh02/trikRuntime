@@ -15,7 +15,7 @@ Rectangle {
 
     ConfirmAction {
         id: _confirm
-        textAction: qsTr("Confirm delition")
+        textAction: qsTr("Confirm deletion")
         descrAction: _confirm.deleteAll ? qsTr("Are you sure you want to delete all the files?") : qsTr(
                                               "Are you sure you want to delete file?")
         property bool deleteAll: false

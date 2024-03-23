@@ -35,7 +35,7 @@
         <translation>Бортномер:</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+107"/>
         <source>Leader IP:</source>
         <translation>IP ведущего:</translation>
     </message>
@@ -58,7 +58,7 @@
         <translation>Нет</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+9"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -66,8 +66,12 @@
 <context>
     <name>FileManager</name>
     <message>
-        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
         <source>Confirm delition</source>
+        <translation type="vanished">Подтвердите удаление</translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
+        <source>Confirm deletion</source>
         <translation>Подтвердите удаление</translation>
     </message>
     <message>
@@ -89,7 +93,7 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+162"/>
+        <location line="+166"/>
         <source>Delete all ...</source>
         <translation>Удалить все ...</translation>
     </message>
@@ -512,7 +516,7 @@
         <translation>Включить точку доступа</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+48"/>
         <source>IP: </source>
         <translation>IP: </translation>
     </message>

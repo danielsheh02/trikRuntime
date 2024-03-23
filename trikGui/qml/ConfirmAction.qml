@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 
 Rectangle {
-    width: parent.width / 1.05
+    width: parent.width / 1.08
     implicitHeight: _columnConfirm.implicitHeight
     z: 1
     color: Style.confirmWindowColor
