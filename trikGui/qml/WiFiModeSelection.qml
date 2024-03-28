@@ -34,10 +34,27 @@ Rectangle {
             width: _listWiFiModes.width
             height: _listWiFiModes.height / 4.8
             property bool isCurrent: ListView.isCurrentItem
+
             Keys.onPressed: {
                 switch (event.key) {
                 case Qt.Key_Return:
                     wiFiMode.setMode(model.mode)
+                    break
+                case Qt.Key_Down:
+                    if (_listWiFiModes.currentIndex === dataModelModes.count - 1) {
+                        _listWiFiModes.currentIndex = 0
+                        _listWiFiModes.positionViewAtIndex(0,
+                                                           ListView.Beginning)
+                        event.accepted = true
+                    }
+                    break
+                case Qt.Key_Up:
+                    if (_listWiFiModes.currentIndex === 0) {
+                        _listWiFiModes.currentIndex = dataModelModes.count - 1
+                        _listWiFiModes.positionViewAtIndex(
+                                    dataModelModes.count - 1, ListView.End)
+                        event.accepted = true
+                    }
                     break
                 default:
                     break

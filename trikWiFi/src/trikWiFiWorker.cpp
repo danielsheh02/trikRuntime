@@ -14,8 +14,8 @@
 
 #include "trikWiFiWorker.h"
 
-#include <QtCore/QStringList>
 #include <QtCore/QProcess>
+#include <QtCore/QStringList>
 
 #include <QsLog.h>
 
@@ -23,29 +23,25 @@
 
 using namespace trikWiFi;
 
-TrikWiFiWorker::TrikWiFiWorker(const QString &interfaceFilePrefix
-		, const QString &daemonFile)
-	: mInterfaceFile(interfaceFilePrefix)
-	, mDaemonFile(daemonFile)
-{
+TrikWiFiWorker::TrikWiFiWorker(const QString &interfaceFilePrefix,
+			       const QString &daemonFile)
+    : mInterfaceFile(interfaceFilePrefix), mDaemonFile(daemonFile) {
 	qRegisterMetaType<DisconnectReason>("DisconnectReason");
 }
 
-TrikWiFiWorker::~TrikWiFiWorker()
-{
-	mMonitorInterface->detach();
-}
+TrikWiFiWorker::~TrikWiFiWorker() { mMonitorInterface->detach(); }
 
-void TrikWiFiWorker::reinit()
-{
+void TrikWiFiWorker::reinit() {
 	QLOG_INFO() << "Reinitializing WiFi";
 
 	if (!mMonitorInterface.isNull()) {
 		mMonitorInterface->detach();
 	}
 
-	mControlInterface.reset(new WpaSupplicantCommunicator(mInterfaceFile + "ctrl", mDaemonFile));
-	mMonitorInterface.reset(new WpaSupplicantCommunicator(mInterfaceFile + "mon", mDaemonFile));
+	mControlInterface.reset(new WpaSupplicantCommunicator(
+	    mInterfaceFile + "ctrl", mDaemonFile));
+	mMonitorInterface.reset(
+	    new WpaSupplicantCommunicator(mInterfaceFile + "mon", mDaemonFile));
 
 	mNetworkConfiguration.clear();
 
@@ -55,8 +51,11 @@ void TrikWiFiWorker::reinit()
 	mMonitorInterface->attach();
 	const int monitorFileDesc = mMonitorInterface->fileDescriptor();
 	if (monitorFileDesc >= 0) {
-		mMonitorFileSocketNotifier.reset(new QSocketNotifier(monitorFileDesc, QSocketNotifier::Read));
-		QObject::connect(mMonitorFileSocketNotifier.data(), SIGNAL(activated(int)), this, SLOT(receiveMessages()));
+		mMonitorFileSocketNotifier.reset(new QSocketNotifier(
+		    monitorFileDesc, QSocketNotifier::Read));
+		QObject::connect(&*mMonitorFileSocketNotifier,
+				 &QSocketNotifier::activated, this,
+				 &TrikWiFiWorker::receiveMessages);
 	} else {
 		QLOG_ERROR() << "Can not get monitor file descriptor";
 	}
@@ -67,18 +66,19 @@ void TrikWiFiWorker::reinit()
 	QLOG_INFO() << "WiFi initialized";
 }
 
-void TrikWiFiWorker::dispose()
-{
+void TrikWiFiWorker::dispose() {
 	if (!mMonitorInterface.isNull()) {
 		mMonitorInterface->detach();
 	}
-
+	mMonitorFileSocketNotifier.reset();
 	mControlInterface.reset();
 	mMonitorInterface.reset();
 }
 
-void TrikWiFiWorker::connect(const QString &ssid)
-{
+void TrikWiFiWorker::connect(const QString &ssid) {
+	if (!mControlInterface)
+		return;
+
 	mPlannedDisconnect = true;
 
 	// At first checking if we have this network in configuration.
@@ -102,15 +102,18 @@ void TrikWiFiWorker::connect(const QString &ssid)
 		return;
 	}
 
-	result = mControlInterface->request("SELECT_NETWORK " + QString::number(networkId), reply);
+	result = mControlInterface->request(
+	    "SELECT_NETWORK " + QString::number(networkId), reply);
 	if (result < 0 || reply != "OK\n") {
 		emit error("connect");
 		return;
 	}
 }
 
-void TrikWiFiWorker::disconnect()
-{
+void TrikWiFiWorker::disconnect() {
+	if (!mControlInterface)
+		return;
+
 	mPlannedDisconnect = true;
 
 	QString reply;
@@ -120,8 +123,10 @@ void TrikWiFiWorker::disconnect()
 	}
 }
 
-void TrikWiFiWorker::scanRequest()
-{
+void TrikWiFiWorker::scanRequest() {
+	if (!mControlInterface)
+		return;
+
 	QString reply;
 
 	mIgnoreScanResults = false;
@@ -131,8 +136,10 @@ void TrikWiFiWorker::scanRequest()
 	}
 }
 
-void TrikWiFiWorker::statusRequest()
-{
+void TrikWiFiWorker::statusRequest() {
+	if (!mControlInterface)
+		return;
+
 	const QString command = "STATUS";
 	QString reply;
 
@@ -143,7 +150,8 @@ void TrikWiFiWorker::statusRequest()
 
 	const QHash<QString, QString> parsedReply = parseReply(reply);
 
-	mStatus->connected = parsedReply.contains("ssid") && !parsedReply["ssid"].isEmpty();
+	mStatus->connected =
+	    parsedReply.contains("ssid") && !parsedReply["ssid"].isEmpty();
 	if (mStatus->connected) {
 		mStatus->ipAddress = parsedReply["ip_address"];
 		mStatus->ssid = parsedReply["ssid"];
@@ -156,13 +164,12 @@ void TrikWiFiWorker::statusRequest()
 	emit statusReady();
 }
 
-Status TrikWiFiWorker::statusResult()
-{
-	return mStatus.get();
-}
+Status TrikWiFiWorker::statusResult() { return mStatus.get(); }
 
-void TrikWiFiWorker::processScanResults()
-{
+void TrikWiFiWorker::processScanResults() {
+	if (!mControlInterface)
+		return;
+
 	int index = 0;
 
 	mIgnoreScanResults = true;
@@ -210,13 +217,12 @@ void TrikWiFiWorker::processScanResults()
 	emit scanFinished();
 }
 
-QList<ScanResult> TrikWiFiWorker::scanResult()
-{
-	return mScanResult.get();
-}
+QList<ScanResult> TrikWiFiWorker::scanResult() { return mScanResult.get(); }
 
-void TrikWiFiWorker::listKnownNetworks()
-{
+void TrikWiFiWorker::listKnownNetworks() {
+	if (!mControlInterface)
+		return;
+
 	QString reply;
 	const int result = mControlInterface->request("LIST_NETWORKS", reply);
 	if (result < 0 || reply.isEmpty() || reply.startsWith("FAIL")) {
@@ -241,13 +247,14 @@ void TrikWiFiWorker::listKnownNetworks()
 		}
 
 		currentNetwork.ssid = values[1];
-		mNetworkConfiguration.insert(currentNetwork.ssid, currentNetwork);
+		mNetworkConfiguration.insert(currentNetwork.ssid,
+					     currentNetwork);
 	}
 }
 
-void TrikWiFiWorker::processMessage(const QString &message)
-{
-	if (message.contains("CTRL-EVENT-SCAN-RESULTS") && !mIgnoreScanResults) {
+void TrikWiFiWorker::processMessage(const QString &message) {
+	if (message.contains("CTRL-EVENT-SCAN-RESULTS") &&
+	    !mIgnoreScanResults) {
 		processScanResults();
 	} else if (message.contains("CTRL-EVENT-CONNECTED")) {
 		// Refresh connection status.
@@ -260,22 +267,27 @@ void TrikWiFiWorker::processMessage(const QString &message)
 		statusRequest();
 		emit connected();
 	} else if (message.contains("CTRL-EVENT-DISCONNECTED")) {
-		emit disconnected(mPlannedDisconnect ? DisconnectReason::planned : DisconnectReason::unplanned);
+		emit disconnected(mPlannedDisconnect
+				      ? DisconnectReason::planned
+				      : DisconnectReason::unplanned);
 	}
 }
 
-void TrikWiFiWorker::receiveMessages()
-{
+void TrikWiFiWorker::receiveMessages() {
+	if (!mMonitorInterface)
+		return;
+
+	mMonitorFileSocketNotifier->setEnabled(false);
 	while (mMonitorInterface->isPending()) {
 		QString message;
 		if (mMonitorInterface->receive(message) == 0) {
 			processMessage(message);
 		}
 	}
+	mMonitorFileSocketNotifier->setEnabled(true);
 }
 
-QHash<QString, QString> TrikWiFiWorker::parseReply(const QString &reply)
-{
+QHash<QString, QString> TrikWiFiWorker::parseReply(const QString &reply) {
 	QHash<QString, QString> result;
 
 	if (reply.isEmpty() || reply.startsWith("FAIL")) {
@@ -299,8 +311,10 @@ QHash<QString, QString> TrikWiFiWorker::parseReply(const QString &reply)
 	return result;
 }
 
-int TrikWiFiWorker::addOpenNetwork(const QString &ssid)
-{
+int TrikWiFiWorker::addOpenNetwork(const QString &ssid) {
+	if (!mControlInterface)
+		return -1;
+
 	QString reply;
 
 	mControlInterface->request("ADD_NETWORK", reply);
@@ -311,17 +325,21 @@ int TrikWiFiWorker::addOpenNetwork(const QString &ssid)
 	bool ok = false;
 	const int id = reply.toInt(&ok);
 	if (ok) {
-		mControlInterface->request(QString("SET_NETWORK %1 ssid \"%2\"").arg(id).arg(ssid), reply);
+		mControlInterface->request(
+		    QString("SET_NETWORK %1 ssid \"%2\"").arg(id).arg(ssid),
+		    reply);
 		if (reply != "OK\n") {
 			return -1;
 		}
 
-		mControlInterface->request(QString("SET_NETWORK %1 key_mgmt NONE").arg(id), reply);
+		mControlInterface->request(
+		    QString("SET_NETWORK %1 key_mgmt NONE").arg(id), reply);
 		if (reply != "OK\n") {
 			return -1;
 		}
 
-		// Enable all networks before saving config, to avoid accidentally turning off known networks.
+		// Enable all networks before saving config, to avoid
+		// accidentally turning off known networks.
 		mControlInterface->request("ENABLE_NETWORK all", reply);
 		if (reply != "OK\n") {
 			return -1;
@@ -340,7 +358,6 @@ int TrikWiFiWorker::addOpenNetwork(const QString &ssid)
 	}
 }
 
-int TrikWiFiWorker::findNetworkId(const QString &ssid) const
-{
+int TrikWiFiWorker::findNetworkId(const QString &ssid) const {
 	return mNetworkConfiguration.value(ssid, {-1, ""}).id;
 }

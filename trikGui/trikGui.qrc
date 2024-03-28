@@ -69,5 +69,9 @@
         <file>resourcesQml/moon.png</file>
         <file>resourcesQml/sun.png</file>
         <file>resourcesQml/gamepad.png</file>
+        <file>TrikStyle/SpinBox.qml</file>
+        <file>TrikStyle/qmldir</file>
+        <file>TrikStyle/Button.qml</file>
+        <file>TrikStyle/Switch.qml</file>
     </qresource>
 </RCC>

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 TEMPLATE = app
-QT += network xml quick concurrent
+QT += network xml quick concurrent quickcontrols2
 
 include(../global.pri)
 include(../Qt-QrCodeGenerator/Qt-QrCodeGenerator.pri)

@@ -15,7 +15,7 @@ Rectangle {
 
     ConfirmAction {
         id: _confirm
-        textAction: qsTr("Confirm delition")
+        textAction: qsTr("Confirm deletion")
         descrAction: _confirm.deleteAll ? qsTr("Are you sure you want to delete all the files?") : qsTr(
                                               "Are you sure you want to delete file?")
         property bool deleteAll: false
@@ -131,12 +131,17 @@ Rectangle {
                                     _listFiles.focus = false
                                     _confirm.focus = true
                                     _confirm.visible = true
+                                    _confirm.buttonNo.focus = true
                                     break
                                 case Qt.Key_Down:
                                     if (_listFiles.count - 1 === index) {
                                         _buttonDeleteAll.focus = true
                                     }
-
+                                    break
+                                case Qt.Key_Up:
+                                    if (0 === index) {
+                                        _buttonDeleteAll.focus = true
+                                    }
                                     break
                                 default:
                                     break
@@ -178,19 +183,15 @@ Rectangle {
                 Button {
                     id: _buttonDeleteAll
                     text: qsTr("Delete all ...")
-                    palette.buttonText: "white"
-
-                    background: Rectangle {
-                        color: _buttonDeleteAll.focus ? Style.darkTrikColor : Style.buttonsColor
-                        radius: 10
-                    }
                     Layout.alignment: Qt.AlignBottom
                     Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height / 9
                     onClicked: {
                         _confirm.deleteAll = true
                         _buttonDeleteAll.focus = false
                         _confirm.focus = true
                         _confirm.visible = true
+                        _confirm.buttonNo.focus = true
                     }
                     Keys.onPressed: {
                         switch (event.key) {
@@ -198,7 +199,16 @@ Rectangle {
                             _buttonDeleteAll.clicked()
                             break
                         case Qt.Key_Up:
+                            _listFiles.currentIndex = _listFiles.count - 1
                             _listFiles.focus = true
+                            _listFiles.positionViewAtIndex(
+                                        _listFiles.count - 1, ListView.End)
+                            break
+                        case Qt.Key_Down:
+                            _listFiles.currentIndex = 0
+                            _listFiles.focus = true
+                            _listFiles.positionViewAtIndex(0,
+                                                           ListView.Beginning)
                             break
                         default:
                             break

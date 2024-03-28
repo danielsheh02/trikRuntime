@@ -3,8 +3,9 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 
 Rectangle {
-    width: parent.width / 1.05
-    implicitHeight: _columnConfirm.implicitHeight
+    id: _rectConfirm
+    width: parent.width / 1.08
+    height: _columnConfirm.height
     z: 1
     color: Style.confirmWindowColor
     radius: 10
@@ -16,17 +17,21 @@ Rectangle {
     property string focusButton: "No"
     property string textAction: ""
     property string descrAction: ""
+    property var buttonNo: _buttonNo
 
     Keys.onPressed: {
         switch (event.key) {
         case Qt.Key_Right:
+
             if (focusButton === "No") {
                 focusButton = "Yes"
+                _buttonYes.focus = true
             }
             break
         case Qt.Key_Left:
             if (focusButton === "Yes") {
                 focusButton = "No"
+                _buttonNo.focus = true
             }
             break
         case Qt.Key_Return:
@@ -55,7 +60,7 @@ Rectangle {
     }
     ColumnLayout {
         id: _columnConfirm
-        anchors.fill: parent
+        width: parent.width
         Text {
             text: textAction
             wrapMode: Text.Wrap
@@ -71,8 +76,8 @@ Rectangle {
             color: Style.delimeterLineColor
         }
         RowLayout {
-            Layout.fillWidth: true
             Image {
+                id: _icon
                 source: iconsPath + "warningDel.png"
                 Layout.preferredWidth: _mainMenuView.width
                                        < 400 ? _mainMenuView.width / 7 : _mainMenuView.width / 25
@@ -86,6 +91,7 @@ Rectangle {
                 text: descrAction
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
+                Layout.maximumWidth: _rectConfirm.width - _icon.width
                 font.pointSize: 12
                 Layout.rightMargin: 5
                 color: Style.textColor
@@ -93,17 +99,14 @@ Rectangle {
         }
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            Layout.bottomMargin: 7
+            Layout.bottomMargin: 6
             Layout.rightMargin: 9
-            Layout.topMargin: 9
+            Layout.topMargin: 8
             Button {
                 id: _buttonNo
                 text: qsTr("No")
-                palette.buttonText: "white"
-                background: Rectangle {
-                    color: _confirm.focusButton === "No" ? Style.darkTrikColor : Style.buttonsColor
-                    radius: 10
-                }
+                Layout.preferredHeight: _columnConfirm.width / 6.8
+                Layout.preferredWidth: _columnConfirm.width / 3.8
                 onClicked: {
                     noOnClick()
                 }
@@ -111,11 +114,8 @@ Rectangle {
             Button {
                 id: _buttonYes
                 text: qsTr("Yes")
-                palette.buttonText: "white"
-                background: Rectangle {
-                    color: _confirm.focusButton === "Yes" ? Style.darkTrikColor : Style.buttonsColor
-                    radius: 10
-                }
+                Layout.preferredHeight: _columnConfirm.width / 6.8
+                Layout.preferredWidth: _columnConfirm.width / 3.8
                 onClicked: {
                     yesOnClick()
                 }

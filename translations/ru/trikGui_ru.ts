@@ -35,7 +35,7 @@
         <translation>Бортномер:</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+107"/>
         <source>Leader IP:</source>
         <translation>IP ведущего:</translation>
     </message>
@@ -45,7 +45,7 @@
         <translation>(последние два числа)</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+108"/>
         <source>Connect</source>
         <translation>Подключиться</translation>
     </message>
@@ -53,12 +53,12 @@
 <context>
     <name>ConfirmAction</name>
     <message>
-        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+101"/>
+        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+105"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+9"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -66,8 +66,12 @@
 <context>
     <name>FileManager</name>
     <message>
-        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
         <source>Confirm delition</source>
+        <translation type="vanished">Подтвердите удаление</translation>
+    </message>
+    <message>
+        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
+        <source>Confirm deletion</source>
         <translation>Подтвердите удаление</translation>
     </message>
     <message>
@@ -89,7 +93,7 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+166"/>
         <source>Delete all ...</source>
         <translation>Удалить все ...</translation>
     </message>
@@ -440,7 +444,7 @@
         <translation>Поиск Wi-Fi</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+16"/>
         <source>Network parameters:</source>
         <translation>Параметры сети:</translation>
     </message>
@@ -475,9 +479,8 @@
         <translation>Подтвердите подключение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to connect to open WiFi network?</source>
-        <translation>Вы действительно хотите подключиться к незащищённой сети?</translation>
+        <translation type="vanished">Вы действительно хотите подключиться к незащищённой сети?</translation>
     </message>
     <message>
         <source>No</source>
@@ -486,6 +489,11 @@
     <message>
         <source>Yes</source>
         <translation type="vanished">Да</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you want to connect to open Wi-Fi network?</source>
+        <translation>Вы действительно хотите подключиться к незащищённой сети?</translation>
     </message>
     <message>
         <location line="+27"/>
@@ -508,7 +516,7 @@
         <translation>Включить точку доступа</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+48"/>
         <source>IP: </source>
         <translation>IP: </translation>
     </message>

@@ -33,15 +33,31 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QSettings>
+#include <QQuickStyle>
 
 using namespace trikGui;
 QQmlApplicationEngine *qQmlEngine = nullptr;
 MotorsManager *motorsManager = nullptr;
 SensorsManager *sensorsManager = nullptr;
 
-int main(int argc, char *argv[]) {
-	QApplication app(argc, argv);
+void setStyle(int argc, char *argv[]) {
+	QQuickStyle::setStyle("TrikStyle");
+	if (argc >= 3) {
+		for (int i = 1; i < argc - 1; i++) {
+			QString current_arg(argv[i]);
+			if (current_arg == "-style" ||
+			    current_arg == "--style") {
+				QQuickStyle::setStyle(argv[i + 1]);
+				QQuickStyle::setFallbackStyle("TrikStyle");
+				break;
+			}
+		}
+	}
+}
 
+int main(int argc, char *argv[]) {
+	setStyle(argc, argv);
+	QApplication app(argc, argv);
 	trikKernel::DeinitializationHelper helper;
 	Q_UNUSED(helper);
 

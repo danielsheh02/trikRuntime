@@ -13,8 +13,6 @@
 #include <QtQml>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QScrollBar>
-#include <iostream>
-#include <thread>
 #include <unistd.h>
 
 using namespace trikGui;
@@ -42,7 +40,6 @@ void WiFiClientMock::onNetworksInfoUpdated() {
 	mAvailableNetworks.clear();
 
 	mNetworks.clear();
-
 	NetworkInfoMock network1{"wifi 1", false, trikWiFi::Security::wpa};
 	NetworkInfoMock network2{"wifi 2", false, trikWiFi::Security::wep};
 	NetworkInfoMock network3{"wifi 3", false, trikWiFi::Security::none};

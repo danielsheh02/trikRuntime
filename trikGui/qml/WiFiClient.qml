@@ -18,7 +18,7 @@ Rectangle {
     ConfirmAction {
         id: _confirm
         textAction: qsTr("Confirm connection")
-        descrAction: qsTr("Are you sure you want to connect to open WiFi network?")
+        descrAction: qsTr("Are you sure you want to connect to open Wi-Fi network?")
         function noOnClick() {
             _confirm.visible = false
             _listNetworks.focus = true
@@ -67,19 +67,24 @@ Rectangle {
             id: _button
             Layout.preferredHeight: parent.height / 10
             text: qsTr("Enable access point")
-            palette.buttonText: "white"
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
-            background: Rectangle {
-                color: _button.focus ? Style.darkTrikColor : Style.buttonsColor
-                radius: 10
-            }
 
             Keys.onPressed: {
                 switch (event.key) {
                 case Qt.Key_Down:
                     if (_listNetworks.count > 0) {
                         _listNetworks.focus = true
+                        _listNetworks.currentIndex = 0
+                        _listNetworks.positionViewAtIndex(0, ListView.Beginning)
+                    }
+                    break
+                case Qt.Key_Up:
+                    if (_listNetworks.count > 0) {
+                        _listNetworks.focus = true
+                        _listNetworks.currentIndex = _listNetworks.count - 1
+                        _listNetworks.positionViewAtIndex(
+                                    _listNetworks.count - 1, ListView.End)
                     }
                     break
                 case Qt.Key_Return:
@@ -210,11 +215,17 @@ Rectangle {
                                     _listNetworks.focus = false
                                     _confirm.focus = true
                                     _confirm.visible = true
+                                    _confirm.buttonNo.focus = true
                                 }
                             }
                             break
                         case Qt.Key_Up:
                             if (index === 0) {
+                                _button.focus = true
+                            }
+                            break
+                        case Qt.Key_Down:
+                            if (_listNetworks.count - 1 === index) {
                                 _button.focus = true
                             }
                             break
@@ -232,7 +243,7 @@ Rectangle {
                         anchors.rightMargin: 9
                         RowLayout {
                             width: parent.width
-                            height: parent.height
+                            anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.leftMargin: 3
                             spacing: connectionWiFiStateIconPath ? (_mainWiFiClient.width

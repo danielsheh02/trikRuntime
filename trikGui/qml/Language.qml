@@ -98,6 +98,7 @@ Rectangle {
                             _confirm.targetLanguage = display
                             _confirm.focus = true
                             _confirm.visible = true
+                            _confirm.buttonNo.focus = true
                             break
                         default:
                             break
