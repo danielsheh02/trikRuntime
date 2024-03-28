@@ -3,8 +3,9 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 
 Rectangle {
+    id: _rectConfirm
     width: parent.width / 1.08
-    implicitHeight: _columnConfirm.implicitHeight
+    height: _columnConfirm.height
     z: 1
     color: Style.confirmWindowColor
     radius: 10
@@ -59,7 +60,7 @@ Rectangle {
     }
     ColumnLayout {
         id: _columnConfirm
-        anchors.fill: parent
+        width: parent.width
         Text {
             text: textAction
             wrapMode: Text.Wrap
@@ -75,8 +76,8 @@ Rectangle {
             color: Style.delimeterLineColor
         }
         RowLayout {
-            Layout.fillWidth: true
             Image {
+                id: _icon
                 source: iconsPath + "warningDel.png"
                 Layout.preferredWidth: _mainMenuView.width
                                        < 400 ? _mainMenuView.width / 7 : _mainMenuView.width / 25
@@ -90,6 +91,7 @@ Rectangle {
                 text: descrAction
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
+                Layout.maximumWidth: _rectConfirm.width - _icon.width
                 font.pointSize: 12
                 Layout.rightMargin: 5
                 color: Style.textColor
@@ -97,9 +99,9 @@ Rectangle {
         }
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            Layout.bottomMargin: 4
+            Layout.bottomMargin: 6
             Layout.rightMargin: 9
-            Layout.topMargin: 4
+            Layout.topMargin: 8
             Button {
                 id: _buttonNo
                 text: qsTr("No")

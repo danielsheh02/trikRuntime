@@ -52,11 +52,6 @@ void WiFiIndicator::updateStatus() {
 WiFiMode::Mode WiFiIndicator::mode() { return mMode; }
 
 bool WiFiIndicator::isConnected() {
-	// When the signal from the router disappears,
-	// the statusResult whatever returns "true" (still connected to WiFi).
-	// It is necessary to make a statusRequest, but in some cases the code
-	// crashes with segfault.
-
-	// mController.wiFi().statusRequest();
+	mController.wiFi().statusRequest();
 	return mController.wiFi().statusResult().connected;
 }
