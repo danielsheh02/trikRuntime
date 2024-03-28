@@ -243,7 +243,7 @@ Rectangle {
                         anchors.rightMargin: 9
                         RowLayout {
                             width: parent.width
-                            height: parent.height
+                            anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.leftMargin: 3
                             spacing: connectionWiFiStateIconPath ? (_mainWiFiClient.width
