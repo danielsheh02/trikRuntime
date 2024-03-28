@@ -4,7 +4,6 @@
 <context>
     <name>Accelerometer</name>
     <message>
-        <location filename="../../trikGui/qml/Accelerometer.qml" line="+29"/>
         <source>Accelerometer:</source>
         <translation>Акселерометр:</translation>
     </message>
@@ -12,7 +11,6 @@
 <context>
     <name>Camera</name>
     <message>
-        <location filename="../../trikGui/qml/Camera.qml" line="+40"/>
         <source>Camera is not available</source>
         <translation>Камера недоступна</translation>
     </message>
@@ -20,32 +18,26 @@
 <context>
     <name>CommunicationSettings</name>
     <message>
-        <location filename="../../trikGui/qml/CommunicationSettings.qml" line="+25"/>
         <source>Comm settings</source>
         <translation>Взаимодействие</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>(Press &apos;Enter&apos; to edit)</source>
         <translation>(Нажмите &apos;Enter&apos; для изменения)</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Hull number:</source>
         <translation>Бортномер:</translation>
     </message>
     <message>
-        <location line="+107"/>
         <source>Leader IP:</source>
         <translation>IP ведущего:</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>(last two numbers)</source>
         <translation>(последние два числа)</translation>
     </message>
     <message>
-        <location line="+108"/>
         <source>Connect</source>
         <translation>Подключиться</translation>
     </message>
@@ -53,12 +45,10 @@
 <context>
     <name>ConfirmAction</name>
     <message>
-        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+105"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -70,17 +60,14 @@
         <translation type="vanished">Подтвердите удаление</translation>
     </message>
     <message>
-        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
         <source>Confirm deletion</source>
         <translation>Подтвердите удаление</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to delete all the files?</source>
         <translation>Вы уверены, что хотите удалить все файлы?</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Are you sure you want to delete file?</source>
         <translation>Вы уверены, что хотите удалить файл?</translation>
     </message>
@@ -93,7 +80,6 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+166"/>
         <source>Delete all ...</source>
         <translation>Удалить все ...</translation>
     </message>
@@ -108,7 +94,6 @@
 <context>
     <name>Gyroscope</name>
     <message>
-        <location filename="../../trikGui/qml/Gyroscope.qml" line="+34"/>
         <source>Gyroscope:</source>
         <translation>Гироскоп:</translation>
     </message>
@@ -116,50 +101,41 @@
 <context>
     <name>Information</name>
     <message>
-        <location filename="../../trikGui/qml/Information.qml" line="+23"/>
         <source>OS version:</source>
         <translation>версия ОС:</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Unknown</source>
         <translation>Неизвестна</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>MAC address:</source>
         <translation>MAC адресс:</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Not found</source>
         <translation>Не найден</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Icons by</source>
         <translation>Иконки</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Icons8,</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Flaticon,</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Svgrepo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Language</name>
     <message>
-        <location filename="../../trikGui/qml/Language.qml" line="+15"/>
         <source>Confirm the change</source>
         <translation>Подтвердите изменение</translation>
     </message>
@@ -180,7 +156,6 @@
         <translation type="vanished">Подтвердите изменение</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>The controller will be restarted. Do you want to continue?</source>
         <translation>Контроллер будет перезагружен. Продолжить?</translation>
     </message>
@@ -189,15 +164,44 @@
         <translation type="vanished">Приложение будет перезапущено. Продолжить?</translation>
     </message>
     <message>
-        <location line="+23"/>
         <source>Select language:</source>
         <translation>Выберите язык:</translation>
     </message>
 </context>
 <context>
+    <name>LogWindow</name>
+    <message>
+        <source>Log window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;lear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Auto scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainMenu</name>
     <message>
-        <location filename="../../trikGui/qml/MainMenu.qml" line="+28"/>
         <source>Running </source>
         <translation>Выполняется </translation>
     </message>
@@ -218,17 +222,14 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+93"/>
         <source>Files</source>
         <translation>Файлы</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Testing</source>
         <translation>Тестирование</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
@@ -237,7 +238,6 @@
         <translation type="vanished">Камера</translation>
     </message>
     <message>
-        <location line="-107"/>
         <source>Running direct command</source>
         <translation>Выполняется команда с компьютера</translation>
     </message>
@@ -246,28 +246,22 @@
         <translation type="vanished">Удерживайте кнопку для выключения</translation>
     </message>
     <message>
-        <location line="+82"/>
         <source>Keep holding to turn off the controller.</source>
         <translation>Удерживайте кнопку для выключения.</translation>
     </message>
     <message>
-        <location line="+43"/>
         <source>Name: </source>
         <translation>Имя: </translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>IP: </source>
         <translation>IP: </translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>no connection</source>
         <translation>нет соединения</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Hull number: </source>
         <translation>Бортномер: </translation>
     </message>
@@ -283,17 +277,14 @@
         <translation type="vanished">Вы уверены, что хотите сменить тему?</translation>
     </message>
     <message>
-        <location filename="../../trikGui/qml/Mode.qml" line="+21"/>
         <source>Select mode:</source>
         <translation>Выберите тему:</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Light</source>
         <translation>Светлая</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Dark</source>
         <translation>Темная</translation>
     </message>
@@ -301,15 +292,129 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../trikGui/trikGuiMain.cpp" line="+61"/>
         <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
         <translation>Графический интерфейс, среда времени выполнения для TRIK Studio и исполнитель скриптов на роботе</translation>
+    </message>
+    <message>
+        <source>Trace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Внимание</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print this help text.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore all locale options and use English language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to a directory where all configs for TRIK runtime are stored. Config files are
+	system-config.xml (system-wide configuration of robot hardware for trikControl library) and
+	model-config.xml (configuration of current model).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to a directory where core dump will be saved in case of creation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Positional arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File with script to execute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(optional of -js or -py option is specified)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JavaScript script to be executed directly from command line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Python script to be executed directly from command line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable display support. When this flag is active, trikRun can work without QWS or even physical display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Runner of JavaScript and Python files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsLogging::LogWindowModel</name>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsLogging::Window</name>
+    <message>
+        <source>&amp;Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log file (*.log)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RunningCodeComponent</name>
     <message>
-        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+42"/>
         <source>Press Power to abort</source>
         <translation>Нажмите кнопку Питание для выхода</translation>
     </message>
@@ -317,32 +422,26 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../../trikGui/qml/Settings.qml" line="+17"/>
         <source>Network</source>
         <translation>Сеть</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Comm settings</source>
         <translation>Взаимодействие</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Language</source>
         <translation>Язык / Language</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>System settings</source>
         <translation>Настройки системы</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Appearance</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>About</source>
         <translation>О системе</translation>
     </message>
@@ -354,17 +453,14 @@
 <context>
     <name>SystemSettings</name>
     <message>
-        <location filename="../../trikGui/qml/SystemSettings.qml" line="+23"/>
         <source>Directory &apos;Files&apos; is ...</source>
         <translation>Папка &apos;Файлы&apos; - это ...</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>only &apos;scripts&apos; directory</source>
         <translation>папка со скриптами</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>full the system</source>
         <translation>вся файловая система</translation>
     </message>
@@ -388,46 +484,34 @@
         <translation type="vanished">Силовые моторы</translation>
     </message>
     <message>
-        <location filename="../../trikGui/qml/Testing.qml" line="+63"/>
         <source>Encoders</source>
         <translation>Энкодеры</translation>
     </message>
     <message>
-        <location line="-18"/>
         <source>Sensors</source>
         <translation>Сенсоры</translation>
     </message>
     <message>
-        <location line="-9"/>
         <source>PWM capture</source>
         <translation>Захват ШИМ</translation>
     </message>
     <message>
-        <location line="+15"/>
-        <location line="+76"/>
-        <location line="+14"/>
         <source>Servo motors</source>
         <translation>Сервоприводы</translation>
     </message>
     <message>
-        <location line="-84"/>
-        <location line="+70"/>
-        <location line="+15"/>
         <source>Power motors</source>
         <translation>Силовые моторы</translation>
     </message>
     <message>
-        <location line="-73"/>
         <source>Accelerometer</source>
         <translation>Акселерометр</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Gyroscope</source>
         <translation>Гироскоп</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Camera</source>
         <translation>Камера</translation>
     </message>
@@ -439,34 +523,26 @@
         <translation type="vanished">Поиск WiFi</translation>
     </message>
     <message>
-        <location filename="../../trikGui/qml/WiFiAP.qml" line="+23"/>
         <source>Search Wi-Fi</source>
         <translation>Поиск Wi-Fi</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Network parameters:</source>
         <translation>Параметры сети:</translation>
     </message>
     <message>
-        <location line="+24"/>
         <source>Name: </source>
         <translation>Имя: </translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+9"/>
-        <location line="+9"/>
         <source>not found</source>
         <translation>не найдено</translation>
     </message>
     <message>
-        <location line="-9"/>
         <source>Password: </source>
         <translation>Пароль: </translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>IP address: </source>
         <translation>IP-адрес: </translation>
     </message>
@@ -474,7 +550,6 @@
 <context>
     <name>WiFiClient</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiClient.qml" line="+20"/>
         <source>Confirm connection</source>
         <translation>Подтвердите подключение</translation>
     </message>
@@ -491,42 +566,34 @@
         <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to connect to open Wi-Fi network?</source>
         <translation>Вы действительно хотите подключиться к незащищённой сети?</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>connecting...</source>
         <translation>соединение...</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>no connection</source>
         <translation>нет соединения</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>error</source>
         <translation>ошибка</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Enable access point</source>
         <translation>Включить точку доступа</translation>
     </message>
     <message>
-        <location line="+48"/>
         <source>IP: </source>
         <translation>IP: </translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Available networks:</source>
         <translation>Доступные сети:</translation>
     </message>
     <message>
-        <location line="+19"/>
         <source>Scanning...</source>
         <translation>Поиск...</translation>
     </message>
@@ -534,17 +601,14 @@
 <context>
     <name>WiFiInit</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiInit.qml" line="+34"/>
         <source>Network initialization in process</source>
         <translation>Инициализация сети</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Please wait</source>
         <translation>Пожалуйста, подождите</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Press Escape for break</source>
         <translation>Нажмите Escape, чтобы выйти</translation>
     </message>
@@ -563,12 +627,10 @@
 <context>
     <name>WiFiModeSelection</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiModeSelection.qml" line="+16"/>
         <source>Wi-Fi client</source>
         <translation>Wi-Fi клиент</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Wi-Fi access point</source>
         <translation>Wi-Fi точка доступа</translation>
     </message>
@@ -576,7 +638,6 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../../trikGui/qml/main.qml" line="+14"/>
         <source>TRIK</source>
         <translation>ТРИК</translation>
     </message>
@@ -1222,6 +1283,31 @@ Escape</translation>
     <message>
         <source>Network Config</source>
         <translation type="vanished">Сеть</translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::ScriptEngineWorker</name>
+    <message>
+        <source>Line %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::ScriptThread</name>
+    <message>
+        <source>Line %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::Threading</name>
+    <message>
+        <source>Attempt to create a thread with an already occupied id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

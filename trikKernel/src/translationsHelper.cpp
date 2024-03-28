@@ -29,7 +29,7 @@ using namespace trikKernel;
 
 QVector<QTranslator *> TranslationsHelper::mCurrentTranslators;
 void TranslationsHelper::loadTranslators(const QString &locale) {
-	const QDir translationsDirectory(Paths::translationsPath() + locale);
+	const QDir translationsDirectory(Paths::translationsPath());
 	QDirIterator files(translationsDirectory);
 	if (mCurrentTranslators.size() > 0) {
 		for (QTranslator *translator : qAsConst(mCurrentTranslators)) {
@@ -39,8 +39,10 @@ void TranslationsHelper::loadTranslators(const QString &locale) {
 	}
 	while (files.hasNext()) {
 		const QFileInfo &translatorFile = QFileInfo(files.next());
-		if (translatorFile.isFile() && translatorFile.baseName().split('_').at(1) == locale) {
-			QLOG_INFO() << "Loading translations from" << translatorFile.absolutePath();
+		if (translatorFile.isFile() &&
+		    translatorFile.baseName().split('_').at(1) == locale) {
+			QLOG_INFO() << "Loading translations from"
+				    << translatorFile.absolutePath();
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			mCurrentTranslators.append(translator);

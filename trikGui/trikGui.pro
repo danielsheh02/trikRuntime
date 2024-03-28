@@ -64,9 +64,9 @@ HEADERS += \
         $$PWD/gyroscopeMock.h \
         $$PWD/sensorMock.h \
         $$PWD/modeManager.h \
-    wiFiAPMock.h \
-    wiFiClientMock.h \
-    wiFiModeMock.h
+        $$PWD/wiFiAPMock.h \
+        $$PWD/wiFiClientMock.h \
+        $$PWD/wiFiModeMock.h
 
 SOURCES += \
 	$$PWD/autoRunner.cpp \
@@ -112,9 +112,9 @@ SOURCES += \
         $$PWD/gyroscopeMock.cpp \
         $$PWD/sensorMock.cpp \
         $$PWD/modeManager.cpp \
-    wiFiAPMock.cpp \
-    wiFiClientMock.cpp \
-    wiFiModeMock.cpp
+        $$PWD/wiFiAPMock.cpp \
+        $$PWD/wiFiClientMock.cpp \
+        $$PWD/wiFiModeMock.cpp
 
 RESOURCES = trikGui.qrc
 

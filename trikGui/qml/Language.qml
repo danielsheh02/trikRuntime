@@ -73,6 +73,8 @@ Rectangle {
                         return iconsPath + "ru.png"
                     case "fr":
                         return iconsPath + "fr.png"
+                    case "de":
+                        return iconsPath + "de.png"
                     }
                 }
 
@@ -84,6 +86,8 @@ Rectangle {
                         return "Русский"
                     case "fr":
                         return "Française"
+                    case "de":
+                        return "Deutsch"
                     }
                 }
 

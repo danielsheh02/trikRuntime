@@ -49,10 +49,11 @@ void LanguageSelection::loadLocales() {
 			if (!baseName.isEmpty() && baseName.contains('_')) {
 				QStringList parts = baseName.split('_');
 				QString langCode = parts.at(1);
-				QLocale locale(langCode);
-				QString languageName = QLocale::languageToString(locale.language());
-				if (languageName != "") {
-					mAvailableLocales.push_back(langCode, languageName);
+				// QLocale locale(langCode);
+				// QString languageName =
+				// QLocale::languageToString(locale.language());
+				if (langCode != "") {
+					mAvailableLocales.push_back(langCode);
 				}
 			}
 		}

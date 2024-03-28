@@ -4,7 +4,6 @@
 <context>
     <name>Accelerometer</name>
     <message>
-        <location filename="../../trikGui/qml/Accelerometer.qml" line="+29"/>
         <source>Accelerometer:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12,7 +11,6 @@
 <context>
     <name>Camera</name>
     <message>
-        <location filename="../../trikGui/qml/Camera.qml" line="+40"/>
         <source>Camera is not available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,32 +18,26 @@
 <context>
     <name>CommunicationSettings</name>
     <message>
-        <location filename="../../trikGui/qml/CommunicationSettings.qml" line="+25"/>
         <source>Comm settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>(Press &apos;Enter&apos; to edit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Hull number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+107"/>
         <source>Leader IP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>(last two numbers)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+108"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,12 +45,10 @@
 <context>
     <name>ConfirmAction</name>
     <message>
-        <location filename="../../trikGui/qml/ConfirmAction.qml" line="+105"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -66,22 +56,18 @@
 <context>
     <name>FileManager</name>
     <message>
-        <location filename="../../trikGui/qml/FileManager.qml" line="+18"/>
         <source>Confirm deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to delete all the files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Are you sure you want to delete file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+166"/>
         <source>Delete all ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -89,7 +75,6 @@
 <context>
     <name>Gyroscope</name>
     <message>
-        <location filename="../../trikGui/qml/Gyroscope.qml" line="+34"/>
         <source>Gyroscope:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,42 +82,34 @@
 <context>
     <name>Information</name>
     <message>
-        <location filename="../../trikGui/qml/Information.qml" line="+23"/>
         <source>OS version:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>MAC address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Icons by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Icons8,</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Flaticon,</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Svgrepo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -140,71 +117,88 @@
 <context>
     <name>Language</name>
     <message>
-        <location filename="../../trikGui/qml/Language.qml" line="+15"/>
         <source>Confirm the change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>The controller will be restarted. Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
         <source>Select language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LogWindow</name>
+    <message>
+        <source>Log window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;lear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Auto scroll</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="../../trikGui/qml/MainMenu.qml" line="+26"/>
         <source>Running direct command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Running </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
         <source>Keep holding to turn off the controller.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+18"/>
         <source>Name: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>IP: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>no connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Hull number: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -212,17 +206,14 @@
 <context>
     <name>Mode</name>
     <message>
-        <location filename="../../trikGui/qml/Mode.qml" line="+21"/>
         <source>Select mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -230,15 +221,129 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../trikGui/trikGuiMain.cpp" line="+61"/>
+        <source>Trace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print this help text.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore all locale options and use English language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to a directory where all configs for TRIK runtime are stored. Config files are
+	system-config.xml (system-wide configuration of robot hardware for trikControl library) and
+	model-config.xml (configuration of current model).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to a directory where core dump will be saved in case of creation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Positional arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Graphical user interface, TRIK Studio runtime environment and script runner of a robot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File with script to execute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(optional of -js or -py option is specified)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JavaScript script to be executed directly from command line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Python script to be executed directly from command line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable display support. When this flag is active, trikRun can work without QWS or even physical display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Runner of JavaScript and Python files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsLogging::LogWindowModel</name>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QsLogging::Window</name>
+    <message>
+        <source>&amp;Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log file (*.log)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RunningCodeComponent</name>
     <message>
-        <location filename="../../trikGui/qml/RunningCodeComponent.qml" line="+42"/>
         <source>Press Power to abort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -246,32 +351,26 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../../trikGui/qml/Settings.qml" line="+17"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Comm settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>System settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,17 +378,14 @@
 <context>
     <name>SystemSettings</name>
     <message>
-        <location filename="../../trikGui/qml/SystemSettings.qml" line="+23"/>
         <source>Directory &apos;Files&apos; is ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>only &apos;scripts&apos; directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>full the system</source>
         <translation type="unfinished"></translation>
     </message>
@@ -297,46 +393,34 @@
 <context>
     <name>Testing</name>
     <message>
-        <location filename="../../trikGui/qml/Testing.qml" line="+63"/>
-        <source>Encoders</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-18"/>
-        <source>Sensors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-9"/>
         <source>PWM capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
-        <location line="+76"/>
-        <location line="+14"/>
+        <source>Sensors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Servo motors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-84"/>
-        <location line="+70"/>
-        <location line="+15"/>
         <source>Power motors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-73"/>
+        <source>Encoders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Gyroscope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
@@ -344,34 +428,26 @@
 <context>
     <name>WiFiAP</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiAP.qml" line="+23"/>
         <source>Search Wi-Fi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Network parameters:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
         <source>Name: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+9"/>
-        <location line="+9"/>
         <source>not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-9"/>
         <source>Password: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>IP address: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -379,47 +455,38 @@
 <context>
     <name>WiFiClient</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiClient.qml" line="+20"/>
         <source>Confirm connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Are you sure you want to connect to open Wi-Fi network?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>connecting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>no connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Enable access point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+48"/>
         <source>IP: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Available networks:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
         <source>Scanning...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -427,17 +494,14 @@
 <context>
     <name>WiFiInit</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiInit.qml" line="+34"/>
         <source>Network initialization in process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Press Escape for break</source>
         <translation type="unfinished"></translation>
     </message>
@@ -445,12 +509,10 @@
 <context>
     <name>WiFiModeSelection</name>
     <message>
-        <location filename="../../trikGui/qml/WiFiModeSelection.qml" line="+16"/>
         <source>Wi-Fi client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Wi-Fi access point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -458,8 +520,32 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../../trikGui/qml/main.qml" line="+14"/>
         <source>TRIK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::ScriptEngineWorker</name>
+    <message>
+        <source>Line %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::ScriptThread</name>
+    <message>
+        <source>Line %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trikScriptRunner::Threading</name>
+    <message>
+        <source>Attempt to create a thread with an already occupied id %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

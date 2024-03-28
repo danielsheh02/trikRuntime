@@ -73,5 +73,6 @@
         <file>TrikStyle/qmldir</file>
         <file>TrikStyle/Button.qml</file>
         <file>TrikStyle/Switch.qml</file>
+        <file>resourcesQml/de.png</file>
     </qresource>
 </RCC>
