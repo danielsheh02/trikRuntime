@@ -26,22 +26,21 @@
 #include "rcReader.h"
 
 using namespace trikKernel;
+
 QVector<QTranslator *> TranslationsHelper::mCurrentTranslators;
 void TranslationsHelper::loadTranslators(const QString &locale) {
 	const QDir translationsDirectory(Paths::translationsPath() + locale);
-	QLOG_INFO() << "Loading translations from"
-		    << translationsDirectory.absolutePath();
-	QDirIterator directories(translationsDirectory,
-				 QDirIterator::Subdirectories);
+	QDirIterator files(translationsDirectory);
 	if (mCurrentTranslators.size() > 0) {
 		for (QTranslator *translator : qAsConst(mCurrentTranslators)) {
 			QCoreApplication::removeTranslator(translator);
 		}
 		mCurrentTranslators.clear();
 	}
-	while (directories.hasNext()) {
-		for (const QFileInfo &translatorFile :
-		     QDir(directories.next()).entryInfoList(QDir::Files)) {
+	while (files.hasNext()) {
+		const QFileInfo &translatorFile = QFileInfo(files.next());
+		if (translatorFile.isFile() && translatorFile.baseName().split('_').at(1) == locale) {
+			QLOG_INFO() << "Loading translations from" << translatorFile.absolutePath();
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			mCurrentTranslators.append(translator);

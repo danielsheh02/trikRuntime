@@ -41,20 +41,19 @@ LanguageSelection::LanguageSelection(QObject *parent)
 
 void LanguageSelection::loadLocales() {
 	const QDir translationsDirectory(trikKernel::Paths::translationsPath());
-	QDirIterator directories(translationsDirectory);
-	while (directories.hasNext()) {
-		const QFileInfo localeInfo(directories.next() + "/locale.ini");
+	QDirIterator files(translationsDirectory.absolutePath(), QDir::Files);
+	while (files.hasNext()) {
+		const QFileInfo localeInfo(files.next());
 		if (localeInfo.exists()) {
-			QSettings parsedLocaleInfo(
-			    localeInfo.absoluteFilePath(),
-			    QSettings::IniFormat);
-			parsedLocaleInfo.setIniCodec("UTF-8");
-			parsedLocaleInfo.sync();
-			const QString localeName =
-			    parsedLocaleInfo.value("name", "").toString();
-			if (localeName != "") {
-				mAvailableLocales.push_back(
-				    localeInfo.dir().dirName());
+			QString baseName = localeInfo.baseName();
+			if (!baseName.isEmpty() && baseName.contains('_')) {
+				QStringList parts = baseName.split('_');
+				QString langCode = parts.at(1);
+				QLocale locale(langCode);
+				QString languageName = QLocale::languageToString(locale.language());
+				if (languageName != "") {
+					mAvailableLocales.push_back(langCode, languageName);
+				}
 			}
 		}
 	}

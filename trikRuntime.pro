@@ -11,24 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+TARGET = trikRuntime
 TEMPLATE = subdirs
-
 SUBDIRS = \
-	initvars \
-	qslog \
-	trikKernel \
-	trikWiFi \
-	trikNetwork \
-	trikHal \
-	trikControl \
-	trikTelemetry \
-	trikCommunicator \
-	trikScriptRunner \
-	trikGui \
-	trikRun \
-	trikServer \
-	translations \
+        initvars \
+        qslog \
+        trikKernel \
+        trikWiFi \
+        trikNetwork \
+        trikHal \
+        trikControl \
+        trikTelemetry \
+        trikCommunicator \
+        trikScriptRunner \
+        trikGui \
+        trikRun \
+        trikServer \
+        translations \
 
 
 initvars.file = $$PWD/initvars.pre
@@ -61,10 +60,15 @@ trikGui.depends = trikCommunicator trikScriptRunner trikWiFi trikTelemetry
     PythonQt.depends = qslog
 }
 
+TRANSLATIONS += \
+        $$PWD/translations/trikRuntime_ru.ts \
+        $$PWD/translations/trikRuntime_fr.ts \
+        $$PWD/translations/trikRuntime_de.ts \
+
 OTHER_FILES += \
 	$$PWD/resources/changelog.txt \
 	$$PWD/resources/lsan.supp \
-	$$PWD/docker/Dockerfile \
+        $$PWD/docker/Dockerfile \
 
 include($$PWD/global.pri)
 include($$PWD/Qt-QrCodeGenerator/Qt-QrCodeGenerator.pri)
@@ -74,3 +78,6 @@ copyToDestdir($$PWD/resources/lsan.supp, now)
 
 
 
+
+=======
+>>>>>>> upstream/master
