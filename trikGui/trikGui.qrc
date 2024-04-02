@@ -74,5 +74,7 @@
         <file>TrikStyle/Button.qml</file>
         <file>TrikStyle/Switch.qml</file>
         <file>resourcesQml/de.png</file>
+        <file>resourcesQml/telegram.png</file>
+        <file>qml/Feedback.qml</file>
     </qresource>
 </RCC>

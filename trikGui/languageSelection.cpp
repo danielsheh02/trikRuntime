@@ -16,8 +16,6 @@
 
 #include <QsLog.h>
 
-#include "../trikKernel/include/trikKernel/translationsHelper.h"
-#include "managers.h"
 #include <QApplication>
 #include <QDir>
 #include <QDirIterator>
@@ -32,9 +30,6 @@ using namespace trikGui;
 
 LanguageSelection::LanguageSelection(QObject *parent)
     : QAbstractListModel(parent) {
-	QSettings settings(trikKernel::Paths::localSettings(),
-			   QSettings::IniFormat);
-	const QString lastLocale = settings.value("locale", "").toString();
 	mAvailableLocales.push_back("en");
 	loadLocales();
 }
@@ -49,9 +44,6 @@ void LanguageSelection::loadLocales() {
 			if (!baseName.isEmpty() && baseName.contains('_')) {
 				QStringList parts = baseName.split('_');
 				QString langCode = parts.at(1);
-				// QLocale locale(langCode);
-				// QString languageName =
-				// QLocale::languageToString(locale.language());
 				if (langCode != "") {
 					mAvailableLocales.push_back(langCode);
 				}

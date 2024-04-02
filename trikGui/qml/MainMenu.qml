@@ -135,11 +135,12 @@ Rectangle {
             filePath: "Settings.qml"
             appType: AppType.Settings
         }
-        // ListElement {
-        //     text: qsTr("Camera")
-        //     iconPath: "camera.png"
-        //     filePath: ""
-        // }
+        ListElement {
+            text: qsTr("Feedback")
+            iconPath: "telegram.png"
+            filePath: "Feedback.qml"
+            appType: AppType.Feedback
+        }
     }
 
     ColumnLayout {

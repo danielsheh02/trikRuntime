@@ -18,9 +18,9 @@ public:
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 
 private:
-	QString mNetworkName{"trik access point"};
-	QString mPassword{"12345678"};
-	QString mIpValue{"192.168.0.0"};
+	QString mNetworkName{"trik-f6fec0"};
+	QString mPassword{"54124221"};
+	QString mIpValue{"192.168.77.1"};
 
 	QString networkName();
 	QString password();

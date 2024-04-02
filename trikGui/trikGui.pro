@@ -66,7 +66,8 @@ HEADERS += \
         $$PWD/modeManager.h \
         $$PWD/wiFiAPMock.h \
         $$PWD/wiFiClientMock.h \
-        $$PWD/wiFiModeMock.h
+        $$PWD/wiFiModeMock.h \
+        $$PWD/feedback.h
 
 SOURCES += \
 	$$PWD/autoRunner.cpp \
@@ -114,9 +115,15 @@ SOURCES += \
         $$PWD/modeManager.cpp \
         $$PWD/wiFiAPMock.cpp \
         $$PWD/wiFiClientMock.cpp \
-        $$PWD/wiFiModeMock.cpp
+        $$PWD/wiFiModeMock.cpp \
+        $$PWD/feedback.cpp
 
 RESOURCES = trikGui.qrc
+
+# TRANSLATIONS += \
+#         $$PWD/translations/trikRuntime_ru.ts \
+#         $$PWD/translations/trikRuntime_fr.ts \
+#         $$PWD/translations/trikRuntime_de.ts \
 
 OTHER_FILES += \
 
