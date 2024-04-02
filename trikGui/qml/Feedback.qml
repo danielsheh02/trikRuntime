@@ -11,7 +11,7 @@ Rectangle {
         spacing: 5
 
         Text {
-            text: qsTr("Please leave an anonymous review about our new interface.")
+            text: qsTr("Please leave an anonymous review about new interface.")
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             Layout.fillHeight: true

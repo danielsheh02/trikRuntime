@@ -57,7 +57,11 @@
     <name>Feedback</name>
     <message>
         <source>Please leave an anonymous review about our new interface.</source>
-        <translation>Пожалуйста оставьте анонимный отзыв о нашем новом интерфейсе</translation>
+        <translation type="vanished">Пожалуйста оставьте анонимный отзыв о нашем новом интерфейсе</translation>
+    </message>
+    <message>
+        <source>Please leave an anonymous review about new interface.</source>
+        <translation>Пожалуйста оставьте анонимный отзыв о новом интерфейсе</translation>
     </message>
 </context>
 <context>

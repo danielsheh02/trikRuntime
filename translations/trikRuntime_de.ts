@@ -56,7 +56,7 @@
 <context>
     <name>Feedback</name>
     <message>
-        <source>Please leave an anonymous review about our new interface.</source>
+        <source>Please leave an anonymous review about new interface.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
