@@ -28,6 +28,7 @@ SUBDIRS = \
         trikRun \
         trikServer \
         translations \
+        trikUserCppProgram \
 
 
 initvars.file = $$PWD/initvars.pre

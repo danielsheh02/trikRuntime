@@ -3,10 +3,9 @@ import QtQuick.Controls 2.0
 
 Rectangle {
     id: _motorsPanel
-    property var motorsManager: MotorsManager
-    property var motors: motorsManager.motors
+    property var motors: MotorsManager
     property var idList: _listMotorsLevers
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
 
     ListView {
         id: _listMotorsLevers
@@ -72,17 +71,17 @@ Rectangle {
                 anchors.rightMargin: 10
                 radius: 10
                 border {
-                    color: Style.trikColor
+                    color: activeTheme.trikColor
                     width: _delegateLever.isCurrent ? 3 : 0
                 }
-                color: Style.elementsOfListColor
+                color: activeTheme.elementsOfListColor
                 Text {
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
                     anchors.topMargin: 5
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
 
                 Switch {

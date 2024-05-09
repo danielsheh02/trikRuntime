@@ -125,6 +125,10 @@ void Controller::runFile(const QString &filePath) {
 		mScriptRunner->run(trikKernel::FileUtils::readFromFile(
 				       fileInfo.canonicalFilePath()),
 				   fileInfo.baseName());
+	} else if (fileInfo.suffix() == "so" ||
+		   fileInfo.completeSuffix().contains("so.")) {
+		mScriptRunner->runCpp(fileInfo.canonicalFilePath(),
+				      fileInfo.fileName());
 	} else if (fileInfo.suffix() == "wav" || fileInfo.suffix() == "mp3") {
 		mScriptRunner->run("brick.playSound(\"" +
 				       fileInfo.canonicalFilePath() + "\");",

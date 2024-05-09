@@ -51,11 +51,8 @@ HEADERS += \
         $$PWD/camera.h \
 	$$PWD/pwmCaptureIndicator.h \
         $$PWD/communicationSettingsManager.h \
-        $$PWD/languageManager.h \
         $$PWD/mainMenuManager.h \
         $$PWD/managers.h \
-        $$PWD/motorsManager.h \
-        $$PWD/sensorsManager.h \
         $$PWD/settingsManager.h \
         $$PWD/testingManager.h \
         $$PWD/wiFiManager.h \
@@ -101,10 +98,7 @@ SOURCES += \
         $$PWD/camera.cpp \
 	$$PWD/pwmCaptureIndicator.cpp \
         $$PWD/communicationSettingsManager.cpp \
-        $$PWD/languageManager.cpp \
         $$PWD/mainMenuManager.cpp \
-        $$PWD/motorsManager.cpp \
-        $$PWD/sensorsManager.cpp \
         $$PWD/settingsManager.cpp \
         $$PWD/testingManager.cpp \
         $$PWD/wiFiManager.cpp \
@@ -120,6 +114,9 @@ SOURCES += \
 
 RESOURCES = trikGui.qrc
 
+!equals(ARCHITECTURE, arm):!trik_not_brick {
+    DEFINES += DESKTOP
+}
 # TRANSLATIONS += \
 #         $$PWD/translations/trikRuntime_ru.ts \
 #         $$PWD/translations/trikRuntime_fr.ts \

@@ -29,50 +29,43 @@ using namespace trikKernel;
 
 Q_DECLARE_METATYPE(QVector<uint8_t>)
 Q_DECLARE_METATYPE(QVector<int>)
-Q_DECLARE_METATYPE(QTimer*)
+Q_DECLARE_METATYPE(QTimer *)
 
 /// Constructor.
 /// @param brick - reference to trikControl::Brick instance.
 /// @param mailbox - mailbox object used to communicate with other robots.
-TrikScriptRunner::TrikScriptRunner(trikControl::BrickInterface &brick
-								   , trikNetwork::MailboxInterface * const mailbox
-								   , TrikScriptControlInterface * scriptControl
-								   )
-	: mBrick(brick), mMailbox(mailbox), mScriptControl(scriptControl), mLastRunner(ScriptType::JAVASCRIPT)
-{
+TrikScriptRunner::TrikScriptRunner(trikControl::BrickInterface &brick,
+				   trikNetwork::MailboxInterface *const mailbox,
+				   TrikScriptControlInterface *scriptControl)
+    : mBrick(brick), mMailbox(mailbox), mScriptControl(scriptControl),
+      mLastRunner(ScriptType::JAVASCRIPT) {
 	mScriptRunnerArray.resize(to_underlying(ScriptType::Size));
 	REGISTER_DEVICES_WITH_TEMPLATE(REGISTER_METATYPE)
 	if (mailbox) {
-			connect(mailbox, &MailboxInterface::newMessage, this, [this](int senderNumber, QString message){
-				emit sendMailboxMessage(QString("mail: sender: %1 contents: %2")
-									 .arg(senderNumber)
-									 .arg(message)
-									 );
+		connect(mailbox, &MailboxInterface::newMessage, this,
+			[this](int senderNumber, QString message) {
+				emit sendMailboxMessage(
+				    QString("mail: sender: %1 contents: %2")
+					.arg(senderNumber)
+					.arg(message));
 			});
 	}
 }
 
-TrikScriptRunner::TrikScriptRunner(trikControl::BrickInterface &brick
-								   , trikNetwork::MailboxInterface * const mailbox
-								   )
-	: TrikScriptRunner(brick, mailbox, new ScriptExecutionControl(&brick))
-{
-}
+TrikScriptRunner::TrikScriptRunner(trikControl::BrickInterface &brick,
+				   trikNetwork::MailboxInterface *const mailbox)
+    : TrikScriptRunner(brick, mailbox, new ScriptExecutionControl(&brick)) {}
 
-TrikScriptRunner::~TrikScriptRunner()
-{
+TrikScriptRunner::~TrikScriptRunner() {
 	abortAll();
-	// Call it here for dtor to be compiled in this context, rather than in the including file's context
+	// Call it here for dtor to be compiled in this context, rather than in
+	// the including file's context
 	mScriptControl.reset();
 }
 
-void TrikScriptRunner::setDefaultRunner(ScriptType t)
-{
-	mLastRunner = t;
-}
+void TrikScriptRunner::setDefaultRunner(ScriptType t) { mLastRunner = t; }
 
-void TrikScriptRunner::setDefaultRunner(const QString &languageExtension)
-{
+void TrikScriptRunner::setDefaultRunner(const QString &languageExtension) {
 	if (languageExtension.contains("js")) {
 		mLastRunner = ScriptType::JAVASCRIPT;
 	}
@@ -83,68 +76,73 @@ void TrikScriptRunner::setDefaultRunner(const QString &languageExtension)
 #endif
 }
 
-void TrikScriptRunner::registerUserFunction(const QString &name, QScriptEngine::FunctionSignature function)
-{
+void TrikScriptRunner::registerUserFunction(
+    const QString &name, QScriptEngine::FunctionSignature function) {
 	fetchRunner(mLastRunner)->registerUserFunction(name, function);
 }
 
-void TrikScriptRunner::addCustomEngineInitStep(const std::function<void (QScriptEngine *)> &step)
-{
+void TrikScriptRunner::addCustomEngineInitStep(
+    const std::function<void(QScriptEngine *)> &step) {
 	fetchRunner(mLastRunner)->addCustomEngineInitStep(step);
 }
 
-bool TrikScriptRunner::wasError()
-{
+bool TrikScriptRunner::wasError() {
 	return fetchRunner(mLastRunner)->wasError();
 }
 
-QStringList TrikScriptRunner::knownMethodNames() const
-{
-	return mScriptRunnerArray[to_underlying(mLastRunner)]->knownMethodNames();
+QStringList TrikScriptRunner::knownMethodNames() const {
+	return mScriptRunnerArray[to_underlying(mLastRunner)]
+	    ->knownMethodNames();
 }
 
-QStringList TrikScriptRunner::knownMethodNamesFor(ScriptType t)
-{
+QStringList TrikScriptRunner::knownMethodNamesFor(ScriptType t) {
 	return fetchRunner(t)->knownMethodNames();
 }
 
-void TrikScriptRunner::run(const QString &script, const QString &fileName)
-{
+void TrikScriptRunner::run(const QString &script, const QString &fileName) {
 #ifndef TRIK_NOPYTHON
 	if (fileName.endsWith(".py")) {
 		run(script, ScriptType::PYTHON, fileName);
 	} else
 #endif
-	{ // default JS
+	{
 		run(script, ScriptType::JAVASCRIPT, fileName);
 	}
 }
 
-TrikScriptRunnerInterface * TrikScriptRunner::fetchRunner(ScriptType stype)
-{
-	auto & cell = mScriptRunnerArray[to_underlying(stype)];
+TrikScriptRunnerInterface *TrikScriptRunner::fetchRunner(ScriptType stype) {
+	auto &cell = mScriptRunnerArray[to_underlying(stype)];
 	if (cell == nullptr) { // lazy creation
 		switch (stype) {
-			case ScriptType::JAVASCRIPT:
-				QSharedPointer<TrikScriptRunnerInterface>(
-							new TrikJavaScriptRunner(&mBrick, mMailbox, mScriptControl)).swap(cell);
-				break;
+		case ScriptType::JAVASCRIPT:
+			QSharedPointer<TrikScriptRunnerInterface>(
+			    new TrikJavaScriptRunner(&mBrick, mMailbox,
+						     mScriptControl))
+			    .swap(cell);
+			break;
 #ifndef TRIK_NOPYTHON
-			case ScriptType::PYTHON:
-				QSharedPointer<TrikScriptRunnerInterface>(
-							new TrikPythonRunner(&mBrick, mMailbox, mScriptControl)).swap(cell);
-				break;
+		case ScriptType::PYTHON:
+			QSharedPointer<TrikScriptRunnerInterface>(
+			    new TrikPythonRunner(&mBrick, mMailbox,
+						 mScriptControl))
+			    .swap(cell);
+			break;
 #endif
-			default:
-				QLOG_ERROR() << "Can't handle script with unrecognized type: " << to_underlying(stype);
-				return nullptr;
+		default:
+			QLOG_ERROR()
+			    << "Can't handle script with unrecognized type: "
+			    << to_underlying(stype);
+			return nullptr;
 		}
 		// subscribe on wrapped objects signals
-		connect(&*cell, &TrikScriptRunnerInterface::completed, this, &TrikScriptRunnerInterface::completed);
-		connect(&*cell, &TrikScriptRunnerInterface::startedScript, this, &TrikScriptRunnerInterface::startedScript);
-		connect(&*cell, &TrikScriptRunnerInterface::startedDirectScript
-				, this, &TrikScriptRunnerInterface::startedDirectScript);
-		connect(&*cell, &TrikScriptRunnerInterface::textInStdOut, this, &TrikScriptRunnerInterface::textInStdOut);
+		connect(&*cell, &TrikScriptRunnerInterface::completed, this,
+			&TrikScriptRunnerInterface::completed);
+		connect(&*cell, &TrikScriptRunnerInterface::startedScript, this,
+			&TrikScriptRunnerInterface::startedScript);
+		connect(&*cell, &TrikScriptRunnerInterface::startedDirectScript,
+			this, &TrikScriptRunnerInterface::startedDirectScript);
+		connect(&*cell, &TrikScriptRunnerInterface::textInStdOut, this,
+			&TrikScriptRunnerInterface::textInStdOut);
 	}
 
 	setDefaultRunner(stype);
@@ -152,50 +150,68 @@ TrikScriptRunnerInterface * TrikScriptRunner::fetchRunner(ScriptType stype)
 	return cell.data();
 }
 
-void TrikScriptRunner::run(const QString &script, ScriptType stype, const QString &fileName)
-{
-	abortAll(); // FIXME: or fetchRunner(stype)->abort()? or abort(/*last*/)?
+void TrikScriptRunner::run(const QString &script, ScriptType stype,
+			   const QString &fileName) {
+	abortAll(); // FIXME: or fetchRunner(stype)->abort()? or
+		    // abort(/*last*/)?
 
 	fetchRunner(stype)->run(script, fileName);
 }
 
-void TrikScriptRunner::runDirectCommand(const QString &command)
-{
+void TrikScriptRunner::runCpp(const QString &filePath,
+			      const QString &fileName) {
+	abortAll();
+	if (mCppRunner.isNull()) {
+		mCppRunner.reset(new TrikCppRunner(&mBrick, mMailbox,
+						   mScriptControl.data()));
+		connect(&*mCppRunner, &TrikCppRunner::completed, this,
+			&TrikScriptRunner::completed);
+		connect(&*mCppRunner, &TrikCppRunner::startedScript, this,
+			&TrikScriptRunner::startedScript);
+	}
+
+	mCppRunner->run(filePath, fileName);
+}
+
+void TrikScriptRunner::runDirectCommand(const QString &command) {
 	fetchRunner(mLastRunner)->runDirectCommand(command);
 }
 
-void TrikScriptRunner::abort()
-{
+void TrikScriptRunner::abort() {
 	fetchRunner(mLastRunner)->abort();
+
+	if (!mCppRunner.isNull()) {
+		mCppRunner.data()->abort();
+	}
 }
 
-void TrikScriptRunner::abortAll()
-{
-	for (auto && r: mScriptRunnerArray) {
+void TrikScriptRunner::abortAll() {
+	for (auto &&r : mScriptRunnerArray) {
 		if (r != nullptr) {
 			r->abort();
 		}
 	}
+	if (!mCppRunner.isNull()) {
+		mCppRunner.data()->abort();
+	}
 }
 
-void TrikScriptRunner::brickBeep()
-{
-	fetchRunner(mLastRunner)->brickBeep();
-}
+void TrikScriptRunner::brickBeep() { fetchRunner(mLastRunner)->brickBeep(); }
 
-void TrikScriptRunner::setWorkingDirectory(const QString &workingDir)
-{
+void TrikScriptRunner::setWorkingDirectory(const QString &workingDir) {
 	fetchRunner(mLastRunner)->setWorkingDirectory(workingDir);
 }
 
-void TrikScriptRunnerInterface::Helper::collectMethodNames(QSet<QString> &result, const QMetaObject *obj) {
+void TrikScriptRunnerInterface::Helper::collectMethodNames(
+    QSet<QString> &result, const QMetaObject *obj) {
 	for (int i = obj->methodOffset(); i < obj->methodCount(); ++i) {
 		auto const &metaMethod = obj->method(i);
 		auto const &methodName = QString::fromLatin1(metaMethod.name());
 		result.insert(methodName);
 
 		auto const &methodReturnTypeId = metaMethod.returnType();
-		const QMetaObject *newObj = QMetaType::metaObjectForType(methodReturnTypeId);
+		const QMetaObject *newObj =
+		    QMetaType::metaObjectForType(methodReturnTypeId);
 		if (newObj) {
 			collectMethodNames(result, newObj);
 		}

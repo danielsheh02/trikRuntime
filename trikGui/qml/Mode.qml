@@ -1,12 +1,13 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
+import QtQml.Models 2.1
 
 Rectangle {
     id: _modeSelection
     property var modeSelection: ModeManager
     property var idList: _listModes
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         modeSelection.setQmlParent(_modeSelection)
     }
@@ -20,7 +21,7 @@ Rectangle {
         Text {
             text: qsTr("Select mode:")
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -29,7 +30,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             ListModel {
                 id: _dataMode
                 ListElement {
@@ -86,14 +87,14 @@ Rectangle {
                         id: _modeName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateModes.isCurrent ? Style.darkTrikColor : Style.managersBackColor
+                        color: _delegateModes.isCurrent ? activeTheme.darkTrikColor : activeTheme.managersBackColor
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 5
                             spacing: 5
                             Image {
                                 id: _modeIcon
-                                source: iconsPath + model.iconPath
+                                source: "../resourcesQml/" + model.iconPath
                                 Layout.preferredWidth: _modeSelection.width
                                                        < 400 ? _modeSelection.width
                                                                / 7 : _modeSelection.width / 25
@@ -106,7 +107,7 @@ Rectangle {
                                 id: _textName
                                 text: model.text
                                 Layout.alignment: Qt.AlignVCenter
-                                color: _delegateModes.isCurrent ? "white" : Style.namesColor
+                                color: _delegateModes.isCurrent ? "white" : activeTheme.namesColor
                                 width: _modeName.width - _modeIcon.width
                                 wrapMode: Text.Wrap
                                 Layout.fillWidth: true

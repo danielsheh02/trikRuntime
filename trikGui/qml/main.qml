@@ -4,7 +4,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 
-ApplicationWindow {
+Window {
     id: root
     visible: true
     minimumHeight: 320
@@ -14,6 +14,7 @@ ApplicationWindow {
     title: qsTr("TRIK")
 
     property string iconsPath: "../resourcesQml/"
+    property var activeTheme: Style.activeTheme
 
     ColumnLayout {
         anchors.fill: parent
@@ -150,7 +151,7 @@ ApplicationWindow {
         }
         MainMenu {
             id: _mainMenu
-            color: Style.backgroundColor
+            color: activeTheme.backgroundColor
         }
     }
 }

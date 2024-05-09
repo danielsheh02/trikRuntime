@@ -7,7 +7,7 @@ Rectangle {
     id: _wiFiAP
     property var wiFiAP: WiFiAPServer
     property var idList: _button
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
 
     Component.onCompleted: {
         wiFiAP.setQmlParent(_wiFiAP)
@@ -42,7 +42,7 @@ Rectangle {
             Layout.fillHeight: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 13
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Image {
@@ -66,7 +66,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
-                color: Style.textColor
+                color: activeTheme.textColor
             }
             Text {
                 text: qsTr("Password: ") + (wiFiAP.password ? wiFiAP.password : qsTr(
@@ -75,7 +75,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
-                color: Style.textColor
+                color: activeTheme.textColor
             }
             Text {
                 text: qsTr("IP address: ") + (wiFiAP.ipValue ? wiFiAP.ipValue : qsTr(
@@ -84,7 +84,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 13
                 horizontalAlignment: Text.AlignHCenter
-                color: Style.textColor
+                color: activeTheme.textColor
             }
         }
     }

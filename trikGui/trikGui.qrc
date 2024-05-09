@@ -76,5 +76,10 @@
         <file>resourcesQml/de.png</file>
         <file>resourcesQml/telegram.png</file>
         <file>qml/Feedback.qml</file>
+        <file>qml/dummydata/LanguageSelection.qml</file>
+        <file>qml/dummydata/SystemInformation.qml</file>
+        <file>qml/dummydata/Sensors.qml</file>
+        <file>qml/LightTheme.qml</file>
+        <file>qml/DarkTheme.qml</file>
     </qresource>
 </RCC>

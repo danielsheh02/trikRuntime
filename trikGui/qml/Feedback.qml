@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 
 Rectangle {
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     ColumnLayout {
         id: _columnInfo
         anchors.fill: parent
@@ -17,7 +17,7 @@ Rectangle {
             Layout.fillHeight: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 13
-            color: Style.textColor
+            color: activeTheme.textColor
             Layout.bottomMargin: 13
         }
 

@@ -3,10 +3,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import MainMenuManager 1.0
 import WiFiMode 1.0
+import QtQml.Models 2.1
 
 Rectangle {
     id: _mainItem
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     property var idList: _listSettings
 
     ListModel {
@@ -129,7 +130,7 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
                 radius: 10
-                color: _delegate.isCurrent ? Style.focusElementsOfListColor : Style.elementsOfListColor
+                color: _delegate.isCurrent ? activeTheme.focusElementsOfListColor : activeTheme.elementsOfListColor
 
                 RowLayout {
                     id: _row
@@ -152,7 +153,7 @@ Rectangle {
                         Layout.fillWidth: true
                         Layout.rightMargin: 3
                         Layout.alignment: Qt.AlignVCenter
-                        color: Style.textColor
+                        color: activeTheme.textColor
                     }
                 }
             }

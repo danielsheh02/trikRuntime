@@ -7,11 +7,11 @@ Rectangle {
     width: parent.width / 1.08
     height: _columnConfirm.height
     z: 1
-    color: Style.confirmWindowColor
+    color: activeTheme.confirmWindowColor
     radius: 10
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
-    border.color: Style.delimeterLineColor
+    border.color: activeTheme.delimeterLineColor
     border.width: 1
     visible: false
     property string focusButton: "No"
@@ -68,12 +68,12 @@ Rectangle {
             font.pointSize: 12
             horizontalAlignment: Text.AlignHCenter
             Layout.topMargin: 6
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Rectangle {
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 1
-            color: Style.delimeterLineColor
+            color: activeTheme.delimeterLineColor
         }
         RowLayout {
             Image {
@@ -94,7 +94,7 @@ Rectangle {
                 Layout.maximumWidth: _rectConfirm.width - _icon.width
                 font.pointSize: 12
                 Layout.rightMargin: 5
-                color: Style.textColor
+                color: activeTheme.textColor
             }
         }
         RowLayout {
