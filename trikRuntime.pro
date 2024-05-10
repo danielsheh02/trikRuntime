@@ -29,7 +29,6 @@ SUBDIRS = \
         trikServer \
         translations \
 
-
 initvars.file = $$PWD/initvars.pre
 
 tests {
@@ -75,4 +74,3 @@ include($$PWD/Qt-QrCodeGenerator/Qt-QrCodeGenerator.pri)
 
 copyToDestdir($$PWD/resources/changelog.txt, now)
 copyToDestdir($$PWD/resources/lsan.supp, now)
-

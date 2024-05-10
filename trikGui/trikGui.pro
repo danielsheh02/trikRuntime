@@ -50,7 +50,6 @@ HEADERS += \
         $$PWD/network.h \
         $$PWD/camera.h \
 	$$PWD/pwmCaptureIndicator.h \
-        $$PWD/communicationSettingsManager.h \
         $$PWD/languageManager.h \
         $$PWD/mainMenuManager.h \
         $$PWD/managers.h \
@@ -100,7 +99,6 @@ SOURCES += \
         $$PWD/network.cpp \
         $$PWD/camera.cpp \
 	$$PWD/pwmCaptureIndicator.cpp \
-        $$PWD/communicationSettingsManager.cpp \
         $$PWD/languageManager.cpp \
         $$PWD/mainMenuManager.cpp \
         $$PWD/motorsManager.cpp \
