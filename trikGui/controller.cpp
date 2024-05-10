@@ -29,6 +29,7 @@
 #include <trikKernel/paths.h>
 #include <trikNetwork/mailboxFactory.h>
 #include <trikWiFi/trikWiFi.h>
+#include <QLibrary>
 
 #include "autoRunner.h"
 #include "runningCode.h"
@@ -125,8 +126,7 @@ void Controller::runFile(const QString &filePath) {
 		mScriptRunner->run(trikKernel::FileUtils::readFromFile(
 				       fileInfo.canonicalFilePath()),
 				   fileInfo.baseName());
-	} else if (fileInfo.suffix() == "so" ||
-		   fileInfo.completeSuffix().contains("so.")) {
+	} else if (QLibrary::isLibrary(filePath)) {
 		mScriptRunner->runCpp(fileInfo.canonicalFilePath(),
 				      fileInfo.fileName());
 	} else if (fileInfo.suffix() == "wav" || fileInfo.suffix() == "mp3") {

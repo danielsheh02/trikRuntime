@@ -13,7 +13,8 @@ class TrikCppRunner : public QObject
 {
 	Q_OBJECT
 public:
-	TrikCppRunner(trikControl::BrickInterface *brick, trikNetwork::MailboxInterface *mailbox,
+	TrikCppRunner(trikControl::BrickInterface *brick,
+		      trikNetwork::MailboxInterface *mailbox,
 		      TrikScriptControlInterface *scriptControl);
 	~TrikCppRunner();
 	void run(const QString &filePath, const QString &fileName);
@@ -22,17 +23,12 @@ public:
 	static void runParallel();
 
 private:
-	trikControl::BrickInterface *mBrick{};	      // Does not have ownership.
-	trikNetwork::MailboxInterface *mMailbox{};    // Does not have ownership.
-	TrikScriptControlInterface *mScriptControl{}; // Does not have ownership.
-	// QThread *mCppThread{};
-	// TrikCppWorker *trikCppWorker{};
+	trikControl::BrickInterface *mBrick{};	   // Does not have ownership.
+	trikNetwork::MailboxInterface *mMailbox{}; // Does not have ownership.
+	TrikScriptControlInterface
+	    *mScriptControl{}; // Does not have ownership.
 	QScopedPointer<TrikCppWorker> trikCppWorker;
 
-	// QScopedPointer<UserCppClassInterface> userCppObject;
-	// UserCppClassInterface *userCppObject2;
-
-	// void *mHandle{};
 	QLibrary mLib;
 	int mMaxScriptId = 0;
 private Q_SLOTS:

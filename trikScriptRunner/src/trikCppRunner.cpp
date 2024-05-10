@@ -15,10 +15,14 @@ TrikCppRunner::TrikCppRunner(trikControl::BrickInterface *brick,
     : mBrick(brick), mMailbox(mailbox), mScriptControl(scriptControl) {}
 
 void TrikCppRunner::run(const QString &filePath, const QString &fileName) {
+	int scriptId = mMaxScriptId++;
+	Q_EMIT startedScript(fileName, scriptId);
 	mLib.setFileName(filePath);
 
-	auto symptr = mLib.resolve("createMyClass");
+	auto symptr = mLib.resolve("createMyObject");
 	if (!symptr) {
+		Q_EMIT completed("Function createMyObject was not resolve",
+				 scriptId);
 		return;
 	}
 	UserCppClassInterface *(*userCppClassFactory)(
@@ -31,9 +35,11 @@ void TrikCppRunner::run(const QString &filePath, const QString &fileName) {
 		       trikScriptRunner::TrikScriptControlInterface *
 			   trikScriptControl)>(symptr);
 	if (!userCppClassFactory) {
+		Q_EMIT completed(
+		    "Error returning or casting a pointer to a user object",
+		    scriptId);
 		return;
 	}
-	int scriptId = mMaxScriptId++;
 	if (trikCppWorker.isNull()) {
 		trikCppWorker.reset(new TrikCppWorker(
 		    userCppClassFactory(mBrick, mMailbox, mScriptControl),
@@ -44,8 +50,6 @@ void TrikCppRunner::run(const QString &filePath, const QString &fileName) {
 	connect(trikCppWorker.data(), &QThread::finished, this,
 		&TrikCppRunner::clean);
 	trikCppWorker->start();
-
-	Q_EMIT startedScript(fileName, scriptId);
 }
 
 void TrikCppRunner::abort() {
