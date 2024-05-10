@@ -38,7 +38,7 @@
 
 using namespace trikGui;
 MainMenuManager::MainMenuManager(const QString &configPath, QObject *parent)
-    : QObject(parent), mController(configPath), mFileManagerRoot(SystemSettings::FileManagerRootType::ScriptsDir) {
+	: QObject(parent), mController(configPath), mFileManagerRoot(SystemSettings::FileManagerRootType::ScriptsDir) {
 	RunningCode *runningCode = new RunningCode(mController, this);
 	qQmlEngine->rootContext()->setContextProperty("RunningCode", runningCode);
 

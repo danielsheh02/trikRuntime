@@ -20,7 +20,7 @@
 using namespace trikGui;
 
 CommunicationSettings::CommunicationSettings(trikNetwork::MailboxInterface &mailbox, QObject *parent)
-    : QObject(parent), mMailbox(mailbox) {
+	: QObject(parent), mMailbox(mailbox) {
 
 	mHullNumber = mailbox.myHullNumber();
 	const auto hostAddressString = mailbox.serverIp();

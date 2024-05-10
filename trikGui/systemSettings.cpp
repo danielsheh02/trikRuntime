@@ -18,7 +18,7 @@
 using namespace trikGui;
 
 SystemSettings::SystemSettings(FileManagerRootType fileManagerRoot, QObject *parent)
-    : QObject(parent), mFileManagerRootType(fileManagerRoot) {
+	: QObject(parent), mFileManagerRootType(fileManagerRoot) {
 	qmlRegisterUncreatableType<SystemSettings>("SystemSettings", 1, 0, "RootType", "Enum is not a type");
 }
 

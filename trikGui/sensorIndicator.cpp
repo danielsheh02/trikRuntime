@@ -19,8 +19,8 @@
 using namespace trikGui;
 
 SensorIndicator::SensorIndicator(const QString &port, trikControl::SensorInterface &sensor, QObject *parent)
-    : AbstractIndicator(parent), mSensor(sensor), mMinValue(sensor.minValue()), mMaxValue(sensor.maxValue()), mValue(0),
-      mNameLabel(port) {}
+	: AbstractIndicator(parent), mSensor(sensor), mMinValue(sensor.minValue()), mMaxValue(sensor.maxValue()), mValue(0),
+	  mNameLabel(port) {}
 
 void SensorIndicator::renew() {
 	mValue = mSensor.read();

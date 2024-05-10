@@ -18,7 +18,7 @@
 using namespace trikGui;
 
 GyroscopeIndicator::GyroscopeIndicator(trikControl::GyroSensorInterface *gyroscope, QObject *parent)
-    : AbstractIndicator(parent), mGyroscope(gyroscope) {}
+	: AbstractIndicator(parent), mGyroscope(gyroscope) {}
 
 void GyroscopeIndicator::renew() {
 	auto value = mGyroscope != nullptr ? mGyroscope->read() : QVector<int>();

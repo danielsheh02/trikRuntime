@@ -30,7 +30,7 @@
 using namespace trikGui;
 
 Motors::Motors(trikControl::BrickInterface &brick, QStringList ports, QObject *parent)
-    : QAbstractListModel(parent), mBrick(brick), mPorts(ports), mLevers(mPorts.size()) {
+	: QAbstractListModel(parent), mBrick(brick), mPorts(ports), mLevers(mPorts.size()) {
 
 	int i = 0;
 	for (const QString &port : mPorts) {

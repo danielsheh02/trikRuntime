@@ -39,7 +39,7 @@ const int communicatorPort = 8888;
 const int telemetryPort = 9000;
 
 Controller::Controller(const QString &configPath, QObject *parent)
-    : QObject(parent), mBrick(trikControl::BrickFactory::create(configPath, trikKernel::Paths::mediaPath())) {
+	: QObject(parent), mBrick(trikControl::BrickFactory::create(configPath, trikKernel::Paths::mediaPath())) {
 	if (configPath.isEmpty()) {
 		throw trikKernel::InternalErrorException("Config path is empty");
 	}

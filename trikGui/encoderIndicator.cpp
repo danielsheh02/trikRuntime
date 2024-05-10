@@ -23,7 +23,7 @@
 using namespace trikGui;
 
 EncoderIndicator::EncoderIndicator(const QString &port, trikControl::EncoderInterface &encoder, QObject *parent)
-    : AbstractIndicator(parent), mEncoder(encoder), mValue(0), mNameLabel(port) {}
+	: AbstractIndicator(parent), mEncoder(encoder), mValue(0), mNameLabel(port) {}
 
 void EncoderIndicator::renew() {
 	mValue = mEncoder.read();

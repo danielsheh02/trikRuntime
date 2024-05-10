@@ -26,27 +26,18 @@
 
 using namespace trikWiFi;
 
-TrikWiFi::TrikWiFi(const QString &interfaceFilePrefix,
-		   const QString &daemonFile, QObject *parent)
-    : QObject(parent),
-      mWorker(new TrikWiFiWorker(interfaceFilePrefix, daemonFile)) {
-	qRegisterMetaType<trikWiFi::DisconnectReason>(
-	    "trikWiFi::DisconnectReason");
+TrikWiFi::TrikWiFi(const QString &interfaceFilePrefix, const QString &daemonFile, QObject *parent)
+	: QObject(parent), mWorker(new TrikWiFiWorker(interfaceFilePrefix, daemonFile)) {
+	qRegisterMetaType<trikWiFi::DisconnectReason>("trikWiFi::DisconnectReason");
 	mWorkerThread.setObjectName(mWorker->metaObject()->className());
 	mWorker->moveToThread(&mWorkerThread);
-	QObject::connect(&mWorkerThread, &QThread::started, &*mWorker,
-			 &TrikWiFiWorker::reinit);
+	QObject::connect(&mWorkerThread, &QThread::started, &*mWorker, &TrikWiFiWorker::reinit);
 
-	QObject::connect(mWorker.data(), &TrikWiFiWorker::scanFinished, this,
-			 &TrikWiFi::scanFinished);
-	QObject::connect(mWorker.data(), &TrikWiFiWorker::connected, this,
-			 &TrikWiFi::connected);
-	QObject::connect(mWorker.data(), &TrikWiFiWorker::disconnected, this,
-			 &TrikWiFi::disconnected);
-	QObject::connect(mWorker.data(), &TrikWiFiWorker::statusReady, this,
-			 &TrikWiFi::statusReady);
-	QObject::connect(mWorker.data(), &TrikWiFiWorker::error, this,
-			 &TrikWiFi::error);
+	QObject::connect(mWorker.data(), &TrikWiFiWorker::scanFinished, this, &TrikWiFi::scanFinished);
+	QObject::connect(mWorker.data(), &TrikWiFiWorker::connected, this, &TrikWiFi::connected);
+	QObject::connect(mWorker.data(), &TrikWiFiWorker::disconnected, this, &TrikWiFi::disconnected);
+	QObject::connect(mWorker.data(), &TrikWiFiWorker::statusReady, this, &TrikWiFi::statusReady);
+	QObject::connect(mWorker.data(), &TrikWiFiWorker::error, this, &TrikWiFi::error);
 
 	QLOG_INFO() << "Starting TrikWiFi worker thread" << &mWorkerThread;
 
@@ -60,14 +51,9 @@ TrikWiFi::~TrikWiFi() {
 	}
 }
 
-void TrikWiFi::reinit() {
-	QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::reinit);
-}
+void TrikWiFi::reinit() { QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::reinit); }
 
-void TrikWiFi::dispose()
-{
-	QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::dispose);
-}
+void TrikWiFi::dispose() { QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::dispose); }
 
 SignalStrength TrikWiFi::signalStrength() {
 #if 0 // defined(Q_OS_LINUX)
@@ -101,23 +87,15 @@ SignalStrength TrikWiFi::signalStrength() {
 }
 
 void TrikWiFi::connect(const QString &ssid) {
-	QMetaObject::invokeMethod(mWorker.data(),
-				  [this, &ssid]() { mWorker->connect(ssid); });
+	QMetaObject::invokeMethod(mWorker.data(), [this, &ssid]() { mWorker->connect(ssid); });
 }
 
-void TrikWiFi::disconnect() {
-	QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::disconnect);
-}
+void TrikWiFi::disconnect() { QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::disconnect); }
 
-void TrikWiFi::statusRequest() {
-	QMetaObject::invokeMethod(mWorker.data(),
-				  &TrikWiFiWorker::statusRequest);
-}
+void TrikWiFi::statusRequest() { QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::statusRequest); }
 
 Status TrikWiFi::statusResult() const { return mWorker->statusResult(); }
 
-void TrikWiFi::scanRequest() {
-	QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::scanRequest);
-}
+void TrikWiFi::scanRequest() { QMetaObject::invokeMethod(mWorker.data(), &TrikWiFiWorker::scanRequest); }
 
 QList<ScanResult> TrikWiFi::scanResult() const { return mWorker->scanResult(); }

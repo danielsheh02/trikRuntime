@@ -16,7 +16,7 @@
 
 using namespace trikGui;
 Accelerometer::Accelerometer(trikControl::VectorSensorInterface *accelerometer, QObject *parent)
-    : AbstractIndicator(parent), mAccelerometer(accelerometer) {}
+	: AbstractIndicator(parent), mAccelerometer(accelerometer) {}
 
 Accelerometer::~Accelerometer() {}
 

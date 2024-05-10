@@ -31,7 +31,7 @@ using namespace trikGui;
 using namespace trikWiFi;
 
 WiFiClientMock::WiFiClientMock(QObject *parent)
-    : QAbstractListModel(parent), mConnectionState(ConnectionState::NotConnected) {
+	: QAbstractListModel(parent), mConnectionState(ConnectionState::NotConnected) {
 	qmlRegisterUncreatableType<WiFiClientMock>("WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
 
 	const QString name = trikKernel::FileUtils::readFromFile(trikKernel::Paths::hostnameName()).trimmed();

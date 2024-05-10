@@ -25,8 +25,8 @@
 using namespace trikGui;
 
 MotorLever::MotorLever(const QString &port, trikControl::MotorInterface &motor, QObject *parent)
-    : QObject(parent), mMotor(motor), mIsOn(false), mMaxPower(motor.maxControl()), mMinPower(motor.minControl()),
-      mPowerStep(10), mPower(0), mNameLabel(port) {
+	: QObject(parent), mMotor(motor), mIsOn(false), mMaxPower(motor.maxControl()), mMinPower(motor.minControl()),
+	  mPowerStep(10), mPower(0), mNameLabel(port) {
 	mMotor.powerOff();
 }
 

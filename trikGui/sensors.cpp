@@ -29,7 +29,7 @@
 using namespace trikGui;
 
 Sensors::Sensors(trikControl::BrickInterface &brick, const QStringList &ports, SensorType sensorType, QObject *parent)
-    : QAbstractListModel(parent), mBrick(brick), mInterval(100), mSensorType(sensorType) {
+	: QAbstractListModel(parent), mBrick(brick), mInterval(100), mSensorType(sensorType) {
 	mTimer.setInterval(mInterval);
 
 	int i = 0;

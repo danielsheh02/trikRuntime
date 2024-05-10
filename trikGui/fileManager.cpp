@@ -28,7 +28,7 @@
 using namespace trikGui;
 
 FileManager::FileManager(Controller &controller, SystemSettings::FileManagerRootType fileManagerRoot, QObject *parent)
-    : QObject(parent), mFileIconProvider(new LightFileIconProvider()), mController(controller) {
+	: QObject(parent), mFileIconProvider(new LightFileIconProvider()), mController(controller) {
 	QDir dir(trikKernel::Paths::userScriptsPath());
 
 	if (!dir.exists()) {

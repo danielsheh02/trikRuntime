@@ -24,7 +24,7 @@
 using namespace trikGui;
 
 WiFiMode::WiFiMode(trikWiFi::TrikWiFi &wiFi, QObject *parent)
-    : QObject(parent), mWiFi(wiFi), mRcReader(trikKernel::Paths::trikRcName()) {}
+	: QObject(parent), mWiFi(wiFi), mRcReader(trikKernel::Paths::trikRcName()) {}
 
 WiFiMode::~WiFiMode() {}
 

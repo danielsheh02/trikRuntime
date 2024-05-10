@@ -20,8 +20,8 @@ using namespace trikGui;
 
 PwmCaptureIndicator::PwmCaptureIndicator(const QString &port, trikControl::PwmCaptureInterface &pwmCapture,
 					 QObject *parent)
-    : AbstractIndicator(parent), mPwmCapture(pwmCapture), mMinValue(pwmCapture.minValue()),
-      mMaxValue(pwmCapture.maxValue()), mValue(0), mNameLabel(port) {}
+	: AbstractIndicator(parent), mPwmCapture(pwmCapture), mMinValue(pwmCapture.minValue()),
+	  mMaxValue(pwmCapture.maxValue()), mValue(0), mNameLabel(port) {}
 
 void PwmCaptureIndicator::renew() {
 	int value = mPwmCapture.duty();

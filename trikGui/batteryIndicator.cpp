@@ -20,7 +20,7 @@
 using namespace trikGui;
 
 BatteryIndicator::BatteryIndicator(trikControl::BrickInterface &brick, QObject *parent)
-    : QObject(parent), mBrick(brick), mCurrentLevel(PowerLevel::currentLevel()) {
+	: QObject(parent), mBrick(brick), mCurrentLevel(PowerLevel::currentLevel()) {
 	mRenewTimer.setSingleShot(true);
 	connect(&mRenewTimer, &QTimer::timeout, this, &BatteryIndicator::renew);
 

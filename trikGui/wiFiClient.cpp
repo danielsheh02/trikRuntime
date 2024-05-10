@@ -38,7 +38,7 @@ using namespace trikWiFi;
 static const int connectionTimeout = 5000;
 
 WiFiClient::WiFiClient(TrikWiFi &trikWiFi, QObject *parent)
-    : QAbstractListModel(parent), mWiFi(trikWiFi), mConnectionState(ConnectionState::NotConnected) {
+	: QAbstractListModel(parent), mWiFi(trikWiFi), mConnectionState(ConnectionState::NotConnected) {
 	qmlRegisterUncreatableType<WiFiClient>("WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
 	connect(&mWiFi, &TrikWiFi::scanFinished, this, &WiFiClient::onNetworksInfoUpdated);
 	connect(&mWiFi, &TrikWiFi::connected, this, &WiFiClient::onConnected);
