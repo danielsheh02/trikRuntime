@@ -1,4 +1,4 @@
-/* Copyright 2014 CyberTech Labs Ltd.
+/* Copyright 2024 Daniel Chehade.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@
 
 namespace trikGui {
 
+/// Widget which allows to set mock wi-fi mode (client or access point) and then
+/// opens corresponding configuration widget.
 class WiFiModeMock : public QObject
 {
 	Q_OBJECT
@@ -29,23 +31,22 @@ public:
 	enum class Mode { AccessPoint, Client, Unknown };
 	Q_ENUM(Mode)
 
+	/// Constructor
 	explicit WiFiModeMock(QObject *parent = 0);
-
-	QString initStatus();
 
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 	Q_INVOKABLE Mode currentMode();
 	Q_INVOKABLE void createWiFiClient();
 	Q_INVOKABLE void createWiFiAP();
-
-public Q_SLOTS:
-	void setMode(Mode mode);
+	Q_INVOKABLE void setMode(Mode mode);
 
 private:
 	QString mInitStatus;
 	Mode mCurrentMode;
+	QString initStatus();
 
 Q_SIGNALS:
+	/// Emitted when init status changed
 	void initStatusChanged();
 };
 

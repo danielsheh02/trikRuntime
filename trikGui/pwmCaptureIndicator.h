@@ -39,8 +39,7 @@ public:
 	/// @param pwmCapture - PWM duty value which we will read.
 	/// @param parent - parent of this widget in Qt widget parent-child
 	/// system.
-	PwmCaptureIndicator(const QString &port,
-			    trikControl::PwmCaptureInterface &pwmCapture,
+	PwmCaptureIndicator(const QString &port, trikControl::PwmCaptureInterface &pwmCapture,
 			    QObject *parent = nullptr);
 
 private Q_SLOTS:
@@ -57,6 +56,7 @@ private:
 	int minValue();
 	int value();
 Q_SIGNALS:
+	/// Emitted when value changed
 	void valueChanged();
 };
 

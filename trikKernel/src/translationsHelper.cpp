@@ -39,10 +39,8 @@ void TranslationsHelper::loadTranslators(const QString &locale) {
 	}
 	while (files.hasNext()) {
 		const QFileInfo &translatorFile = QFileInfo(files.next());
-		if (translatorFile.isFile() &&
-		    translatorFile.baseName().split('_').at(1) == locale) {
-			QLOG_INFO() << "Loading translations from"
-				    << translatorFile.absolutePath();
+		if (translatorFile.isFile() && translatorFile.baseName().split('_').at(1) == locale) {
+			QLOG_INFO() << "Loading translations from" << translatorFile.absolutePath();
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			mCurrentTranslators.append(translator);
@@ -57,8 +55,7 @@ void TranslationsHelper::initLocale(bool localizationDisabled) {
 		return;
 	}
 
-	QSettings settings(trikKernel::Paths::localSettings(),
-			   QSettings::IniFormat);
+	QSettings settings(trikKernel::Paths::localSettings(), QSettings::IniFormat);
 	QString locale = settings.value("locale", "").toString();
 	const QString lastLocale = locale;
 

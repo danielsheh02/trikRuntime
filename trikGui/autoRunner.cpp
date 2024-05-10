@@ -38,6 +38,4 @@ void AutoRunner::doLaunch() {
 	mController.runFile(fileName());
 }
 
-QString AutoRunner::fileName() {
-	return trikKernel::Paths::userScriptsPath() + "autorun.js";
-}
+QString AutoRunner::fileName() { return trikKernel::Paths::userScriptsPath() + "autorun.js"; }

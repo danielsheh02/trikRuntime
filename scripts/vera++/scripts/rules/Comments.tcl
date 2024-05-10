@@ -13,15 +13,15 @@
 # limitations under the License.
 
 proc ClassSection { old line } {
-  if { [regexp {public:} $line] || [regexp {public slots:} $line] || [regexp {signals:} $line] } {
+  if { [regexp {public:} $line] || [regexp {public slots:} $line] || [regexp {signals:} $line] || [regexp {public Q_SLOTS:} $line] || [regexp {Q_SIGNALS:} $line] } {
     return "public"
   }
 
-  if { [regexp {protected:} $line] || [regexp {protected slots:} $line] } {
+  if { [regexp {protected:} $line] || [regexp {protected slots:} $line] || [regexp {protected Q_SLOTS:} $line] } {
     return "protected"
   }
 
-  if { [regexp {private:} $line] || [regexp {private slots:} $line] } {
+  if { [regexp {private:} $line] || [regexp {private slots:} $line] || [regexp {private Q_SLOTS:} $line] } {
     return "private"
   }
 
@@ -55,6 +55,14 @@ proc ShallHaveComment { line previousComment currentSection inClass } {
   }
 
   if { [regexp {^[\t]*///} $line] } {
+    return 0
+  }
+
+  if { [regexp {Q_PROPERTY} $line] } {
+    return 0
+  }
+
+  if { [regexp {Q_INVOKABLE} $line] } {
     return 0
   }
 

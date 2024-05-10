@@ -14,7 +14,6 @@
 
 #include "motors.h"
 
-#include <QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QKeyEvent>
 
@@ -30,15 +29,12 @@
 #include <QApplication>
 using namespace trikGui;
 
-Motors::Motors(trikControl::BrickInterface &brick, QStringList ports,
-	       QObject *parent)
-    : QAbstractListModel(parent), mBrick(brick), mPorts(ports),
-      mLevers(mPorts.size()) {
+Motors::Motors(trikControl::BrickInterface &brick, QStringList ports, QObject *parent)
+    : QAbstractListModel(parent), mBrick(brick), mPorts(ports), mLevers(mPorts.size()) {
 
 	int i = 0;
 	for (const QString &port : mPorts) {
-		MotorLever *lever =
-		    new MotorLever(port, *mBrick.motor(port), this);
+		MotorLever *lever = new MotorLever(port, *mBrick.motor(port), this);
 		mLevers[i] = lever;
 		++i;
 	}

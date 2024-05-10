@@ -34,9 +34,7 @@ public:
 	/// @param gyroscope - gyroscope which we will read.
 	/// @param parent - parent of this widget in Qt widget parent-child
 	/// system.
-	explicit GyroscopeIndicator(trikControl::GyroSensorInterface *gyroscope,
-				    QObject *parent = 0);
-	QVector<int> coords();
+	explicit GyroscopeIndicator(trikControl::GyroSensorInterface *gyroscope, QObject *parent = 0);
 
 public Q_SLOTS:
 	void renew() override;
@@ -44,7 +42,9 @@ public Q_SLOTS:
 private:
 	trikControl::GyroSensorInterface *mGyroscope;
 	QVector<int> mCoords;
+	QVector<int> coords();
 Q_SIGNALS:
+	/// Emitted when coords changed
 	void coordsChanged();
 };
 } // namespace trikGui

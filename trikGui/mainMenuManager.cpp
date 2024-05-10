@@ -1,3 +1,17 @@
+/* Copyright 2024 Daniel Chehade.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
 #ifdef DESKTOP
 #include "wiFiModeMock.h"
 #endif
@@ -19,45 +33,36 @@
 #include <QApplication>
 #include <QProcess>
 #include <QQmlContext>
+#include "fileManager.h"
+#include "runningCode.h"
+
 using namespace trikGui;
 MainMenuManager::MainMenuManager(const QString &configPath, QObject *parent)
-    : QObject(parent), mController(configPath),
-      mFileManagerRoot(SystemSettings::FileManagerRootType::ScriptsDir) {
+    : QObject(parent), mController(configPath), mFileManagerRoot(SystemSettings::FileManagerRootType::ScriptsDir) {
 	RunningCode *runningCode = new RunningCode(mController, this);
-	qQmlEngine->rootContext()->setContextProperty("RunningCode",
-						      runningCode);
+	qQmlEngine->rootContext()->setContextProperty("RunningCode", runningCode);
 
 	Network *network = new Network(this);
 	qQmlEngine->rootContext()->setContextProperty("Network", network);
 
-	BatteryIndicator *batteryIndicator =
-	    new BatteryIndicator(mController.brick(), this);
-	qQmlEngine->rootContext()->setContextProperty("BatteryIndicator",
-						      batteryIndicator);
+	BatteryIndicator *batteryIndicator = new BatteryIndicator(mController.brick(), this);
+	qQmlEngine->rootContext()->setContextProperty("BatteryIndicator", batteryIndicator);
 
 	WiFiIndicator *wiFiIndicator = new WiFiIndicator(mController, this);
-	qQmlEngine->rootContext()->setContextProperty("WiFiIndicator",
-						      wiFiIndicator);
-	qmlRegisterUncreatableType<WiFiMode>("WiFiMode", 1, 0, "Mode",
-					     "Enum is not a type");
+	qQmlEngine->rootContext()->setContextProperty("WiFiIndicator", wiFiIndicator);
+	qmlRegisterUncreatableType<WiFiMode>("WiFiMode", 1, 0, "Mode", "Enum is not a type");
 
-	GamepadIndicator *gamepadIndicator =
-	    new GamepadIndicator(mController, this);
-	qQmlEngine->rootContext()->setContextProperty("GamepadIndicator",
-						      gamepadIndicator);
-	OpenSocketIndicator *mailboxIndicator =
-	    new OpenSocketIndicator(mController.mailbox()->isConnected(), this);
-	connect(&mController, &Controller::mailboxStatusChanged,
-		mailboxIndicator, &OpenSocketIndicator::changeStatus);
-	qQmlEngine->rootContext()->setContextProperty("MailboxIndicator",
-						      mailboxIndicator);
+	GamepadIndicator *gamepadIndicator = new GamepadIndicator(mController, this);
+	qQmlEngine->rootContext()->setContextProperty("GamepadIndicator", gamepadIndicator);
+	OpenSocketIndicator *mailboxIndicator = new OpenSocketIndicator(mController.mailbox()->isConnected(), this);
+	connect(&mController, &Controller::mailboxStatusChanged, mailboxIndicator, &OpenSocketIndicator::changeStatus);
+	qQmlEngine->rootContext()->setContextProperty("MailboxIndicator", mailboxIndicator);
 
-	OpenSocketIndicator *communicatorIndicator = new OpenSocketIndicator(
-	    mController.communicatorConnectionStatus(), this);
-	connect(&mController, &Controller::communicatorStatusChanged,
-		communicatorIndicator, &OpenSocketIndicator::changeStatus);
-	qQmlEngine->rootContext()->setContextProperty("CommunicatorIndicator",
-						      communicatorIndicator);
+	OpenSocketIndicator *communicatorIndicator =
+	    new OpenSocketIndicator(mController.communicatorConnectionStatus(), this);
+	connect(&mController, &Controller::communicatorStatusChanged, communicatorIndicator,
+		&OpenSocketIndicator::changeStatus);
+	qQmlEngine->rootContext()->setContextProperty("CommunicatorIndicator", communicatorIndicator);
 
 	mController.brick().playTone(2000, 10);
 }
@@ -67,21 +72,15 @@ MainMenuManager::~MainMenuManager() {}
 void MainMenuManager::createApp(AppType appType) {
 	switch (appType) {
 	case AppType::Files: {
-		FileManager *fileManager =
-		    new FileManager(mController, mFileManagerRoot, this);
-		qQmlEngine->rootContext()->setContextProperty(
-		    "FileManagerServer", fileManager);
+		FileManager *fileManager = new FileManager(mController, mFileManagerRoot, this);
+		qQmlEngine->rootContext()->setContextProperty("FileManagerServer", fileManager);
 		break;
 	}
 	case AppType::Testing: {
-		QProcess::startDetached("/etc/trik/init-ov7670-320x240.sh",
-					{"0"});
-		QProcess::startDetached("/etc/trik/init-ov7670-320x240.sh",
-					{"1"});
-		TestingManager *testingManager =
-		    new TestingManager(mController, this);
-		qQmlEngine->rootContext()->setContextProperty("TestingManager",
-							      testingManager);
+		QProcess::startDetached("/etc/trik/init-ov7670-320x240.sh", {"0"});
+		QProcess::startDetached("/etc/trik/init-ov7670-320x240.sh", {"1"});
+		TestingManager *testingManager = new TestingManager(mController, this);
+		qQmlEngine->rootContext()->setContextProperty("TestingManager", testingManager);
 		break;
 	}
 	case AppType::Network: {
@@ -90,18 +89,15 @@ void MainMenuManager::createApp(AppType appType) {
 #else
 		WiFiModeMock *wiFiMode = new WiFiModeMock(this);
 #endif
-		qQmlEngine->rootContext()->setContextProperty("WiFiModeServer",
-							      wiFiMode);
+		qQmlEngine->rootContext()->setContextProperty("WiFiModeServer", wiFiMode);
 		break;
 	}
 	case AppType::CommSettings: {
 		if (mController.mailbox()) {
 			CommunicationSettings *communicationSettings =
-			    new CommunicationSettings(*mController.mailbox(),
-						      this);
-			qQmlEngine->rootContext()->setContextProperty(
-			    "CommunicationSettingsServer",
-			    communicationSettings);
+			    new CommunicationSettings(*mController.mailbox(), this);
+			qQmlEngine->rootContext()->setContextProperty("CommunicationSettingsServer",
+								      communicationSettings);
 		} else {
 			Q_ASSERT(!"Mailbox is disabled but "
 				  "commmunications widget "
@@ -111,37 +107,30 @@ void MainMenuManager::createApp(AppType appType) {
 		break;
 	}
 	case AppType::Language: {
-		LanguageSelection *languageSelection =
-		    new LanguageSelection(this);
-		qQmlEngine->rootContext()->setContextProperty(
-		    "LanguageSelection", languageSelection);
+		LanguageSelection *languageSelection = new LanguageSelection(this);
+		qQmlEngine->rootContext()->setContextProperty("LanguageSelection", languageSelection);
 		break;
 	}
 	case AppType::SystemSettings: {
-		SystemSettings *systemSettings =
-		    new SystemSettings(mFileManagerRoot, this);
-		connect(systemSettings, &SystemSettings::currentFilesDirPath,
-			this, &MainMenuManager::changeFileManagerRoot);
-		qQmlEngine->rootContext()->setContextProperty(
-		    "SystemSettingsComponent", systemSettings);
+		SystemSettings *systemSettings = new SystemSettings(mFileManagerRoot, this);
+		connect(systemSettings, &SystemSettings::currentFilesDirPath, this,
+			&MainMenuManager::changeFileManagerRoot);
+		qQmlEngine->rootContext()->setContextProperty("SystemSettingsComponent", systemSettings);
 		break;
 	}
 	case AppType::AppearanceMode: {
 		ModeManager *modeManager = new ModeManager(this);
-		qQmlEngine->rootContext()->setContextProperty("ModeManager",
-							      modeManager);
+		qQmlEngine->rootContext()->setContextProperty("ModeManager", modeManager);
 		break;
 	}
 	case AppType::Information: {
 		Information *information = new Information(this);
-		qQmlEngine->rootContext()->setContextProperty(
-		    "SystemInformation", information);
+		qQmlEngine->rootContext()->setContextProperty("SystemInformation", information);
 		break;
 	}
 	case AppType::Feedback: {
 		Feedback *feedback = new Feedback(this);
-		qQmlEngine->rootContext()->setContextProperty("FeedbackServer",
-							      feedback);
+		qQmlEngine->rootContext()->setContextProperty("FeedbackServer", feedback);
 		break;
 	}
 	default:
@@ -149,8 +138,7 @@ void MainMenuManager::createApp(AppType appType) {
 	}
 }
 
-void MainMenuManager::changeFileManagerRoot(
-    SystemSettings::FileManagerRootType const &path) {
+void MainMenuManager::changeFileManagerRoot(SystemSettings::FileManagerRootType const &path) {
 	mFileManagerRoot = path;
 	Q_EMIT fileManagerRootChanged(mFileManagerRoot);
 }

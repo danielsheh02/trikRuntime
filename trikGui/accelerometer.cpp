@@ -14,17 +14,14 @@
 
 #include "accelerometer.h"
 
-#include <QDebug>
 using namespace trikGui;
-Accelerometer::Accelerometer(trikControl::VectorSensorInterface *accelerometer,
-			     QObject *parent)
+Accelerometer::Accelerometer(trikControl::VectorSensorInterface *accelerometer, QObject *parent)
     : AbstractIndicator(parent), mAccelerometer(accelerometer) {}
 
 Accelerometer::~Accelerometer() {}
 
 void Accelerometer::renew() {
-	auto value =
-	    mAccelerometer != nullptr ? mAccelerometer->read() : QVector<int>();
+	auto value = mAccelerometer != nullptr ? mAccelerometer->read() : QVector<int>();
 
 	if (value.size() < 3) {
 		return;

@@ -30,12 +30,9 @@ class Camera : public AbstractIndicator, public QQuickImageProvider
 	Q_PROPERTY(QString namePhoto READ namePhoto NOTIFY namePhotoChanged)
 public:
 	/// Constructor for Camera Widget in testing menu
-	explicit Camera(trikControl::BrickInterface &brick,
-			QObject *parent = nullptr);
-	~Camera();
+	explicit Camera(trikControl::BrickInterface &brick);
 
-	QImage requestImage(const QString &id, QSize *size,
-			    const QSize &requestedSize) override;
+	QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override;
 
 public Q_SLOTS:
 	void renew() override;
@@ -51,8 +48,11 @@ private:
 	QString mNamePhoto;
 	QImage mPhoto;
 Q_SIGNALS:
+	/// Emitted when name photo changed
 	void namePhotoChanged();
+	/// Emitted when image changed
 	void imageChanged();
+	/// Emitted when camera unavailable
 	void cameraUnavailable();
 };
 

@@ -1,10 +1,22 @@
-#include "wiFiClientMock.h"
+/* Copyright 2024 Daniel Chehade.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
 
+#include "wiFiClientMock.h"
 #include <QsLog.h>
 #include <trikKernel/fileUtils.h>
 #include <trikKernel/paths.h>
 #include <trikWiFi/trikWiFi.h>
-
 #include <QtGui/QKeyEvent>
 #include <QtNetwork/QAbstractSocket>
 #include <QtNetwork/QHostAddress>
@@ -19,14 +31,10 @@ using namespace trikGui;
 using namespace trikWiFi;
 
 WiFiClientMock::WiFiClientMock(QObject *parent)
-    : QAbstractListModel(parent),
-      mConnectionState(ConnectionState::NotConnected) {
-	qmlRegisterUncreatableType<WiFiClientMock>(
-	    "WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
+    : QAbstractListModel(parent), mConnectionState(ConnectionState::NotConnected) {
+	qmlRegisterUncreatableType<WiFiClientMock>("WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
 
-	const QString name = trikKernel::FileUtils::readFromFile(
-				 trikKernel::Paths::hostnameName())
-				 .trimmed();
+	const QString name = trikKernel::FileUtils::readFromFile(trikKernel::Paths::hostnameName()).trimmed();
 }
 
 WiFiClientMock::~WiFiClientMock() {}
@@ -53,8 +61,7 @@ void WiFiClientMock::onNetworksInfoUpdated() {
 	mAvailableNetworks.append(network3);
 
 	for (int i = 0; i < 10; i++) {
-		NetworkInfoMock network{"wifi " + QString::number(i), true,
-					trikWiFi::Security::wpa};
+		NetworkInfoMock network{"wifi " + QString::number(i), true, trikWiFi::Security::wpa};
 		/// If two networks have the same ssid, only last one will be
 		/// shown. Some routers boadcast ssids on different channels
 		/// and they will be shown as different networks if we do not
@@ -69,9 +76,7 @@ void WiFiClientMock::onNetworksInfoUpdated() {
 	Q_EMIT endResetModel();
 }
 
-void WiFiClientMock::setConnectionStatus(ConnectionState state,
-					 const QString &ip,
-					 const QString &ssid) {
+void WiFiClientMock::setConnectionStatus(ConnectionState state, const QString &ip, const QString &ssid) {
 	mConnectionState = state;
 	mCurrentSsid = "";
 
@@ -92,9 +97,7 @@ void WiFiClientMock::connectToSelectedNetwork(QString ssid) {
 	if (!mNetworks.contains(ssid)) {
 		return;
 	}
-	const auto doConnect = [&]() {
-		setConnectionStatus(ConnectionState::Connecting, "", "");
-	};
+	const auto doConnect = [&]() { setConnectionStatus(ConnectionState::Connecting, "", ""); };
 
 	if (mNetworks[ssid].mIsKnown) {
 		doConnect();
@@ -102,8 +105,7 @@ void WiFiClientMock::connectToSelectedNetwork(QString ssid) {
 		doConnect();
 		mNetworks[ssid].mIsKnown = true;
 	}
-	setConnectionStatus(ConnectionState::Connected, "192.168.0.0",
-			    "trik wi-fi");
+	setConnectionStatus(ConnectionState::Connected, "192.168.0.0", "trik wi-fi");
 }
 
 int WiFiClientMock::rowCount(const QModelIndex &parent) const {
@@ -122,13 +124,9 @@ QVariant WiFiClientMock::data(const QModelIndex &index, int role) const {
 	return QVariant::fromValue(mAvailableNetworks[index_row]);
 }
 
-QVector<trikGui::NetworkInfoMock> WiFiClientMock::availableNetworks() {
-	return mAvailableNetworks;
-}
+QVector<trikGui::NetworkInfoMock> WiFiClientMock::availableNetworks() { return mAvailableNetworks; }
 
-WiFiClientMock::ConnectionState WiFiClientMock::connectionState() {
-	return mConnectionState;
-}
+WiFiClientMock::ConnectionState WiFiClientMock::connectionState() { return mConnectionState; }
 
 QString WiFiClientMock::currentSsid() { return mCurrentSsid; }
 

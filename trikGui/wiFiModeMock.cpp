@@ -1,17 +1,26 @@
+/* Copyright 2024 Daniel Chehade.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
 #include "wiFiModeMock.h"
-
 #include <QtGui/QKeyEvent>
-
 #include <QsLog.h>
 #include <trikKernel/paths.h>
-
 #include "managers.h"
 #include "wiFiAPMock.h"
 #include "wiFiClientMock.h"
 #include "wiFiInit.h"
-#include <QDebug>
 #include <QQmlContext>
-#include <unistd.h>
 
 using namespace trikGui;
 
@@ -19,8 +28,7 @@ WiFiModeMock::WiFiModeMock(QObject *parent) : QObject(parent) {}
 
 void WiFiModeMock::createWiFiClient() {
 	WiFiClientMock *wiFiClient = new WiFiClientMock(this);
-	qQmlEngine->rootContext()->setContextProperty("WiFiClientServer",
-						      wiFiClient);
+	qQmlEngine->rootContext()->setContextProperty("WiFiClientServer", wiFiClient);
 	wiFiClient->scanWiFi();
 }
 
@@ -32,8 +40,7 @@ void WiFiModeMock::createWiFiAP() {
 void WiFiModeMock::setMode(Mode mode) {
 	if (mCurrentMode != mode) {
 		WiFiInit wiFiInit;
-		qQmlEngine->rootContext()->setContextProperty("WiFiInitServer",
-							      &wiFiInit);
+		qQmlEngine->rootContext()->setContextProperty("WiFiInitServer", &wiFiInit);
 		mInitStatus = "start";
 		Q_EMIT initStatusChanged();
 	}
@@ -52,8 +59,7 @@ void WiFiModeMock::setMode(Mode mode) {
 		break;
 	}
 	case Mode::Unknown: {
-		QLOG_ERROR()
-		    << "Error: unknown WiFi mode in WiFiModeWidget::setMode()";
+		QLOG_ERROR() << "Error: unknown WiFi mode in WiFiModeWidget::setMode()";
 		break;
 	}
 	}

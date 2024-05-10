@@ -27,16 +27,12 @@
 
 using namespace trikGui;
 
-FileManager::FileManager(Controller &controller,
-			 SystemSettings::FileManagerRootType fileManagerRoot,
-			 QObject *parent)
-    : QObject(parent), mFileIconProvider(new LightFileIconProvider()),
-      mController(controller) {
+FileManager::FileManager(Controller &controller, SystemSettings::FileManagerRootType fileManagerRoot, QObject *parent)
+    : QObject(parent), mFileIconProvider(new LightFileIconProvider()), mController(controller) {
 	QDir dir(trikKernel::Paths::userScriptsPath());
 
 	if (!dir.exists()) {
-		const bool result =
-		    dir.mkpath(trikKernel::Paths::userScriptsPath());
+		const bool result = dir.mkpath(trikKernel::Paths::userScriptsPath());
 		if (!result) {
 			QLOG_ERROR() << "Incorrect user scripts directory";
 		}
@@ -59,11 +55,9 @@ FileManager::FileManager(Controller &controller,
 
 	mFileSystemModel.setIconProvider(mFileIconProvider.data());
 	mFileSystemModel.setRootPath(mRootDirPath);
-	mFileSystemModel.setFilter(QDir::AllEntries | QDir::Hidden |
-				   QDir::System | QDir::NoDot);
+	mFileSystemModel.setFilter(QDir::AllEntries | QDir::Hidden | QDir::System | QDir::NoDot);
 
-	connect(&mFileSystemModel, &QFileSystemModel::directoryLoaded, this,
-		&FileManager::onDirectoryLoaded);
+	connect(&mFileSystemModel, &QFileSystemModel::directoryLoaded, this, &FileManager::onDirectoryLoaded);
 
 	setFiltersForCurrentDir();
 }
@@ -105,15 +99,13 @@ QString FileManager::currentPath() {
 	QString result = QDir(QDir::currentPath()).canonicalPath();
 	if (mRootDirPath != "/") {
 		/// @todo: fix this.
-		const auto prefixLength =
-		    result.indexOf("scripts") + QString("scripts").length();
+		const auto prefixLength = result.indexOf("scripts") + QString("scripts").length();
 		result = result.replace(0, prefixLength, "");
 	}
 	if (result.isEmpty()) {
 		result = "/";
 	} else if (result.count("/") > 2) {
-		result = "/../" + result.section("/", result.count("/") - 1,
-						 result.count("/"));
+		result = "/../" + result.section("/", result.count("/") - 1, result.count("/"));
 	}
 
 	return result;
@@ -147,14 +139,9 @@ void FileManager::onDirectoryLoaded(const QString &path) {
 	Q_EMIT fileSystemModelChanged();
 }
 
-QIcon FileManager::LightFileIconProvider::icon(
-    QFileIconProvider::IconType) const {
-	return QIcon();
-}
+QIcon FileManager::LightFileIconProvider::icon(QFileIconProvider::IconType) const { return QIcon(); }
 
-QIcon FileManager::LightFileIconProvider::icon(const QFileInfo &) const {
-	return QIcon();
-}
+QIcon FileManager::LightFileIconProvider::icon(const QFileInfo &) const { return QIcon(); }
 
 // QString FileManager::LightFileIconProvider::type(const QFileInfo &) const {
 //     return QString();
@@ -162,8 +149,6 @@ QIcon FileManager::LightFileIconProvider::icon(const QFileInfo &) const {
 
 QFileSystemModel *FileManager::fileSystemModel() { return &mFileSystemModel; }
 
-QModelIndex FileManager::indexOfCurrentPath() {
-	return mFileSystemModel.index(QDir::currentPath());
-}
+QModelIndex FileManager::indexOfCurrentPath() { return mFileSystemModel.index(QDir::currentPath()); }
 
 void FileManager::setQmlParent(QObject *parent) { setParent(parent); }

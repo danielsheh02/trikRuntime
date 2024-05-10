@@ -19,16 +19,13 @@
 #include <QtWidgets/QStyleOptionFocusRect>
 #include <QtWidgets/QStylePainter>
 
-#include <QDebug>
 #include <abstractIndicator.h>
 #include <trikControl/motorInterface.h>
 
 using namespace trikGui;
 
-MotorLever::MotorLever(const QString &port, trikControl::MotorInterface &motor,
-		       QObject *parent)
-    : QObject(parent), mMotor(motor), mIsOn(false),
-      mMaxPower(motor.maxControl()), mMinPower(motor.minControl()),
+MotorLever::MotorLever(const QString &port, trikControl::MotorInterface &motor, QObject *parent)
+    : QObject(parent), mMotor(motor), mIsOn(false), mMaxPower(motor.maxControl()), mMinPower(motor.minControl()),
       mPowerStep(10), mPower(0), mNameLabel(port) {
 	mMotor.powerOff();
 }

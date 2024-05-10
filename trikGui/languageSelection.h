@@ -24,8 +24,7 @@ namespace trikGui {
 class LanguageSelection : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(
-	    QVector<QString> availableLocales READ availableLocales CONSTANT)
+	Q_PROPERTY(QVector<QString> availableLocales READ availableLocales CONSTANT)
 
 public:
 	/// Constructor
@@ -33,8 +32,7 @@ public:
 	LanguageSelection(QObject *parent = nullptr);
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-	QVariant data(const QModelIndex &index,
-		      int role = Qt::DisplayRole) const override;
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 	Q_INVOKABLE void switchLanguage(QString targetLanguage);
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 

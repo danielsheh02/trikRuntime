@@ -38,22 +38,20 @@ public:
 
 	~WiFiMode();
 
-	QString initStatus();
-
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 	Q_INVOKABLE Mode currentMode();
 	Q_INVOKABLE void createWiFiClient();
 	Q_INVOKABLE void createWiFiAP();
-
-public Q_SLOTS:
-	void setMode(Mode mode);
+	Q_INVOKABLE void setMode(Mode mode);
 
 private:
 	trikWiFi::TrikWiFi &mWiFi;
 	trikKernel::RcReader mRcReader;
 	QString mInitStatus;
+	QString initStatus();
 
 Q_SIGNALS:
+	/// Emitted when init status changed
 	void initStatusChanged();
 };
 

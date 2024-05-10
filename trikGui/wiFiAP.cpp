@@ -29,9 +29,7 @@
 using namespace trikGui;
 
 WiFiAP::WiFiAP(QObject *parent) : QObject(parent) {
-	const QString name = trikKernel::FileUtils::readFromFile(
-				 trikKernel::Paths::hostnameName())
-				 .trimmed();
+	const QString name = trikKernel::FileUtils::readFromFile(trikKernel::Paths::hostnameName()).trimmed();
 	if (!name.isEmpty()) {
 		mNetworkName = name;
 		Q_EMIT networkNameChanged();
@@ -45,16 +43,13 @@ WiFiAP::WiFiAP(QObject *parent) : QObject(parent) {
 		Q_EMIT passwordChanged();
 	}
 
-	const QList<QNetworkInterface> interfaces =
-	    QNetworkInterface::allInterfaces();
+	const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
 	for (const QNetworkInterface &interface : interfaces) {
 		if (interface.name() == "wlan0") {
-			const QList<QNetworkAddressEntry> entries =
-			    interface.addressEntries();
+			const QList<QNetworkAddressEntry> entries = interface.addressEntries();
 			for (const QNetworkAddressEntry &entry : entries) {
 				const QHostAddress ip = entry.ip();
-				if (ip.protocol() ==
-				    QAbstractSocket::IPv4Protocol) {
+				if (ip.protocol() == QAbstractSocket::IPv4Protocol) {
 					mIpValue = ip.toString();
 					Q_EMIT ipValueChanged();
 					break;
@@ -65,20 +60,16 @@ WiFiAP::WiFiAP(QObject *parent) : QObject(parent) {
 		}
 	}
 
-	if (!mNetworkName.isEmpty() && !mPassword.isEmpty() &&
-	    !mIpValue.isEmpty()) {
+	if (!mNetworkName.isEmpty() && !mPassword.isEmpty() && !mIpValue.isEmpty()) {
 		QrCodeGenerator generator;
-		QString data =
-		    "WIFI:T:WPA;S:" + mNetworkName + ";P:" + mPassword + ";H:;";
+		QString data = "WIFI:T:WPA;S:" + mNetworkName + ";P:" + mPassword + ";H:;";
 		QImage qrCodeImage = generator.generateQr(data, 300);
 		QDir dir(trikKernel::Paths::imagesPath());
 
-		if (!dir.exists() &&
-		    !dir.mkpath(trikKernel::Paths::imagesPath())) {
+		if (!dir.exists() && !dir.mkpath(trikKernel::Paths::imagesPath())) {
 			QLOG_ERROR() << "Cannot create directory for images";
 		} else {
-			const QString name =
-			    trikKernel::Paths::imagesPath() + "qrCodeImg.png";
+			const QString name = trikKernel::Paths::imagesPath() + "qrCodeImg.png";
 			qrCodeImage.save(name);
 			mNameImage = name;
 			Q_EMIT nameImageChanged();

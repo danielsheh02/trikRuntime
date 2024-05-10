@@ -1,3 +1,17 @@
+/* Copyright 2024 Daniel Chehade.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
 #pragma once
 
 #include <QtCore/qglobal.h>
@@ -8,8 +22,7 @@
 #include <trikWiFi/networkStructs.h>
 
 namespace trikGui {
-/// Information about networks that we get from WiFi controller when scans are
-/// complete.
+/// Information about mock networks that we get from WiFi controller.
 struct NetworkInfoMock {
 	Q_GADGET
 	Q_PROPERTY(QString ssid MEMBER mSsid)
@@ -73,12 +86,10 @@ public:
 class WiFiClientMock : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(QVector<trikGui::NetworkInfoMock> availableNetworks READ
-		       availableNetworks NOTIFY availableNetworksChanged)
-	Q_PROPERTY(ConnectionState connectionState READ connectionState NOTIFY
-		       connectionStateChanged)
 	Q_PROPERTY(
-	    QString currentSsid READ currentSsid NOTIFY currentSsidChanged)
+	    QVector<trikGui::NetworkInfoMock> availableNetworks READ availableNetworks NOTIFY availableNetworksChanged)
+	Q_PROPERTY(ConnectionState connectionState READ connectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(QString currentSsid READ currentSsid NOTIFY currentSsidChanged)
 	Q_PROPERTY(QString ipValue READ ipValue NOTIFY ipValueChanged)
 
 public:
@@ -90,27 +101,19 @@ public:
 	~WiFiClientMock();
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-	QVariant data(const QModelIndex &index,
-		      int role = Qt::DisplayRole) const override;
-
-	QVector<trikGui::NetworkInfoMock> availableNetworks();
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 public:
 	/// Enum with possible states of a widget. It is actually an automata
 	/// that can move between four connection states reacting on user input
 	/// and WiFi controller messages.
-	enum class ConnectionState {
-		NotConnected,
-		Connecting,
-		Connected,
-		Errored
-	};
+	enum class ConnectionState { NotConnected, Connecting, Connected, Errored };
 	Q_ENUM(ConnectionState)
 	/// Tries to connect to currently selected network.
 	Q_INVOKABLE void connectToSelectedNetwork(QString ssid);
 
 	Q_INVOKABLE void setQmlParent(QObject *parent);
-
+	/// Send mock requests for scanning
 	void scanWiFi();
 
 private Q_SLOTS:
@@ -120,8 +123,7 @@ private Q_SLOTS:
 
 private:
 	/// Updates widget state and shows info about connection in GUI.
-	void setConnectionStatus(ConnectionState state, const QString &ip,
-				 const QString &ssid);
+	void setConnectionStatus(ConnectionState state, const QString &ip, const QString &ssid);
 
 	QVector<QString> mAvailableNetworksSsids;
 	QVector<NetworkInfoMock> mAvailableNetworks;
@@ -134,11 +136,16 @@ private:
 	ConnectionState connectionState();
 	QString currentSsid();
 	QString ipValue();
+	QVector<trikGui::NetworkInfoMock> availableNetworks();
 
 Q_SIGNALS:
+	/// Emitted when available networks changed
 	void availableNetworksChanged();
+	/// Emitted when connection state changed
 	void connectionStateChanged();
+	/// Emitted when current ssid changed
 	void currentSsidChanged();
+	/// Emitted when ip value changed
 	void ipValueChanged();
 };
 

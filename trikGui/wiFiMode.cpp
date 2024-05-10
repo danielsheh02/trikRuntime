@@ -19,22 +19,18 @@
 #include "wiFiAP.h"
 #include "wiFiClient.h"
 #include "wiFiInit.h"
-#include <QDebug>
 #include <QQmlContext>
 
 using namespace trikGui;
 
 WiFiMode::WiFiMode(trikWiFi::TrikWiFi &wiFi, QObject *parent)
-    : QObject(parent), mWiFi(wiFi), mRcReader(trikKernel::Paths::trikRcName()) {
-
-}
+    : QObject(parent), mWiFi(wiFi), mRcReader(trikKernel::Paths::trikRcName()) {}
 
 WiFiMode::~WiFiMode() {}
 
 void WiFiMode::createWiFiClient() {
 	WiFiClient *wiFiClient = new WiFiClient(mWiFi, this);
-	qQmlEngine->rootContext()->setContextProperty("WiFiClientServer",
-						      wiFiClient);
+	qQmlEngine->rootContext()->setContextProperty("WiFiClientServer", wiFiClient);
 	wiFiClient->scanWiFi();
 }
 
@@ -56,13 +52,11 @@ void WiFiMode::setMode(Mode mode) {
 
 	if (currentMode != mode) {
 		WiFiInit wiFiInit;
-		qQmlEngine->rootContext()->setContextProperty("WiFiInitServer",
-							      &wiFiInit);
+		qQmlEngine->rootContext()->setContextProperty("WiFiInitServer", &wiFiInit);
 		mInitStatus = "start";
 		Q_EMIT initStatusChanged();
 		if (wiFiInit.init(mode) == WiFiInit::Result::fail) {
-			QLOG_ERROR()
-			    << "Failed to init WiFi in mode" << currentModeText;
+			QLOG_ERROR() << "Failed to init WiFi in mode" << currentModeText;
 			mInitStatus = "error";
 			Q_EMIT initStatusChanged();
 			return;
@@ -87,8 +81,7 @@ void WiFiMode::setMode(Mode mode) {
 		break;
 	}
 	case Mode::Unknown: {
-		QLOG_ERROR()
-		    << "Error: unknown WiFi mode in WiFiModeWidget::setMode()";
+		QLOG_ERROR() << "Error: unknown WiFi mode in WiFiModeWidget::setMode()";
 		break;
 	}
 	}

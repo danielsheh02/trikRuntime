@@ -37,9 +37,7 @@ public:
 	/// @param sensor - sensor which we will read.
 	/// @param parent - parent of this widget in Qt widget parent-child
 	/// system.
-	SensorIndicator(const QString &port,
-			trikControl::SensorInterface &sensor,
-			QObject *parent = nullptr);
+	SensorIndicator(const QString &port, trikControl::SensorInterface &sensor, QObject *parent = nullptr);
 
 private Q_SLOTS:
 	void renew() override;
@@ -55,6 +53,7 @@ private:
 	int minValue();
 	int value();
 Q_SIGNALS:
+	/// Emitted when sensor value changed
 	void valueChanged();
 };
 

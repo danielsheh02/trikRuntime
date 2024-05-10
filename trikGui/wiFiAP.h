@@ -22,8 +22,7 @@ namespace trikGui {
 class WiFiAP : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(
-	    QString networkName READ networkName NOTIFY networkNameChanged)
+	Q_PROPERTY(QString networkName READ networkName NOTIFY networkNameChanged)
 	Q_PROPERTY(QString password READ password NOTIFY passwordChanged)
 	Q_PROPERTY(QString ipValue READ ipValue NOTIFY ipValueChanged)
 	Q_PROPERTY(QString nameImage READ nameImage NOTIFY nameImageChanged)
@@ -45,9 +44,13 @@ private:
 	QString mNameImage;
 	QString nameImage();
 Q_SIGNALS:
+	/// Emitted when network name changed
 	void networkNameChanged();
+	/// Emitted when password changed
 	void passwordChanged();
+	/// Emitted when ip value changed
 	void ipValueChanged();
+	/// Emitted when name image changed
 	void nameImageChanged();
 };
 

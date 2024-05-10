@@ -16,8 +16,7 @@
 
 using namespace trikGui;
 
-OpenSocketIndicator::OpenSocketIndicator(bool status, QObject *parent)
-    : QObject(parent) {
+OpenSocketIndicator::OpenSocketIndicator(bool status, QObject *parent) : QObject(parent) {
 	mIsConnected = status;
 	Q_EMIT isConnectedChanged();
 }

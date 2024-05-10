@@ -38,8 +38,7 @@ public:
 	/// Constructor.
 	/// @param configPath - path to config file for trikControl, for
 	/// example, /home/root/trik/.
-	explicit Controller(const QString &configPath,
-			    QObject *parent = nullptr);
+	explicit Controller(const QString &configPath, QObject *parent = nullptr);
 
 	~Controller() override;
 
@@ -117,8 +116,7 @@ Q_SIGNALS:
 private Q_SLOTS:
 	void scriptExecutionCompleted(const QString &error, int scriptId);
 
-	void scriptExecutionFromFileStarted(const QString &fileName,
-					    int scriptId);
+	void scriptExecutionFromFileStarted(const QString &fileName, int scriptId);
 	void directScriptExecutionStarted(int scriptId);
 
 	void updateCommunicatorStatus();

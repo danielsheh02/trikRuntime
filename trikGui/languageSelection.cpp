@@ -28,8 +28,7 @@
 
 using namespace trikGui;
 
-LanguageSelection::LanguageSelection(QObject *parent)
-    : QAbstractListModel(parent) {
+LanguageSelection::LanguageSelection(QObject *parent) : QAbstractListModel(parent) {
 	mAvailableLocales.push_back("en");
 	loadLocales();
 }
@@ -68,13 +67,10 @@ QVariant LanguageSelection::data(const QModelIndex &index, int role) const {
 	return QVariant::fromValue(mAvailableLocales[index_row]);
 }
 
-QVector<QString> LanguageSelection::availableLocales() {
-	return mAvailableLocales;
-}
+QVector<QString> LanguageSelection::availableLocales() { return mAvailableLocales; }
 
 void LanguageSelection::switchLanguage(QString targetLanguage) {
-	QSettings settings(trikKernel::Paths::localSettings(),
-			   QSettings::IniFormat);
+	QSettings settings(trikKernel::Paths::localSettings(), QSettings::IniFormat);
 	settings.setValue("locale", targetLanguage);
 	settings.sync();
 	QApplication::exit();

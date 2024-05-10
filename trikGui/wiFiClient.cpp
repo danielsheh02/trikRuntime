@@ -38,28 +38,20 @@ using namespace trikWiFi;
 static const int connectionTimeout = 5000;
 
 WiFiClient::WiFiClient(TrikWiFi &trikWiFi, QObject *parent)
-    : QAbstractListModel(parent), mWiFi(trikWiFi),
-      mConnectionState(ConnectionState::NotConnected) {
-	qmlRegisterUncreatableType<WiFiClient>(
-	    "WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
-	connect(&mWiFi, &TrikWiFi::scanFinished, this,
-		&WiFiClient::onNetworksInfoUpdated);
+    : QAbstractListModel(parent), mWiFi(trikWiFi), mConnectionState(ConnectionState::NotConnected) {
+	qmlRegisterUncreatableType<WiFiClient>("WiFiClient", 1, 0, "ConnectionState", "Enum is not a type");
+	connect(&mWiFi, &TrikWiFi::scanFinished, this, &WiFiClient::onNetworksInfoUpdated);
 	connect(&mWiFi, &TrikWiFi::connected, this, &WiFiClient::onConnected);
-	connect(&mWiFi, &TrikWiFi::disconnected, this,
-		&WiFiClient::onDisconnected);
-	connect(&mWiFi, &TrikWiFi::statusReady, this,
-		&WiFiClient::onStatusUpdated);
+	connect(&mWiFi, &TrikWiFi::disconnected, this, &WiFiClient::onDisconnected);
+	connect(&mWiFi, &TrikWiFi::statusReady, this, &WiFiClient::onStatusUpdated);
 	connect(&mWiFi, &TrikWiFi::error, this, &WiFiClient::onError);
 
-	const QString name = trikKernel::FileUtils::readFromFile(
-				 trikKernel::Paths::hostnameName())
-				 .trimmed();
+	const QString name = trikKernel::FileUtils::readFromFile(trikKernel::Paths::hostnameName()).trimmed();
 
 	mConnectionTimeoutTimer.setInterval(connectionTimeout);
 	mConnectionTimeoutTimer.setSingleShot(true);
 
-	connect(&mConnectionTimeoutTimer, &QTimer::timeout, this,
-		&WiFiClient::onConnectionTimeout);
+	connect(&mConnectionTimeoutTimer, &QTimer::timeout, this, &WiFiClient::onConnectionTimeout);
 }
 
 WiFiClient::~WiFiClient() {}
@@ -100,8 +92,7 @@ void WiFiClient::onNetworksInfoUpdated() {
 void WiFiClient::onConnected() {
 	mConnectionTimeoutTimer.stop();
 	const trikWiFi::Status connectionStatus = mWiFi.statusResult();
-	setConnectionStatus(ConnectionState::Connected,
-			    connectionStatus.ipAddress, connectionStatus.ssid);
+	setConnectionStatus(ConnectionState::Connected, connectionStatus.ipAddress, connectionStatus.ssid);
 }
 
 void WiFiClient::onDisconnected(DisconnectReason reason) {
@@ -116,17 +107,13 @@ void WiFiClient::onDisconnected(DisconnectReason reason) {
 	// Anyway, we are disconnected, so if we are already connecting, we will
 	// probably be connected sometime, in other cases we shall report
 	// disconnect.
-	setConnectionStatus(mConnectionState == ConnectionState::Connecting
-				? mConnectionState
-				: ConnectionState::NotConnected,
-			    "", "");
+	setConnectionStatus(
+	    mConnectionState == ConnectionState::Connecting ? mConnectionState : ConnectionState::NotConnected, "", "");
 }
 
 void WiFiClient::onStatusUpdated() {
 	const trikWiFi::Status connectionStatus = mWiFi.statusResult();
-	setConnectionStatus(connectionStatus.connected
-				? ConnectionState::Connected
-				: ConnectionState::NotConnected,
+	setConnectionStatus(connectionStatus.connected ? ConnectionState::Connected : ConnectionState::NotConnected,
 			    connectionStatus.ipAddress, connectionStatus.ssid);
 }
 
@@ -137,12 +124,9 @@ void WiFiClient::onError(const QString &message) {
 	}
 }
 
-void WiFiClient::onConnectionTimeout() {
-	setConnectionStatus(ConnectionState::Errored, "", "");
-}
+void WiFiClient::onConnectionTimeout() { setConnectionStatus(ConnectionState::Errored, "", ""); }
 
-void WiFiClient::setConnectionStatus(ConnectionState state, const QString &ip,
-				     const QString &ssid) {
+void WiFiClient::setConnectionStatus(ConnectionState state, const QString &ip, const QString &ssid) {
 	mConnectionState = state;
 	mCurrentSsid = "";
 
@@ -192,13 +176,9 @@ QVariant WiFiClient::data(const QModelIndex &index, int role) const {
 	return QVariant::fromValue(mAvailableNetworks[index_row]);
 }
 
-QVector<trikGui::NetworkInfo> WiFiClient::availableNetworks() {
-	return mAvailableNetworks;
-}
+QVector<trikGui::NetworkInfo> WiFiClient::availableNetworks() { return mAvailableNetworks; }
 
-WiFiClient::ConnectionState WiFiClient::connectionState() {
-	return mConnectionState;
-}
+WiFiClient::ConnectionState WiFiClient::connectionState() { return mConnectionState; }
 
 QString WiFiClient::currentSsid() { return mCurrentSsid; }
 

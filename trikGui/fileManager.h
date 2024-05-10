@@ -31,11 +31,9 @@ namespace trikGui {
 class FileManager : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QFileSystemModel *fileSystemModel READ fileSystemModel NOTIFY
-		       fileSystemModelChanged)
 
-	Q_PROPERTY(
-	    QModelIndex indexOfCurrentPath READ indexOfCurrentPath CONSTANT)
+	Q_PROPERTY(QFileSystemModel *fileSystemModel READ fileSystemModel NOTIFY fileSystemModelChanged)
+	Q_PROPERTY(QModelIndex indexOfCurrentPath READ indexOfCurrentPath CONSTANT)
 	Q_PROPERTY(QString currentPath READ currentPath CONSTANT)
 
 	/// Default QFileIconProvider spend about 10 seconds for scanning empty
@@ -61,17 +59,19 @@ public:
 	/// access to low-level functionality.
 	/// @param fileManagerRoot - root directory for file browser.
 	/// @param parent - parent of this widget in Qt object hierarchy.
-	explicit FileManager(
-	    Controller &controller,
-	    SystemSettings::FileManagerRootType fileManagerRoot,
-	    QObject *parent = 0);
+	explicit FileManager(Controller &controller, SystemSettings::FileManagerRootType fileManagerRoot,
+			     QObject *parent = 0);
 
 	~FileManager();
-
+	/// Open file
 	Q_INVOKABLE void open(QModelIndex index);
+	/// Remove file
 	Q_INVOKABLE void remove(QModelIndex index);
+	///  Remove all files
 	Q_INVOKABLE void removeAll();
+	/// Checking whether this QModelIndex is a directory
 	Q_INVOKABLE bool isDir(QModelIndex i);
+	/// Set a QML component as a parent for a given QObject
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 
 private Q_SLOTS:
@@ -90,6 +90,7 @@ private:
 	QString mLastSelectedFile;
 
 Q_SIGNALS:
+	/// The signal is needed to update the file lists on the frontend
 	void fileSystemModelChanged();
 };
 

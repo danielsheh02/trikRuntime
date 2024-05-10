@@ -41,4 +41,4 @@ public:
 	static Level currentLevel();
 };
 
-}// namespace trikGui
+} // namespace trikGui

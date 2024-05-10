@@ -19,8 +19,7 @@
 
 using namespace trikGui;
 
-CommunicationSettings::CommunicationSettings(
-    trikNetwork::MailboxInterface &mailbox, QObject *parent)
+CommunicationSettings::CommunicationSettings(trikNetwork::MailboxInterface &mailbox, QObject *parent)
     : QObject(parent), mMailbox(mailbox) {
 
 	mHullNumber = mailbox.myHullNumber();
@@ -31,8 +30,7 @@ CommunicationSettings::CommunicationSettings(
 	} else {
 		const auto parsedAddress = hostAddressString.split('.');
 		Q_ASSERT(parsedAddress.size() == 4);
-		auto hostAddress =
-		    parsedAddress[2].toInt() * 1000 + parsedAddress[3].toInt();
+		auto hostAddress = parsedAddress[2].toInt() * 1000 + parsedAddress[3].toInt();
 
 		mThirdFourthIpPart = hostAddress;
 	}
@@ -40,8 +38,7 @@ CommunicationSettings::CommunicationSettings(
 
 CommunicationSettings::~CommunicationSettings() {}
 
-void CommunicationSettings::onConnectButtonClicked(
-    QString newThirdFourthIpPart) {
+void CommunicationSettings::onConnectButtonClicked(QString newThirdFourthIpPart) {
 	mMailbox.renewIp();
 	QStringList result = mMailbox.myIp().split('.');
 	QStringList thirdFourthIpPart = newThirdFourthIpPart.split('.');
@@ -51,31 +48,23 @@ void CommunicationSettings::onConnectButtonClicked(
 		return;
 	}
 
-	const QString thirdPart =
-	    thirdFourthIpPart[0].replace(QRegExp("^0+"), "");
-	const QString fourthPart =
-	    thirdFourthIpPart[1].replace(QRegExp("^0+"), "");
+	const QString thirdPart = thirdFourthIpPart[0].replace(QRegExp("^0+"), "");
+	const QString fourthPart = thirdFourthIpPart[1].replace(QRegExp("^0+"), "");
 	result[2] = thirdPart.isEmpty() ? "0" : thirdPart;
 	result[3] = fourthPart.isEmpty() ? "0" : fourthPart;
 	mMailbox.connect(result.join("."));
 }
 
 QString CommunicationSettings::hullNumber() {
-	const QString hullNumber =
-	    QString("%1").arg(mHullNumber, 2, 10, QChar('0'));
+	const QString hullNumber = QString("%1").arg(mHullNumber, 2, 10, QChar('0'));
 	return hullNumber;
 }
 
 QString CommunicationSettings::thirdFourthIpPart() {
-	const QString thirdFourthIpPart =
-	    QString("%1")
-		.arg(mThirdFourthIpPart, 6, 10, QChar('0'))
-		.insert(3, ".");
+	const QString thirdFourthIpPart = QString("%1").arg(mThirdFourthIpPart, 6, 10, QChar('0')).insert(3, ".");
 	return thirdFourthIpPart;
 }
 
-void CommunicationSettings::onHullNumberChanged(int newHullNumber) {
-	mMailbox.setHullNumber(newHullNumber);
-}
+void CommunicationSettings::onHullNumberChanged(int newHullNumber) { mMailbox.setHullNumber(newHullNumber); }
 
 void CommunicationSettings::setQmlParent(QObject *parent) { setParent(parent); }

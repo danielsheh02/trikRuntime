@@ -51,14 +51,12 @@ public:
 	/// @param brick - reference to trikControl::Brick instance.
 	/// @param type - type of motors we want to test.
 	/// @param parent - pointer to a parent widget.
-	Motors(trikControl::BrickInterface &brick, QStringList ports,
-	       QObject *parent = nullptr);
+	Motors(trikControl::BrickInterface &brick, QStringList ports, QObject *parent = nullptr);
 	/// Destructor.
 	~Motors();
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-	QVariant data(const QModelIndex &index,
-		      int role = Qt::DisplayRole) const override;
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 	Q_INVOKABLE void setQmlParent(QObject *parent);
 
 private:

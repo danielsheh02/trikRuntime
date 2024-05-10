@@ -22,9 +22,8 @@ namespace trikGui {
 class SystemSettings : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(
-	    FileManagerRootType fileManagerRootType READ fileManagerRootType
-		WRITE setFileManagerRootType NOTIFY fileManagerRootTypeChanged)
+	Q_PROPERTY(FileManagerRootType fileManagerRootType READ fileManagerRootType WRITE setFileManagerRootType NOTIFY
+		       fileManagerRootTypeChanged)
 public:
 	enum class FileManagerRootType { ScriptsDir, AllFS };
 	Q_ENUM(FileManagerRootType)
@@ -32,8 +31,7 @@ public:
 	/// @param parent - parent of this widget in terms of Qt widget
 	/// parent/child system.
 	/// @param fileManagerRoot - current FilesManagerRoot
-	explicit SystemSettings(FileManagerRootType fileManagerRoot,
-				QObject *parent = 0);
+	explicit SystemSettings(FileManagerRootType fileManagerRoot, QObject *parent = 0);
 
 	/// Destructor.
 	~SystemSettings();
@@ -47,6 +45,7 @@ private:
 Q_SIGNALS:
 	/// Emitted when we want to save current FilesManagerRoot
 	void currentFilesDirPath(FileManagerRootType const &path);
+	/// Emitted when root type changed (scripts is root dir or not)
 	void fileManagerRootTypeChanged();
 };
 

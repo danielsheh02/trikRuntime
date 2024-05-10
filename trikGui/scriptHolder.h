@@ -58,4 +58,4 @@ private:
 	QStringList mCommands;
 };
 
-}// namespace trikGui
+} // namespace trikGui

@@ -53,9 +53,13 @@ private:
 	Controller &mController;
 	int mScriptId{-1};
 Q_SIGNALS:
+	/// Emitted when it is necessary to show the widget of running script
 	void showRunningCodeComponent(const QString &programName);
+	/// Emitted when it is necessary to show the widget with error of running script
 	void showErrorRunningCodeComponent(const QString &error);
+	/// Emitted when it is necessary to hide the widget of running script
 	void hideRunningCodeComponent();
+	/// Emitted when it is necessary to hide the widget of running script
 	void hideScriptComponent();
 };
 

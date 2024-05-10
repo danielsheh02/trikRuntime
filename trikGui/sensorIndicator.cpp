@@ -13,23 +13,14 @@
  * limitations under the License. */
 
 #include "sensorIndicator.h"
-
-#include <QtWidgets/QStyleOptionFocusRect>
-#include <QtWidgets/QStylePainter>
-
-#include <QDebug>
 #include <QtCore/QString>
-#include <unistd.h>
-
 #include <trikControl/sensorInterface.h>
 
 using namespace trikGui;
 
-SensorIndicator::SensorIndicator(const QString &port,
-				 trikControl::SensorInterface &sensor,
-				 QObject *parent)
-    : AbstractIndicator(parent), mSensor(sensor), mMinValue(sensor.minValue()),
-      mMaxValue(sensor.maxValue()), mValue(0), mNameLabel(port) {}
+SensorIndicator::SensorIndicator(const QString &port, trikControl::SensorInterface &sensor, QObject *parent)
+    : AbstractIndicator(parent), mSensor(sensor), mMinValue(sensor.minValue()), mMaxValue(sensor.maxValue()), mValue(0),
+      mNameLabel(port) {}
 
 void SensorIndicator::renew() {
 	mValue = mSensor.read();

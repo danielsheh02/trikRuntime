@@ -33,6 +33,7 @@ public:
 	explicit AutoRunner(Controller &controller);
 
 private Q_SLOTS:
+	/// Launch autorun.js file
 	void doLaunch();
 
 private:

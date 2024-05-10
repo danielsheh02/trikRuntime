@@ -47,9 +47,7 @@ public:
 	/// @param encoder - encoder which we will read.
 	/// @param parent - parent of this widget in Qt widget parent-child
 	/// system.
-	EncoderIndicator(const QString &port,
-			 trikControl::EncoderInterface &encoder,
-			 QObject *parent = 0);
+	EncoderIndicator(const QString &port, trikControl::EncoderInterface &encoder, QObject *parent = 0);
 
 private Q_SLOTS:
 	void renew() override;
@@ -61,11 +59,8 @@ private:
 	QString nameLabel();
 	int value();
 Q_SIGNALS:
+	/// Emitted when value changed
 	void valueChanged();
-	//  QHBoxLayout mLayout;
-	//  QLabel mNameLabel;
-	//  QDial mValueDial;
-	//  QLabel mValueLabel;
 };
 
 } // namespace trikGui

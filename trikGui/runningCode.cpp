@@ -18,17 +18,12 @@
 
 using namespace trikGui;
 
-RunningCode::RunningCode(Controller &controller, QObject *parent)
-    : QObject(parent), mController(controller) {
-	connect(&mController, &Controller::showRunningWidget, this,
-		&RunningCode::showRunningCode);
+RunningCode::RunningCode(Controller &controller, QObject *parent) : QObject(parent), mController(controller) {
+	connect(&mController, &Controller::showRunningWidget, this, &RunningCode::showRunningCode);
 
-	connect(&mController, &Controller::showError, this,
-		&RunningCode::showError);
-	connect(&mController, &Controller::hideRunningWidget, this,
-		&RunningCode::hideRunningCode);
-	connect(&mController, &Controller::hideScriptWidgets, this,
-		&RunningCode::hideScript);
+	connect(&mController, &Controller::showError, this, &RunningCode::showError);
+	connect(&mController, &Controller::hideRunningWidget, this, &RunningCode::hideRunningCode);
+	connect(&mController, &Controller::hideScriptWidgets, this, &RunningCode::hideScript);
 }
 
 void RunningCode::showError(const QString &error, int scriptId) {

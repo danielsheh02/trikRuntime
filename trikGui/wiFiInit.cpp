@@ -24,21 +24,17 @@
 using namespace trikGui;
 
 WiFiInit::WiFiInit(QObject *parent) : QObject(parent) {
-	connect(&mProcess,
-		QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-		this, &WiFiInit::onProcessFinished);
-	connect(&mProcess,
-		QOverload<QProcess::ProcessError>::of(&QProcess::errorOccurred),
-		this, &WiFiInit::onProcessError);
-	connect(&mProcess, &QProcess::errorOccurred, this,
+	connect(&mProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+		&WiFiInit::onProcessFinished);
+	connect(&mProcess, QOverload<QProcess::ProcessError>::of(&QProcess::errorOccurred), this,
 		&WiFiInit::onProcessError);
+	connect(&mProcess, &QProcess::errorOccurred, this, &WiFiInit::onProcessError);
 }
 
 WiFiInit::~WiFiInit() {
 	if (mProcess.state() != QProcess::NotRunning) {
-		QLOG_ERROR()
-		    << "Destroyng WiFiInitWidget with runnig process. The user "
-		       "has cancelled the running operation?";
+		QLOG_ERROR() << "Destroyng WiFiInitWidget with runnig process. The user "
+				"has cancelled the running operation?";
 		mProcess.kill();
 	}
 }
@@ -57,8 +53,7 @@ WiFiInit::Result WiFiInit::init(WiFiMode::Mode mode) {
 		break;
 	}
 	case WiFiMode::Mode::Unknown: {
-		QLOG_ERROR()
-		    << "Error: unknown WiFi mode in WiFiInitWidget::init()";
+		QLOG_ERROR() << "Error: unknown WiFi mode in WiFiInitWidget::init()";
 		return Result::fail;
 	}
 	}

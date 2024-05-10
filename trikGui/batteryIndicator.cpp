@@ -14,16 +14,13 @@
 
 #include "batteryIndicator.h"
 
-#include <QDebug>
 #include <QtCore/QProcess>
 #include <QtCore/QString>
 
 using namespace trikGui;
 
-BatteryIndicator::BatteryIndicator(trikControl::BrickInterface &brick,
-				   QObject *parent)
-    : QObject(parent), mBrick(brick),
-      mCurrentLevel(PowerLevel::currentLevel()) {
+BatteryIndicator::BatteryIndicator(trikControl::BrickInterface &brick, QObject *parent)
+    : QObject(parent), mBrick(brick), mCurrentLevel(PowerLevel::currentLevel()) {
 	mRenewTimer.setSingleShot(true);
 	connect(&mRenewTimer, &QTimer::timeout, this, &BatteryIndicator::renew);
 
@@ -33,21 +30,17 @@ BatteryIndicator::BatteryIndicator(trikControl::BrickInterface &brick,
 		mRenewTimer.start(mRenewInterval);
 	});
 
-	connect(&mBeepTimer, &QTimer::timeout, this,
-		[this]() { mBrick.playTone(1500, 100); });
+	connect(&mBeepTimer, &QTimer::timeout, this, [this]() { mBrick.playTone(1500, 100); });
 
 	renew();
 }
 
 void BatteryIndicator::renew() {
-	if (mBrick.battery()->status() ==
-	    trikControl::DeviceInterface::Status::ready) {
+	if (mBrick.battery()->status() == trikControl::DeviceInterface::Status::ready) {
 		const auto voltage = mBrick.battery()->readVoltage();
-		if (voltage > mSanityThreshold &&
-		    voltage < shutdownThreshold()) {
+		if (voltage > mSanityThreshold && voltage < shutdownThreshold()) {
 			QProcess::startDetached("/bin/sh", {"-c", "halt"});
-		} else if (voltage > mSanityThreshold &&
-			   voltage < warningThreshold()) {
+		} else if (voltage > mSanityThreshold && voltage < warningThreshold()) {
 			mBeepTimer.start(500);
 			mBeepingTimer.start(mBeepingInterval);
 		}
@@ -58,15 +51,11 @@ void BatteryIndicator::renew() {
 }
 
 float BatteryIndicator::warningThreshold() const {
-	return mCurrentLevel == PowerLevel::Level::twelveVolt
-		   ? m12VWarningThreshold
-		   : m6VWarningThreshold;
+	return mCurrentLevel == PowerLevel::Level::twelveVolt ? m12VWarningThreshold : m6VWarningThreshold;
 }
 
 float BatteryIndicator::shutdownThreshold() const {
-	return mCurrentLevel == PowerLevel::Level::twelveVolt
-		   ? m12VShutdownThreshold
-		   : m6VShutdownThreshold;
+	return mCurrentLevel == PowerLevel::Level::twelveVolt ? m12VShutdownThreshold : m6VShutdownThreshold;
 }
 
 QString BatteryIndicator::voltageValue() { return mVoltageValue; }

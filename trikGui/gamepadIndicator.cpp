@@ -16,12 +16,9 @@
 
 using namespace trikGui;
 
-GamepadIndicator::GamepadIndicator(Controller &controller, QObject *parent)
-    : QObject(parent), mController(controller) {
-	connect(&mController, &Controller::gamepadDisconnected, this,
-		&GamepadIndicator::setOff);
-	connect(&mController, &Controller::gamepadConnected, this,
-		&GamepadIndicator::setOn);
+GamepadIndicator::GamepadIndicator(Controller &controller, QObject *parent) : QObject(parent), mController(controller) {
+	connect(&mController, &Controller::gamepadDisconnected, this, &GamepadIndicator::setOff);
+	connect(&mController, &Controller::gamepadConnected, this, &GamepadIndicator::setOn);
 }
 
 void GamepadIndicator::setOn() {
@@ -34,8 +31,6 @@ void GamepadIndicator::setOff() {
 	Q_EMIT isConnectedChanged();
 }
 
-void GamepadIndicator::connected(bool connected) {
-	connected ? setOn() : setOff();
-}
+void GamepadIndicator::connected(bool connected) { connected ? setOn() : setOff(); }
 
 bool GamepadIndicator::isConnected() { return mIsConnected; }

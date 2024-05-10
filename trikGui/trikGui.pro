@@ -41,7 +41,6 @@ HEADERS += \
         $$PWD/wiFiMode.h \
 	$$PWD/wiFiIndicator.h \
 	$$PWD/openSocketIndicator.h \
-	$$PWD/sensorLever.h \
 	$$PWD/scriptHolder.h \
 	$$PWD/gamepadIndicator.h \
 	$$PWD/powerLevel.h \
@@ -53,7 +52,6 @@ HEADERS += \
         $$PWD/mainMenuManager.h \
         $$PWD/managers.h \
         $$PWD/testingManager.h \
-        $$PWD/wiFiManager.h \
         $$PWD/accelerometerMock.h \
         $$PWD/encoderMock.h \
         $$PWD/gyroscopeMock.h \
@@ -86,7 +84,6 @@ SOURCES += \
         $$PWD/wiFiMode.cpp \
 	$$PWD/wiFiIndicator.cpp \
 	$$PWD/openSocketIndicator.cpp \
-	$$PWD/sensorLever.cpp \
 	$$PWD/scriptHolder.cpp \
 	$$PWD/gamepadIndicator.cpp \
 	$$PWD/$$PLATFORM/powerLevel.cpp \
@@ -97,7 +94,6 @@ SOURCES += \
 	$$PWD/pwmCaptureIndicator.cpp \
         $$PWD/mainMenuManager.cpp \
         $$PWD/testingManager.cpp \
-        $$PWD/wiFiManager.cpp \
         $$PWD/accelerometerMock.cpp \
         $$PWD/encoderMock.cpp \
         $$PWD/gyroscopeMock.cpp \

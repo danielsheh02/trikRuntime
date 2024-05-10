@@ -17,20 +17,15 @@
 
 using namespace trikGui;
 
-SystemSettings::SystemSettings(FileManagerRootType fileManagerRoot,
-			       QObject *parent)
+SystemSettings::SystemSettings(FileManagerRootType fileManagerRoot, QObject *parent)
     : QObject(parent), mFileManagerRootType(fileManagerRoot) {
-	qmlRegisterUncreatableType<SystemSettings>(
-	    "SystemSettings", 1, 0, "RootType", "Enum is not a type");
+	qmlRegisterUncreatableType<SystemSettings>("SystemSettings", 1, 0, "RootType", "Enum is not a type");
 }
 
 SystemSettings::~SystemSettings() {}
-SystemSettings::FileManagerRootType SystemSettings::fileManagerRootType() {
-	return mFileManagerRootType;
-}
+SystemSettings::FileManagerRootType SystemSettings::fileManagerRootType() { return mFileManagerRootType; }
 
-void SystemSettings::setFileManagerRootType(
-    FileManagerRootType fileManagerRootType) {
+void SystemSettings::setFileManagerRootType(FileManagerRootType fileManagerRootType) {
 	mFileManagerRootType = fileManagerRootType;
 	Q_EMIT fileManagerRootTypeChanged();
 	Q_EMIT currentFilesDirPath(fileManagerRootType);

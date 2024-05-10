@@ -45,6 +45,7 @@ private:
 	bool isConnected();
 	bool mIsConnected{false};
 Q_SIGNALS:
+	/// Emitted when connected status changed
 	void isConnectedChanged();
 };
 

@@ -13,24 +13,15 @@
  * limitations under the License. */
 
 #include "pwmCaptureIndicator.h"
-
-#include <QtWidgets/QStyleOptionFocusRect>
-#include <QtWidgets/QStylePainter>
-
-#include <QDebug>
 #include <QtCore/QString>
-
-#include <QDebug>
 #include <trikControl/pwmCaptureInterface.h>
 
 using namespace trikGui;
 
-PwmCaptureIndicator::PwmCaptureIndicator(
-    const QString &port, trikControl::PwmCaptureInterface &pwmCapture,
-    QObject *parent)
-    : AbstractIndicator(parent), mPwmCapture(pwmCapture),
-      mMinValue(pwmCapture.minValue()), mMaxValue(pwmCapture.maxValue()),
-      mValue(0), mNameLabel(port) {}
+PwmCaptureIndicator::PwmCaptureIndicator(const QString &port, trikControl::PwmCaptureInterface &pwmCapture,
+					 QObject *parent)
+    : AbstractIndicator(parent), mPwmCapture(pwmCapture), mMinValue(pwmCapture.minValue()),
+      mMaxValue(pwmCapture.maxValue()), mValue(0), mNameLabel(port) {}
 
 void PwmCaptureIndicator::renew() {
 	int value = mPwmCapture.duty();

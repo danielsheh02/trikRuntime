@@ -35,8 +35,7 @@ public:
 	/// here.
 	/// @param parent - parent of this widget in terms of Qt widget
 	/// parent/child system.
-	explicit CommunicationSettings(trikNetwork::MailboxInterface &mailbox,
-				       QObject *parent = 0);
+	explicit CommunicationSettings(trikNetwork::MailboxInterface &mailbox, QObject *parent = 0);
 
 	~CommunicationSettings();
 

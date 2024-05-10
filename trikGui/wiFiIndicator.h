@@ -43,6 +43,7 @@ private:
 	WiFiMode::Mode mode();
 
 Q_SIGNALS:
+	/// Emitted when mode changed
 	void modeChanged();
 };
 

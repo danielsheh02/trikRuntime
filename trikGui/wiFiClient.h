@@ -20,7 +20,6 @@
 
 #include <QtCore/qglobal.h>
 
-#include <../trikWiFi/include/trikWiFi/trikWiFi.h>
 #include <QtCore/QList>
 #include <QtCore/QTimer>
 #include <QtGui/QStandardItem>
@@ -97,45 +96,34 @@ public:
 class WiFiClient : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(QVector<trikGui::NetworkInfo> availableNetworks READ
-		       availableNetworks NOTIFY availableNetworksChanged)
-	Q_PROPERTY(ConnectionState connectionState READ connectionState NOTIFY
-		       connectionStateChanged)
 	Q_PROPERTY(
-	    QString currentSsid READ currentSsid NOTIFY currentSsidChanged)
+	    QVector<trikGui::NetworkInfo> availableNetworks READ availableNetworks NOTIFY availableNetworksChanged)
+	Q_PROPERTY(ConnectionState connectionState READ connectionState NOTIFY connectionStateChanged)
+	Q_PROPERTY(QString currentSsid READ currentSsid NOTIFY currentSsidChanged)
 	Q_PROPERTY(QString ipValue READ ipValue NOTIFY ipValueChanged)
 
 public:
 	/// Constructor.
 	/// @param parent - parent QObject.
-	explicit WiFiClient(trikWiFi::TrikWiFi &trikWiFi,
-			    QObject *parent = nullptr);
+	explicit WiFiClient(trikWiFi::TrikWiFi &trikWiFi, QObject *parent = nullptr);
 
 	/// Destructor.
 	~WiFiClient();
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-	QVariant data(const QModelIndex &index,
-		      int role = Qt::DisplayRole) const override;
-
-	QVector<trikGui::NetworkInfo> availableNetworks();
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 public:
 	/// Enum with possible states of a widget. It is actually an automata
 	/// that can move between four connection states reacting on user input
 	/// and WiFi controller messages.
-	enum class ConnectionState {
-		NotConnected,
-		Connecting,
-		Connected,
-		Errored
-	};
+	enum class ConnectionState { NotConnected, Connecting, Connected, Errored };
 	Q_ENUM(ConnectionState)
 	/// Tries to connect to currently selected network.
 	Q_INVOKABLE void connectToSelectedNetwork(QString ssid);
 
 	Q_INVOKABLE void setQmlParent(QObject *parent);
-
+	/// Send requests for scanning
 	void scanWiFi();
 
 private Q_SLOTS:
@@ -163,8 +151,7 @@ private Q_SLOTS:
 
 private:
 	/// Updates widget state and shows info about connection in GUI.
-	void setConnectionStatus(ConnectionState state, const QString &ip,
-				 const QString &ssid);
+	void setConnectionStatus(ConnectionState state, const QString &ip, const QString &ssid);
 
 	QVector<QString> mAvailableNetworksSsids;
 	QVector<NetworkInfo> mAvailableNetworks;
@@ -179,11 +166,16 @@ private:
 	ConnectionState connectionState();
 	QString currentSsid();
 	QString ipValue();
+	QVector<trikGui::NetworkInfo> availableNetworks();
 
 Q_SIGNALS:
+	/// Emitted when available networks changed
 	void availableNetworksChanged();
+	/// Emitted when connection state changed
 	void connectionStateChanged();
+	/// Emitted when current ssid changed
 	void currentSsidChanged();
+	/// Emitted when ip value changed
 	void ipValueChanged();
 };
 

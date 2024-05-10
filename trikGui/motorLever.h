@@ -41,6 +41,7 @@ namespace trikGui {
 class MotorLever : public QObject
 {
 	Q_OBJECT
+private:
 	Q_PROPERTY(QString nameLabel READ nameLabel CONSTANT)
 	Q_PROPERTY(bool isOn READ isOn WRITE setIsOn NOTIFY isOnChanged)
 	Q_PROPERTY(int maxPower READ maxPower CONSTANT)
@@ -53,16 +54,10 @@ public:
 	/// @param port - name of a port which the motor is connected to.
 	/// @param motor - pointer to an instance representing the motor.
 	/// @param parent - pointer to a parent widget.
-	MotorLever(const QString &port, trikControl::MotorInterface &motor,
-		   QObject *parent = nullptr);
+	MotorLever(const QString &port, trikControl::MotorInterface &motor, QObject *parent = nullptr);
 
 	/// Destructor.
 	~MotorLever() override;
-
-private:
-Q_SIGNALS:
-	void isOnChanged();
-	void powerChanged();
 
 private:
 	void setPower(int power);
@@ -82,6 +77,11 @@ private:
 	const int mPowerStep;
 	int mPower;
 	QString mNameLabel;
+Q_SIGNALS:
+	/// Emitted when activation status changed
+	void isOnChanged();
+	/// Emitted when power changed
+	void powerChanged();
 };
 
-}// namespace trikGui
+} // namespace trikGui

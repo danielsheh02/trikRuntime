@@ -20,16 +20,12 @@
 using namespace trikGui;
 using namespace trikWiFi;
 
-WiFiIndicator::WiFiIndicator(Controller &controller, QObject *parent)
-    : QObject(parent), mController(controller) {
-	connect(&mController, &Controller::wiFiConnected, this,
-		&WiFiIndicator::updateStatus);
-	connect(&mController, &Controller::wiFiDisconnected, this,
-		&WiFiIndicator::updateStatus);
+WiFiIndicator::WiFiIndicator(Controller &controller, QObject *parent) : QObject(parent), mController(controller) {
+	connect(&mController, &Controller::wiFiConnected, this, &WiFiIndicator::updateStatus);
+	connect(&mController, &Controller::wiFiDisconnected, this, &WiFiIndicator::updateStatus);
 
 	updateStatus();
-	connect(&mUpdateTimer, &QTimer::timeout, this,
-		&WiFiIndicator::updateStatus);
+	connect(&mUpdateTimer, &QTimer::timeout, this, &WiFiIndicator::updateStatus);
 	mUpdateTimer.start(5000);
 }
 

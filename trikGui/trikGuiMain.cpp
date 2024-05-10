@@ -37,16 +37,13 @@
 
 using namespace trikGui;
 QQmlApplicationEngine *qQmlEngine = nullptr;
-MotorsManager *motorsManager = nullptr;
-SensorsManager *sensorsManager = nullptr;
 
 void setStyle(int argc, char *argv[]) {
 	QQuickStyle::setStyle("TrikStyle");
 	if (argc >= 3) {
 		for (int i = 1; i < argc - 1; i++) {
 			QString current_arg(argv[i]);
-			if (current_arg == "-style" ||
-			    current_arg == "--style") {
+			if (current_arg == "-style" || current_arg == "--style") {
 				QQuickStyle::setStyle(argv[i + 1]);
 				QQuickStyle::setFallbackStyle("TrikStyle");
 				break;
@@ -65,18 +62,10 @@ int main(int argc, char *argv[]) {
 
 	qQmlEngine = new QQmlApplicationEngine(&app);
 
-	motorsManager = new MotorsManager(qQmlEngine);
-	sensorsManager = new SensorsManager(qQmlEngine);
-
-	qQmlEngine->rootContext()->setContextProperty("MotorsManager",
-						      motorsManager);
-	qQmlEngine->rootContext()->setContextProperty("SensorsManager",
-						      sensorsManager);
-
 	ModeManager::initMode();
-	initHelper.commandLineParser().addApplicationDescription(QObject::tr(
-	    "Graphical user interface, TRIK Studio runtime environment "
-	    "and script runner of a robot"));
+	initHelper.commandLineParser().addApplicationDescription(
+	    QObject::tr("Graphical user interface, TRIK Studio runtime environment "
+			"and script runner of a robot"));
 
 	if (!initHelper.parseCommandLine()) {
 		return 0;
@@ -91,10 +80,8 @@ int main(int argc, char *argv[]) {
 	QLOG_INFO() << "TrikGui started";
 
 	MainMenuManager mainMenuManager(initHelper.configPath());
-	qmlRegisterUncreatableType<MainMenuManager>(
-	    "MainMenuManager", 1, 0, "AppType", "Enum is not a type");
-	qQmlEngine->rootContext()->setContextProperty("MainMenuManager",
-						      &mainMenuManager);
+	qmlRegisterUncreatableType<MainMenuManager>("MainMenuManager", 1, 0, "AppType", "Enum is not a type");
+	qQmlEngine->rootContext()->setContextProperty("MainMenuManager", &mainMenuManager);
 	const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 	QObject::connect(
 	    qQmlEngine, &QQmlApplicationEngine::objectCreated, &app,

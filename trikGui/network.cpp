@@ -26,10 +26,8 @@ using namespace trikGui;
 Network::Network(QObject *parent) : QObject(parent) {
 	mUpdateTimer.setInterval(5000);
 	connect(&mUpdateTimer, &QTimer::timeout, this, &Network::updateIP);
-	connect(&mUpdateTimer, &QTimer::timeout, this,
-		&Network::updateHostname);
-	connect(&mUpdateTimer, &QTimer::timeout, this,
-		&Network::updateHullNumber);
+	connect(&mUpdateTimer, &QTimer::timeout, this, &Network::updateHostname);
+	connect(&mUpdateTimer, &QTimer::timeout, this, &Network::updateHullNumber);
 	mUpdateTimer.start();
 }
 
@@ -37,17 +35,12 @@ void Network::updateIP() {
 	const auto &interfaces = QNetworkInterface::allInterfaces();
 	const auto &interface =
 	    std::find_if(interfaces.begin(), interfaces.end(),
-			 [](const QNetworkInterface &interface) {
-				 return interface.name() == "wlan0";
-			 });
+			 [](const QNetworkInterface &interface) { return interface.name() == "wlan0"; });
 	if (interface != interfaces.end()) {
 		const auto &entries = interface[0].addressEntries();
-		const auto &entry =
-		    std::find_if(entries.begin(), entries.end(),
-				 [](const QNetworkAddressEntry &entry) {
-					 return entry.ip().protocol() ==
-						QAbstractSocket::IPv4Protocol;
-				 });
+		const auto &entry = std::find_if(entries.begin(), entries.end(), [](const QNetworkAddressEntry &entry) {
+			return entry.ip().protocol() == QAbstractSocket::IPv4Protocol;
+		});
 		if (entry != entries.end()) {
 			mIp = entry[0].ip().toString();
 			Q_EMIT ipChanged();
@@ -56,16 +49,13 @@ void Network::updateIP() {
 }
 
 void Network::updateHostname() {
-	const QString name = trikKernel::FileUtils::readFromFile(
-				 trikKernel::Paths::hostnameName())
-				 .trimmed();
+	const QString name = trikKernel::FileUtils::readFromFile(trikKernel::Paths::hostnameName()).trimmed();
 	mHostName = name;
 	Q_EMIT hostNameChanged();
 }
 
 void Network::updateHullNumber() {
-	QSettings settings(trikKernel::Paths::localSettings(),
-			   QSettings::IniFormat);
+	QSettings settings(trikKernel::Paths::localSettings(), QSettings::IniFormat);
 	auto hullNumber = settings.value("hullNumber");
 	mHullNumber = QString::number(hullNumber.toInt());
 	Q_EMIT hullNumberChanged();

@@ -46,8 +46,11 @@ private:
 
 	QTimer mUpdateTimer;
 Q_SIGNALS:
+	/// Emitted when host name changed
 	void hostNameChanged();
+	/// Emitted when ip changed
 	void ipChanged();
+	/// Emitted when hull number changed
 	void hullNumberChanged();
 };
 

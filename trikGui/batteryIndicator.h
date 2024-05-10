@@ -28,16 +28,14 @@ namespace trikGui {
 class BatteryIndicator : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(
-	    QString voltageValue READ voltageValue NOTIFY voltageValueChanged)
+	Q_PROPERTY(QString voltageValue READ voltageValue NOTIFY voltageValueChanged)
 
 public:
 	/// Constructor.
 	/// @param brick - object that provides interface to a hardware.
 	/// @param parent - parent of this widget in terms of Qt parent-child
 	/// widget relations.
-	explicit BatteryIndicator(trikControl::BrickInterface &brick,
-				  QObject *parent = 0);
+	explicit BatteryIndicator(trikControl::BrickInterface &brick, QObject *parent = 0);
 
 private Q_SLOTS:
 	void renew();
@@ -96,6 +94,7 @@ private:
 	QString voltageValue();
 	QString mVoltageValue;
 Q_SIGNALS:
+	/// Emitted when voltage value changed.
 	void voltageValueChanged();
 };
 
