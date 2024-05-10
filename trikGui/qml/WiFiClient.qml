@@ -10,7 +10,7 @@ Rectangle {
     property string ipValue: ""
     property string connectionStateIconPath: ""
     property bool isScanning: wiFiClient.rowCount() === 0 ? true : false
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     property var idList: _button
     Component.onCompleted: {
         wiFiClient.setQmlParent(_mainWiFiClient)
@@ -116,13 +116,13 @@ Rectangle {
                 id: _ipValue
                 text: qsTr("IP: ") + ipValue
                 anchors.verticalCenter: parent.verticalCenter
-                color: Style.textColor
+                color: activeTheme.textColor
             }
         }
         Text {
             id: _availableNet
             text: qsTr("Available networks:")
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -131,7 +131,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             ColumnLayout {
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -145,14 +145,14 @@ Rectangle {
                     width: parent.width / 1.2
                     Layout.alignment: Qt.AlignHCenter
                     horizontalAlignment: Text.AlignHCenter
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
                 ProgressBar {
                     indeterminate: true
-                    palette.dark: Style.trikColor
+                    palette.dark: activeTheme.trikColor
                     Layout.fillWidth: true
                     background: Rectangle {
-                        color: Style.backgroundColor
+                        color: activeTheme.backgroundColor
                         radius: 3
                     }
                 }
@@ -238,7 +238,7 @@ Rectangle {
                         anchors.fill: parent
                         radius: 10
                         color: _delegateNetworks.isCurrent
-                               && _listNetworks.focus ? Style.focusElementsOfListNetworksColor : Style.managersBackColor
+                               && _listNetworks.focus ? activeTheme.focusElementsOfListNetworksColor : activeTheme.managersBackColor
                         anchors.leftMargin: 9
                         anchors.rightMargin: 9
                         RowLayout {
@@ -263,7 +263,7 @@ Rectangle {
                                 Layout.rightMargin: 7
                                 Layout.alignment: Qt.AlignVCenter
                                 wrapMode: Text.Wrap
-                                color: Style.textColor
+                                color: activeTheme.textColor
                             }
                         }
                     }

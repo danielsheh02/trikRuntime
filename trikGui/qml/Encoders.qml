@@ -3,11 +3,10 @@ import QtQuick.Controls 2.0
 
 Rectangle {
     id: _sensorsPanel
-    property var sensorsManager: SensorsManager
-    property var sensors: sensorsManager.sensors
+    property var sensors: Sensors
     property var sensorsCount: sensors.rowCount()
     property var idList: _listSensorsIndicators
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
 
     ListView {
         id: _listSensorsIndicators
@@ -27,14 +26,14 @@ Rectangle {
                 anchors.leftMargin: 6
                 anchors.rightMargin: 6
                 radius: 10
-                color: Style.elementsOfListColor
+                color: activeTheme.elementsOfListColor
                 Text {
                     id: _nameLabel
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
                 Text {
                     id: _value
@@ -42,7 +41,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 10
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
                 Item {
                     width: parent.height
@@ -66,7 +65,7 @@ Rectangle {
                             Rectangle {
                                 width: _dial.width / 6
                                 height: _dial.width / 6
-                                color: Style.lightOrStandartGreenColor
+                                color: activeTheme.lightOrStandartGreenColor
                                 radius: _dial.width / 2
                                 anchors.bottom: parent.bottom
                                 anchors.horizontalCenter: parent.horizontalCenter

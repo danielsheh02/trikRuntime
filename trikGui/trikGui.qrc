@@ -76,5 +76,7 @@
         <file>resourcesQml/de.png</file>
         <file>resourcesQml/telegram.png</file>
         <file>qml/Feedback.qml</file>
+        <file>qml/DarkTheme.qml</file>
+        <file>qml/LightTheme.qml</file>
     </qresource>
 </RCC>

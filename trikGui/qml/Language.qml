@@ -6,7 +6,7 @@ Rectangle {
     id: _languageSelection
     property var languageSelection: LanguageSelection
     property var idList: _listLanguages
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         languageSelection.setQmlParent(_languageSelection)
     }
@@ -38,7 +38,7 @@ Rectangle {
         Text {
             text: qsTr("Select language:")
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -47,7 +47,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             ListView {
                 id: _listLanguages
                 anchors.fill: parent
@@ -112,7 +112,7 @@ Rectangle {
                         id: _languageName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateLanguages.isCurrent ? Style.darkTrikColor : Style.managersBackColor
+                        color: _delegateLanguages.isCurrent ? activeTheme.darkTrikColor : activeTheme.managersBackColor
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 5
@@ -132,7 +132,7 @@ Rectangle {
                                 id: _textName
                                 text: _listLanguages.getLanguage(display, index)
                                 Layout.alignment: Qt.AlignVCenter
-                                color: _delegateLanguages.isCurrent ? "white" : Style.namesColor
+                                color: _delegateLanguages.isCurrent ? "white" : activeTheme.namesColor
                                 width: _languageName.width - _languageIcon.width
                                 wrapMode: Text.Wrap
                                 Layout.fillWidth: true

@@ -7,7 +7,7 @@ Rectangle {
     id: _settingsSelection
     property var systemSettings: SystemSettingsComponent
     property var idList: _listSettings
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         systemSettings.setQmlParent(_settingsSelection)
     }
@@ -22,7 +22,7 @@ Rectangle {
         Text {
             text: qsTr("Directory 'Files' is ...")
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -31,7 +31,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             ListModel {
                 id: dataModel
                 ListElement {
@@ -87,7 +87,7 @@ Rectangle {
                         id: _settingsName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateSettings.isCurrent ? Style.darkTrikColor : Style.managersBackColor
+                        color: _delegateSettings.isCurrent ? activeTheme.darkTrikColor : activeTheme.managersBackColor
                         RowLayout {
                             id: _row
                             anchors.fill: parent
@@ -124,7 +124,7 @@ Rectangle {
                             Text {
                                 id: _textName
                                 text: model.text
-                                color: _delegateSettings.isCurrent ? "white" : Style.namesColor
+                                color: _delegateSettings.isCurrent ? "white" : activeTheme.namesColor
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.fillWidth: true
                                 wrapMode: Text.Wrap

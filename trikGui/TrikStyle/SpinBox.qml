@@ -4,7 +4,7 @@ import QtQuick.Templates 2.0 as T
 T.SpinBox {
     background: Rectangle {
         id: _counter
-        border.color: Style.spinBorderColor
+        border.color: activeTheme.spinBorderColor
         anchors.fill: parent
         radius: 10
     }
@@ -22,7 +22,7 @@ T.SpinBox {
         anchors.right: parent.right
         anchors.top: parent.top
         color: _sb.up.pressed ? "#e4e4e4" : "#f6f6f6"
-        border.color: Style.spinBorderColor
+        border.color: activeTheme.spinBorderColor
         radius: 10
         Text {
             text: '+'
@@ -38,7 +38,7 @@ T.SpinBox {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         color: _sb.down.pressed ? "#e4e4e4" : "#f6f6f6"
-        border.color: Style.spinBorderColor
+        border.color: activeTheme.spinBorderColor
         radius: 10
         Text {
             text: '-'

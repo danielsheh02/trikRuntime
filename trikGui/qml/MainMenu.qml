@@ -82,11 +82,11 @@ Rectangle {
         width: parent.width / 1.05
         height: parent.height / 3.8
         z: 1
-        color: Style.confirmWindowColor
+        color: activeTheme.confirmWindowColor
         radius: 10
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        border.color: Style.delimeterLineColor
+        border.color: activeTheme.delimeterLineColor
         border.width: 1
         visible: false
 
@@ -110,7 +110,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pointSize: 12
                 Layout.rightMargin: 5
-                color: Style.textColor
+                color: activeTheme.textColor
             }
         }
     }
@@ -153,7 +153,7 @@ Rectangle {
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             text: qsTr("IP: ")
@@ -163,14 +163,14 @@ Rectangle {
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             text: qsTr("Hull number: ") + (network !== null ? network.hullNumber : "")
             Layout.fillWidth: true
             font.pointSize: 12
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Item {
             Layout.fillWidth: true
@@ -238,9 +238,9 @@ Rectangle {
                             id: _iconWrapper
                             anchors.fill: parent
                             radius: 10
-                            border.color: _delegate.isCurrent ? Style.lightOrStandartGreenColor : "transparent"
+                            border.color: _delegate.isCurrent ? activeTheme.lightOrStandartGreenColor : "transparent"
                             border.width: _delegate.isCurrent ? 4 : 0
-                            color: Style.elementsOfGridColor
+                            color: activeTheme.elementsOfGridColor
                             Image {
                                 id: _iconMenu
                                 source: iconsPath + model.iconPath
@@ -263,7 +263,7 @@ Rectangle {
                         wrapMode: Text.Wrap
                         font.pointSize: 12
                         Layout.maximumWidth: parent.width
-                        color: Style.textColor
+                        color: activeTheme.textColor
                     }
                 }
             }

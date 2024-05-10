@@ -8,7 +8,7 @@ Rectangle {
     property var wiFiMode: WiFiModeServer
     property var idList: pageLoader
     property var wiFiSelectionComponent: null
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         wiFiMode.setQmlParent(_mainItem)
 

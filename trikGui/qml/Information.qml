@@ -6,7 +6,7 @@ Rectangle {
     property var systemInformation: SystemInformation
     property string osVersion: systemInformation.osVersion()
     property string macAddress: systemInformation.macAddress()
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         systemInformation.setQmlParent(_information)
     }
@@ -14,7 +14,7 @@ Rectangle {
         anchors.fill: parent
         radius: 10
         anchors.margins: 15
-        color: Style.managersBackColor
+        color: activeTheme.managersBackColor
         ColumnLayout {
             id: _columnInfo
             anchors.fill: parent
@@ -23,17 +23,17 @@ Rectangle {
                 text: qsTr("OS version:")
                 wrapMode: Text.Wrap
                 font.pointSize: 15
-                color: Style.textColor
+                color: activeTheme.textColor
             }
             Text {
                 text: osVersion ? osVersion : qsTr("Unknown")
                 wrapMode: Text.Wrap
                 font.pointSize: 13
-                color: Style.informationColor
+                color: activeTheme.informationColor
             }
             Rectangle {
                 height: 1
-                color: Style.informationColor
+                color: activeTheme.informationColor
                 Layout.fillWidth: true
             }
 
@@ -41,17 +41,17 @@ Rectangle {
                 text: qsTr("MAC address:")
                 wrapMode: Text.Wrap
                 font.pointSize: 15
-                color: Style.textColor
+                color: activeTheme.textColor
             }
             Text {
                 text: macAddress ? macAddress : qsTr("Not found")
                 wrapMode: Text.Wrap
                 font.pointSize: 13
-                color: Style.informationColor
+                color: activeTheme.informationColor
             }
             Rectangle {
                 height: 1
-                color: Style.informationColor
+                color: activeTheme.informationColor
                 Layout.fillWidth: true
             }
             GridLayout {
@@ -60,13 +60,13 @@ Rectangle {
                     text: qsTr("Icons by")
                     wrapMode: Text.Wrap
                     font.pointSize: 11
-                    color: Style.informationColor
+                    color: activeTheme.informationColor
                 }
                 Text {
                     text: qsTr("Icons8,")
                     wrapMode: Text.Wrap
                     font.pointSize: 11
-                    color: Style.informationColor
+                    color: activeTheme.informationColor
                     font.underline: true
                     MouseArea {
                         anchors.fill: parent
@@ -80,7 +80,7 @@ Rectangle {
                     text: qsTr("Flaticon,")
                     wrapMode: Text.Wrap
                     font.pointSize: 11
-                    color: Style.informationColor
+                    color: activeTheme.informationColor
                     font.underline: true
                     MouseArea {
                         anchors.fill: parent
@@ -94,7 +94,7 @@ Rectangle {
                     text: qsTr("Svgrepo")
                     wrapMode: Text.Wrap
                     font.pointSize: 11
-                    color: Style.informationColor
+                    color: activeTheme.informationColor
                     font.underline: true
                     MouseArea {
                         anchors.fill: parent
@@ -110,7 +110,7 @@ Rectangle {
             }
             Text {
                 text: "https://trikset.com/"
-                color: Style.linkColor
+                color: activeTheme.linkColor
                 font.underline: true
                 Layout.alignment: Qt.AlignHCenter
                 MouseArea {

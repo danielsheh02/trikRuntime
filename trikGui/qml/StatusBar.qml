@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.0
 import WiFiMode 1.0
 
 Rectangle {
-    color: Style.statusBarColor
+    color: activeTheme.statusBarColor
     property var network: Network
 
     Connections {
@@ -42,7 +42,7 @@ Rectangle {
             text: BatteryIndicator ? BatteryIndicator.voltageValue : ""
             Layout.fillWidth: true
             font.pointSize: 11
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Image {
@@ -81,7 +81,7 @@ Rectangle {
             id: _hullNumber
             text: network !== null ? network.hullNumber : ""
             font.pointSize: 11
-            color: Style.textColor
+            color: activeTheme.textColor
             visible: network !== null ? (network.hullNumber !== "" ? true : false) : false
         }
     }
@@ -90,7 +90,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
         height: 1
-        color: Style.delimeterLineColor
+        color: activeTheme.delimeterLineColor
         anchors.bottomMargin: -1
     }
 }

@@ -8,7 +8,7 @@ Rectangle {
     id: _mainItem
     property var testingManager: TestingManager
     property var idList: _listTesting
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         testingManager.setQmlParent(_mainItem)
     }
@@ -176,7 +176,7 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
                 radius: 10
-                color: _delegateMode.isCurrent ? Style.focusElementsOfListColor : Style.elementsOfListColor
+                color: _delegateMode.isCurrent ? activeTheme.focusElementsOfListColor : activeTheme.elementsOfListColor
                 RowLayout {
                     id: _row
                     anchors.fill: parent
@@ -199,7 +199,7 @@ Rectangle {
                         Layout.fillWidth: true
                         Layout.rightMargin: 7
                         Layout.alignment: Qt.AlignVCenter
-                        color: Style.textColor
+                        color: activeTheme.textColor
                     }
                 }
             }

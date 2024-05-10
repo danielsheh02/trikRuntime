@@ -2,10 +2,9 @@ import QtQuick 2.0
 
 Rectangle {
     id: _camera
-    property var sensorsManager: SensorsManager
-    property var sensors: sensorsManager.sensors
+    property var sensors: Sensors
     property var idList: _listSensors
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
 
     ListView {
         id: _listSensors
@@ -40,7 +39,7 @@ Rectangle {
                     text: qsTr("Camera is not available")
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
             }
             Component {
