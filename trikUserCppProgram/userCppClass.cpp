@@ -13,7 +13,7 @@ UserCppClass *UserCppClass::create(
 	return new UserCppClass(brick, mailbox, trikScriptControl);
 }
 
-void UserCppClass::runMyScript() {
+void UserCppClass::startProgram() {
 	double kp = 2.5;
 	double kd = -3;
 	double dist = mBrick->sensor("A1")->read();

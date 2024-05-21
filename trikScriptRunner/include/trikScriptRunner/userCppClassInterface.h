@@ -11,6 +11,6 @@ public:
 
 	virtual ~UserCppClassInterface() = default;
 
-	virtual void runMyScript() = 0;
+	virtual void startProgram() = 0;
 };
 } // namespace trikScriptRunner

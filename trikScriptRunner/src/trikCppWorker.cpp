@@ -20,7 +20,7 @@ void TrikCppWorker::run() {
 
 	QString message = "";
 	try {
-		mUserObject->runMyScript();
+		mUserObject->startProgram();
 		QLOG_INFO() << "ScriptEngineWorker: evaluation ended";
 		QThread::currentThread()->quit();
 	} catch (trikKernel::ThreadInterruptionException &trik_ex) {

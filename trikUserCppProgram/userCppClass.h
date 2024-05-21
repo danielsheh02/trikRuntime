@@ -16,5 +16,5 @@ public:
 	trikControl::BrickInterface *mBrick;
 	trikNetwork::MailboxInterface *mMailbox;
 	trikScriptRunner::TrikScriptControlInterface *mTrikScriptControl;
-	void runMyScript() override;
+	void startProgram() override;
 };
