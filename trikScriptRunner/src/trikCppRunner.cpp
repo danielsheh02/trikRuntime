@@ -60,8 +60,10 @@ void TrikCppRunner::abort() {
 	}
 }
 
-void TrikCppRunner::clean() { trikCppWorker.reset(); }
+void TrikCppRunner::clean() {
+	trikCppWorker.reset();
 	mLib.unload();
+}
 
 void TrikCppRunner::reset() {
 	QLOG_INFO() << "Stopping robot";
