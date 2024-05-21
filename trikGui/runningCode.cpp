@@ -28,7 +28,7 @@ RunningCode::RunningCode(Controller &controller, QObject *parent)
 	connect(&mController, &Controller::hideRunningWidget, this,
 		&RunningCode::hideRunningCode);
 	connect(&mController, &Controller::hideScriptWidgets, this,
-		&RunningCode::hideScript);
+		&RunningCode::hideScriptComponent);
 }
 
 void RunningCode::showError(const QString &error, int scriptId) {
@@ -59,5 +59,3 @@ void RunningCode::hideRunningCode(int scriptId) {
 	}
 	Q_EMIT hideRunningCodeComponent();
 }
-
-void RunningCode::hideScript() { Q_EMIT hideScriptComponent(); }

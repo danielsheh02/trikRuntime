@@ -22,29 +22,31 @@
 #include <array>
 #include <trikControl/brickInterface.h>
 #include <trikNetwork/mailboxInterface.h>
+#include "trikCppRunner.h"
 
 namespace trikScriptRunner {
 
 /// General wrapper for other executors (such as Python, JavaScript)
-class TRIKSCRIPTRUNNER_EXPORT TrikScriptRunner : public TrikScriptRunnerInterface
+class TRIKSCRIPTRUNNER_EXPORT TrikScriptRunner
+    : public TrikScriptRunnerInterface
 {
 	Q_OBJECT
 public:
 	/// Constructor.
 	/// @param brick - reference to trikControl::Brick instance.
-	/// @param mailbox - mailbox object used to communicate with other robots.
+	/// @param mailbox - mailbox object used to communicate with other
+	/// robots.
 	/// @param scriptControl - implementation of script object
-	TrikScriptRunner(trikControl::BrickInterface &brick
-					 , trikNetwork::MailboxInterface * mailbox
-					 , TrikScriptControlInterface * scriptControl
-					 );
+	TrikScriptRunner(trikControl::BrickInterface &brick,
+			 trikNetwork::MailboxInterface *mailbox,
+			 TrikScriptControlInterface *scriptControl);
 
 	/// Constructor.
 	/// @param brick - reference to trikControl::Brick instance.
-	/// @param mailbox - mailbox object used to communicate with other robots.
-	TrikScriptRunner(trikControl::BrickInterface &brick
-					 , trikNetwork::MailboxInterface * mailbox
-					 );
+	/// @param mailbox - mailbox object used to communicate with other
+	/// robots.
+	TrikScriptRunner(trikControl::BrickInterface &brick,
+			 trikNetwork::MailboxInterface *mailbox);
 
 	~TrikScriptRunner() override;
 
@@ -54,8 +56,11 @@ public:
 	/// Choose default runner type (Python or JavaScript) from extension
 	void setDefaultRunner(const QString &languageExtension);
 
-	void registerUserFunction(const QString &name, QScriptEngine::FunctionSignature function) override;
-	void addCustomEngineInitStep(const std::function<void (QScriptEngine *)> &step) override;
+	void registerUserFunction(
+	    const QString &name,
+	    QScriptEngine::FunctionSignature function) override;
+	void addCustomEngineInitStep(
+	    const std::function<void(QScriptEngine *)> &step) override;
 	bool wasError() override;
 
 	/// Create completion list for interpreted language
@@ -64,13 +69,15 @@ public:
 	/// See corresponding TrikScriptRunnerInterface method
 	QStringList knownMethodNames() const override;
 	/// Execute script with a corresponding engine of specified type
-	void run(const QString &script, ScriptType stype, const QString &fileName = "");
+	void run(const QString &script, ScriptType stype,
+		 const QString &fileName = "");
 signals:
 	/// Broadcasts message to all opened mailboxes.
 	void sendMailboxMessage(QString msg);
 public slots:
 	/// See corresponding TrikScriptRunnerInterface method
 	void run(const QString &script, const QString &fileName = "") override;
+	void runCpp(const QString &filePath, const QString &fileName);
 	/// See corresponding TrikScriptRunnerInterface method
 	void runDirectCommand(const QString &command) override;
 	/// See corresponding TrikScriptRunnerInterface method
@@ -83,13 +90,15 @@ public slots:
 	void setWorkingDirectory(const QString &workingDir) override;
 
 private:
-	TrikScriptRunnerInterface * fetchRunner(ScriptType stype);
+	TrikScriptRunnerInterface *fetchRunner(ScriptType stype);
 
 	trikControl::BrickInterface &mBrick;
-	trikNetwork::MailboxInterface * mMailbox;
-	QSharedPointer <TrikScriptControlInterface> mScriptControl;
-	std::vector<QSharedPointer<TrikScriptRunnerInterface>> mScriptRunnerArray;
+	trikNetwork::MailboxInterface *mMailbox;
+	QSharedPointer<TrikScriptControlInterface> mScriptControl;
+	std::vector<QSharedPointer<TrikScriptRunnerInterface>>
+	    mScriptRunnerArray;
+	QScopedPointer<TrikCppRunner> mCppRunner;
 	ScriptType mLastRunner;
 };
 
-}
+} // namespace trikScriptRunner

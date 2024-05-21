@@ -4,9 +4,9 @@ import QtQml.Models 2.1
 
 Rectangle {
     id: _communication
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     property var communicationSettings: CommunicationSettingsServer
-    property var objectForQmlParentSetting: communicationSettings
+    // property var objectForQmlParentSetting: communicationSettings
     property var idList: _listDigitsHull
 
     Component.onCompleted: {
@@ -25,20 +25,20 @@ Rectangle {
             text: qsTr("Comm settings")
             font.pointSize: 15
             font.bold: true
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("(Press 'Enter' to edit)")
             font.pointSize: 8
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             anchors.left: parent.left
             anchors.leftMargin: 10
             text: qsTr("Hull number:")
             font.pointSize: 15
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Item {
             width: parent.width / 3.5
@@ -72,7 +72,7 @@ Rectangle {
                         width: parent.width / 2
                         height: parent.height
                         radius: 5
-                        color: Style.cellsColor
+                        color: activeTheme.cellsColor
                         property int currentValue: parseInt(
                                                        _listDigitsHull.hullNumberStr[index])
                         border {
@@ -80,7 +80,7 @@ Rectangle {
                                     && _listsDigits.whatFocused === "hull"
                                     && _listDigitsHull.currentIndex
                                     === index) ? "red" : (_listsDigits.whatFocused === "hull"
-                                                          && _listDigitsHull.currentIndex === index) ? Style.lightOrStandartGreenColor : Style.commSettingsBorderColor
+                                                          && _listDigitsHull.currentIndex === index) ? activeTheme.lightOrStandartGreenColor : activeTheme.commSettingsBorderColor
                             width: (_listDigitsHull.focusDigit
                                     && _listsDigits.whatFocused === "hull"
                                     && _listDigitsHull.currentIndex
@@ -92,7 +92,7 @@ Rectangle {
                             anchors.centerIn: parent
                             text: currentValue
                             font.pointSize: 13
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Keys.onPressed: {
                             switch (event.key) {
@@ -145,14 +145,14 @@ Rectangle {
             anchors.leftMargin: 10
             text: qsTr("Leader IP:")
             font.pointSize: 15
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             anchors.left: parent.left
             anchors.leftMargin: 10
             text: qsTr("(last two numbers)")
             font.pointSize: 10
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Item {
             width: parent.width / 1.5
@@ -181,13 +181,13 @@ Rectangle {
                         property var currentValue: index !== _listDigitsIp.indexOfSeparator ? parseInt(_listDigitsIp.ip[index]) : "."
                         property real maxValue: index === 0
                                                 || index === 4 ? 3 : 6
-                        color: index !== _listDigitsIp.indexOfSeparator ? Style.cellsColor : Style.backgroundColor
+                        color: index !== _listDigitsIp.indexOfSeparator ? activeTheme.cellsColor : activeTheme.backgroundColor
                         border {
                             color: (_listDigitsIp.focusDigit
                                     && _listsDigits.whatFocused === "ip"
                                     && _listDigitsIp.currentIndex
                                     === index) ? "red" : (_listsDigits.whatFocused === "ip"
-                                                          && _listDigitsIp.currentIndex === index) ? Style.lightOrStandartGreenColor : (index !== _listDigitsIp.indexOfSeparator) ? Style.commSettingsBorderColor : "transparent"
+                                                          && _listDigitsIp.currentIndex === index) ? activeTheme.lightOrStandartGreenColor : (index !== _listDigitsIp.indexOfSeparator) ? activeTheme.commSettingsBorderColor : "transparent"
                             width: (_listDigitsIp.focusDigit
                                     && _listsDigits.whatFocused === "ip"
                                     && _listDigitsIp.currentIndex
@@ -200,7 +200,7 @@ Rectangle {
                             anchors.centerIn: parent
                             text: currentValue
                             font.pointSize: index !== _listDigitsIp.indexOfSeparator ? 13 : 25
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
 
                         Keys.onPressed: {

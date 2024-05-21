@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 Rectangle {
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     property var wiFiInit: WiFiInitServer
 
     Keys.onPressed: {
@@ -35,21 +35,21 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         Text {
             text: qsTr("Please wait")
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            color: Style.textColor
+            color: activeTheme.textColor
         }
         ProgressBar {
             indeterminate: true
-            palette.dark: Style.trikColor
+            palette.dark: activeTheme.trikColor
             Layout.fillWidth: true
             background: Rectangle {
-                color: Style.progressBarWiFiInitColor
+                color: activeTheme.progressBarWiFiInitColor
                 radius: 3
             }
         }
@@ -59,7 +59,7 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            color: Style.textColor
+            color: activeTheme.textColor
         }
     }
 }

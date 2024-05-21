@@ -23,7 +23,8 @@ public:
 		Language,
 		SystemSettings,
 		AppearanceMode,
-		Information
+		Information,
+		Feedback
 	};
 	Q_ENUM(AppType)
 	Q_INVOKABLE void createApp(AppType appType);

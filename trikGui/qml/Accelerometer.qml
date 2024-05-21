@@ -3,15 +3,16 @@ import QtQuick.Controls 2.0
 
 Item {
     id: _accelerometer
-    property var sensorsManager: SensorsManager
-    property var sensors: sensorsManager.sensors
+    property var sensors: Sensors
     property var coords: [0, 0, 0]
     property var idList: _listSensors
-
+    Component.onCompleted: {
+        sensors.setQmlParent(_accelerometer)
+    }
     ListView {
         id: _listSensors
         anchors.fill: parent
-        model: sensors
+        model: _accelerometer.sensors
         delegate: Item {
             id: _listDelegateSensors
             Column {
@@ -19,7 +20,7 @@ Item {
                     id: _coordsInfo
                     width: _accelerometer.width
                     height: _accelerometer.height * 0.4
-                    color: Style.backgroundColor
+                    color: activeTheme.backgroundColor
                     Column {
                         spacing: 7
                         anchors.fill: parent
@@ -28,22 +29,22 @@ Item {
                         Text {
                             text: qsTr("Accelerometer:")
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
-                            text: "x: " + coords[0].toString()
+                            text: "x: " + _accelerometer.coords[0].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
-                            text: "y: " + coords[1].toString()
+                            text: "y: " + _accelerometer.coords[1].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
-                            text: "z: " + coords[2].toString()
+                            text: "z: " + _accelerometer.coords[2].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                     }
                 }
@@ -51,7 +52,7 @@ Item {
                     id: _tester
                     width: _accelerometer.width
                     height: _accelerometer.height * 0.6
-                    color: Style.backgroundColor
+                    color: activeTheme.backgroundColor
                     property real circleRadius: _tester.width < _tester.height ? _tester.width / 2.5 : _tester.height / 2.5
                     property real innerCircleRadius: _tester.width < _tester.height ? _tester.width / 21 : _tester.height / 21
                     Rectangle {
@@ -59,8 +60,8 @@ Item {
                         width: _tester.circleRadius * 2
                         height: _tester.circleRadius * 2
                         radius: _tester.circleRadius
-                        border.color: Style.gyroAccelBordersColor
-                        color: Style.gyroAccelBackColor
+                        border.color: activeTheme.gyroAccelBordersColor
+                        color: activeTheme.gyroAccelBackColor
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             verticalCenter: parent.verticalCenter
@@ -68,14 +69,14 @@ Item {
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: Style.gyroAccelBordersColor
+                            color: activeTheme.gyroAccelBordersColor
                             x: 0
                             y: _circle.height / 2
                         }
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: Style.gyroAccelBordersColor
+                            color: activeTheme.gyroAccelBordersColor
                             x: _circle.width / 2
                             y: 0
                             transform: Rotation {
@@ -87,7 +88,7 @@ Item {
                             id: innerCircle
                             width: _tester.innerCircleRadius * 2
                             height: _tester.innerCircleRadius * 2
-                            color: Style.lightTrikColor
+                            color: activeTheme.lightTrikColor
                             radius: _tester.innerCircleRadius
                             x: _tester.circleRadius - _tester.innerCircleRadius
                             y: _tester.circleRadius - _tester.innerCircleRadius

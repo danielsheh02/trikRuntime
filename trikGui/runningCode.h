@@ -43,7 +43,6 @@ public:
 private Q_SLOTS:
 	void showRunningCode(const QString &fileName, int scriptId);
 	void hideRunningCode(int scriptId);
-	void hideScript();
 	/// Shows given error message on a widget.
 	void showError(const QString &error, int scriptId);
 

@@ -51,11 +51,8 @@ HEADERS += \
         $$PWD/camera.h \
 	$$PWD/pwmCaptureIndicator.h \
         $$PWD/communicationSettingsManager.h \
-        $$PWD/languageManager.h \
         $$PWD/mainMenuManager.h \
         $$PWD/managers.h \
-        $$PWD/motorsManager.h \
-        $$PWD/sensorsManager.h \
         $$PWD/settingsManager.h \
         $$PWD/testingManager.h \
         $$PWD/wiFiManager.h \
@@ -66,7 +63,8 @@ HEADERS += \
         $$PWD/modeManager.h \
         $$PWD/wiFiAPMock.h \
         $$PWD/wiFiClientMock.h \
-        $$PWD/wiFiModeMock.h
+        $$PWD/wiFiModeMock.h \
+        $$PWD/feedback.h
 
 SOURCES += \
 	$$PWD/autoRunner.cpp \
@@ -100,10 +98,7 @@ SOURCES += \
         $$PWD/camera.cpp \
 	$$PWD/pwmCaptureIndicator.cpp \
         $$PWD/communicationSettingsManager.cpp \
-        $$PWD/languageManager.cpp \
         $$PWD/mainMenuManager.cpp \
-        $$PWD/motorsManager.cpp \
-        $$PWD/sensorsManager.cpp \
         $$PWD/settingsManager.cpp \
         $$PWD/testingManager.cpp \
         $$PWD/wiFiManager.cpp \
@@ -114,9 +109,18 @@ SOURCES += \
         $$PWD/modeManager.cpp \
         $$PWD/wiFiAPMock.cpp \
         $$PWD/wiFiClientMock.cpp \
-        $$PWD/wiFiModeMock.cpp
+        $$PWD/wiFiModeMock.cpp \
+        $$PWD/feedback.cpp
 
 RESOURCES = trikGui.qrc
+
+!equals(ARCHITECTURE, arm):!trik_not_brick {
+    DEFINES += DESKTOP
+}
+# TRANSLATIONS += \
+#         $$PWD/translations/trikRuntime_ru.ts \
+#         $$PWD/translations/trikRuntime_fr.ts \
+#         $$PWD/translations/trikRuntime_de.ts \
 
 OTHER_FILES += \
 

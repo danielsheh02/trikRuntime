@@ -3,19 +3,18 @@ import QtQuick.Controls 2.0
 
 Rectangle {
     id: _sensorsPanel
-    property var sensorsManager: SensorsManager
-    property var sensors: sensorsManager.sensors
-    property var sensorsCount: sensors.rowCount()
+    property var sensors: Sensors
     property var idList: _listSensorsIndicators
-
-    color: Style.backgroundColor
-
+    color: activeTheme.backgroundColor
+    Component.onCompleted: {
+        sensors.setQmlParent(_sensorsPanel)
+    }
     GridView {
         id: _listSensorsIndicators
         anchors.fill: parent
         cellWidth: parent.width / 2
         cellHeight: parent.height / 5
-        model: sensors
+        model: Sensors
 
         delegate: Item {
             id: _delegateIndicator
@@ -26,14 +25,14 @@ Rectangle {
                 anchors.fill: parent
                 anchors.margins: 5
                 radius: 10
-                color: Style.elementsOfListColor
+                color: activeTheme.elementsOfListColor
                 Text {
                     id: _nameLabel
                     text: display.nameLabel
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
                 Text {
                     id: _value
@@ -41,7 +40,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 10
-                    color: Style.textColor
+                    color: activeTheme.textColor
                 }
             }
         }

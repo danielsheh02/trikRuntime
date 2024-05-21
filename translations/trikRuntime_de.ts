@@ -54,6 +54,13 @@
     </message>
 </context>
 <context>
+    <name>Feedback</name>
+    <message>
+        <source>Please leave an anonymous review about new interface.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FileManager</name>
     <message>
         <source>Confirm deletion</source>
@@ -191,6 +198,10 @@
     </message>
     <message>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feedback</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -358,12 +369,12 @@
 <context>
     <name>Settings</name>
     <message>
-        <source>Network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Comm settings</source>
         <translation type="unfinished">Kommunikationseinstellungen</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

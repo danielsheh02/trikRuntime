@@ -8,7 +8,7 @@ Rectangle {
     property var fileManager: FileManagerServer
     property var fileSystemModel: fileManager.fileSystemModel
     property var idList: _listFiles
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     Component.onCompleted: {
         fileManager.setQmlParent(_fileManager)
     }
@@ -50,7 +50,7 @@ Rectangle {
             text: _columMainView.currentPath
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -59,7 +59,7 @@ Rectangle {
             Layout.fillHeight: true
             radius: 13
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             Connections {
                 target: FileManagerServer
                 onFileSystemModelChanged: {
@@ -152,7 +152,7 @@ Rectangle {
                                 anchors.fill: parent
                                 radius: 10
                                 color: _delegateFiles.isCurrent
-                                       && _listFiles.focus ? Style.darkTrikColor : Style.managersBackColor
+                                       && _listFiles.focus ? activeTheme.darkTrikColor : activeTheme.managersBackColor
                                 RowLayout {
                                     anchors.fill: parent
                                     anchors.leftMargin: 5
@@ -169,7 +169,7 @@ Rectangle {
                                         id: _textName
                                         text: display
                                         color: _delegateFiles.isCurrent
-                                               && _listFiles.focus ? "white" : Style.namesColor
+                                               && _listFiles.focus ? "white" : activeTheme.namesColor
                                         Layout.fillWidth: true
                                         Layout.rightMargin: 7
                                         Layout.alignment: Qt.AlignVCenter

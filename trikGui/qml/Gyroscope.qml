@@ -3,19 +3,20 @@ import QtQuick.Controls 2.0
 
 Item {
     id: _gyroscope
-    property var sensorsManager: SensorsManager
     readonly property int maxGyroscopeVal: 100000
-    property var sensors: sensorsManager.sensors
+    property var sensors: Sensors
     property var coords: [0, 0, 0]
     property int xShift: 0
     property int yShift: 0
     property real zShift: -Math.PI / 2
     property var idList: _listSensors
-
+    Component.onCompleted: {
+        sensors.setQmlParent(_gyroscope)
+    }
     ListView {
         id: _listSensors
         anchors.fill: parent
-        model: sensors
+        model: _gyroscope.sensors
         delegate: Item {
             id: _listDelegateSensors
             anchors.fill: parent
@@ -24,7 +25,7 @@ Item {
                     id: _coordsInfo
                     width: _gyroscope.width
                     height: _gyroscope.height * 0.4
-                    color: Style.backgroundColor
+                    color: activeTheme.backgroundColor
                     Column {
                         spacing: 7
                         anchors.fill: parent
@@ -33,22 +34,22 @@ Item {
                         Text {
                             text: qsTr("Gyroscope:")
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
                             text: "x: " + coords[0].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
                             text: "y: " + coords[1].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                         Text {
                             text: "z: " + coords[2].toString()
                             anchors.left: parent.left
-                            color: Style.textColor
+                            color: activeTheme.textColor
                         }
                     }
                 }
@@ -56,15 +57,15 @@ Item {
                     id: _tester
                     width: _gyroscope.width
                     height: _gyroscope.height * 0.6
-                    color: Style.backgroundColor
+                    color: activeTheme.backgroundColor
                     property real circleRadius: _tester.width < _tester.height ? _tester.width / 2.5 : _tester.height / 2.5
                     Rectangle {
                         id: _circle
                         width: _tester.circleRadius * 2
                         height: _tester.circleRadius * 2
                         radius: _tester.circleRadius
-                        border.color: Style.gyroAccelBordersColor
-                        color: Style.gyroAccelBackColor
+                        border.color: activeTheme.gyroAccelBordersColor
+                        color: activeTheme.gyroAccelBackColor
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             verticalCenter: parent.verticalCenter
@@ -72,14 +73,14 @@ Item {
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: Style.gyroAccelBordersColor
+                            color: activeTheme.gyroAccelBordersColor
                             x: 0
                             y: _circle.height / 2
                         }
                         Rectangle {
                             width: _circle.height
                             height: 1
-                            color: Style.gyroAccelBordersColor
+                            color: activeTheme.gyroAccelBordersColor
                             x: _circle.width / 2
                             y: 0
                             transform: Rotation {
@@ -102,7 +103,7 @@ Item {
                                 ctx.stroke()
 
                                 ctx.beginPath()
-                                ctx.strokeStyle = Style.lightTrikColor
+                                ctx.strokeStyle = activeTheme.lightTrikColor
                                 ctx.moveTo(_circle.width / 2,
                                            _circle.height / 2)
                                 ctx.lineTo(_circle.width / 2,

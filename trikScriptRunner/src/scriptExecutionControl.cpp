@@ -19,6 +19,9 @@
 #include <QtCore/QProcess>
 #include <QtCore/QFileInfo>
 #include <QtCore/QStringList>
+#include <QThread>
+#include <QDebug>
+#include <trikKernel/exceptions/threadInterruptionException.h>
 
 #include <QRandomGenerator>
 #include <QsLog.h>
@@ -27,79 +30,73 @@
 
 using namespace trikScriptRunner;
 
-ScriptExecutionControl::ScriptExecutionControl(trikControl::BrickInterface *brick): mBrick(brick) {
+ScriptExecutionControl::ScriptExecutionControl(
+    trikControl::BrickInterface *brick)
+    : mBrick(brick) {
 	qRegisterMetaType<QVector<int32_t>>("QVector<int32_t>");
 }
 
-ScriptExecutionControl::~ScriptExecutionControl()
-{
-	qDeleteAll(mTimers);
-}
+ScriptExecutionControl::~ScriptExecutionControl() { qDeleteAll(mTimers); }
 
-void ScriptExecutionControl::reset()
-{
+void ScriptExecutionControl::reset() {
 	mInEventDrivenMode = false;
 	emit stopWaiting();
 	for (auto &&timer : mTimers) {
-		QMetaObject::invokeMethod(timer, &QTimer::stop, Qt::QueuedConnection);
+		QMetaObject::invokeMethod(timer, &QTimer::stop,
+					  Qt::QueuedConnection);
 		timer->deleteLater();
 	}
 
 	mTimers.clear();
 }
 
-QObject* ScriptExecutionControl::timer(int milliseconds)
-{
+QObject *ScriptExecutionControl::timer(int milliseconds) {
 	auto result = new QTimer();
 	mTimers.append(result);
 	result->start(milliseconds);
 	return result;
 }
 
-void ScriptExecutionControl::wait(const int &milliseconds)
-{
+void ScriptExecutionControl::wait(const int &milliseconds) {
 	QEventLoop loop;
-	QObject::connect(this, &ScriptExecutionControl::stopWaiting, &loop, &QEventLoop::quit);
+	QObject::connect(this, &ScriptExecutionControl::stopWaiting, &loop,
+			 &QEventLoop::quit);
 	QTimer t;
 	connect(&t, &QTimer::timeout, &loop, &QEventLoop::quit);
 	t.start(milliseconds);
 	loop.exec();
+	if (QThread::currentThread()->isInterruptionRequested()) {
+		throw trikKernel::ThreadInterruptionException(
+		    "Interrupt thread with cpp code");
+	}
 }
 
-qint64 ScriptExecutionControl::time() const
-{
+qint64 ScriptExecutionControl::time() const {
 	return QDateTime::currentMSecsSinceEpoch();
 }
 
-int ScriptExecutionControl::random(int from, int to) const
-{
+int ScriptExecutionControl::random(int from, int to) const {
 	if (from > to) {
 		qSwap(from, to);
 	}
 
-	return QRandomGenerator::global()->bounded(from, to+1);
+	return QRandomGenerator::global()->bounded(from, to + 1);
 }
 
-void ScriptExecutionControl::run()
-{
-	mInEventDrivenMode = true;
-}
+void ScriptExecutionControl::run() { mInEventDrivenMode = true; }
 
-bool ScriptExecutionControl::isInEventDrivenMode() const
-{
+bool ScriptExecutionControl::isInEventDrivenMode() const {
 	return mInEventDrivenMode;
 }
 
-void ScriptExecutionControl::quit()
-{
-	emit quitSignal();
-}
+void ScriptExecutionControl::quit() { emit quitSignal(); }
 
-void ScriptExecutionControl::system(const QString &command, bool synchronously)
-{
+void ScriptExecutionControl::system(const QString &command,
+				    bool synchronously) {
 	if (!synchronously) {
 		QStringList args{"-c", command};
-		QLOG_INFO() << "Running: " << "sh" << args;
+		QLOG_INFO() << "Running: "
+			    << "sh" << args;
 		QProcess::startDetached("sh", args);
 	} else {
 		QLOG_INFO() << "Running synchronously: " << command;
@@ -108,22 +105,21 @@ void ScriptExecutionControl::system(const QString &command, bool synchronously)
 	}
 }
 
-void ScriptExecutionControl::writeToFile(const QString &file, const QString &text)
-{
+void ScriptExecutionControl::writeToFile(const QString &file,
+					 const QString &text) {
 	QFile out(file);
 	out.open(QIODevice::WriteOnly | QIODevice::Append);
 	out.write(text.toUtf8());
 }
 
-void ScriptExecutionControl::writeData(const QString &file, const QVector<uint8_t> &bytes)
-{
+void ScriptExecutionControl::writeData(const QString &file,
+				       const QVector<uint8_t> &bytes) {
 	QFile out(file);
 	out.open(QIODevice::WriteOnly | QIODevice::Append);
-	out.write(reinterpret_cast<const char*>(bytes.data()), bytes.size());
+	out.write(reinterpret_cast<const char *>(bytes.data()), bytes.size());
 }
 
-QStringList ScriptExecutionControl::readAll(const QString &file) const
-{
+QStringList ScriptExecutionControl::readAll(const QString &file) const {
 	QFile in(file);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
 		QLOG_INFO() << "Trying to read from file" << file << "failed";
@@ -140,18 +136,17 @@ QStringList ScriptExecutionControl::readAll(const QString &file) const
 	return result;
 }
 
-void ScriptExecutionControl::removeFile(const QString &file)
-{
+void ScriptExecutionControl::removeFile(const QString &file) {
 	QFile out(file);
 	out.remove();
 }
 
-int ScriptExecutionControl::timeInterval(int packedTimeLeft, int packedTimeRight)
-{
-	return trikKernel::TimeVal::timeInterval(packedTimeLeft, packedTimeRight);
+int ScriptExecutionControl::timeInterval(int packedTimeLeft,
+					 int packedTimeRight) {
+	return trikKernel::TimeVal::timeInterval(packedTimeLeft,
+						 packedTimeRight);
 }
 
-QVector<int32_t> ScriptExecutionControl::getPhoto()
-{
+QVector<int32_t> ScriptExecutionControl::getPhoto() {
 	return trikControl::Utilities::rescalePhoto(mBrick->getStillImage());
 }

@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.0
 
 Rectangle {
     id: _runningCode
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
     property var idText: _scriptInfo
     Keys.onPressed: {
         switch (event.key) {
@@ -35,7 +35,7 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Text {
@@ -45,7 +45,7 @@ Rectangle {
             Layout.bottomMargin: 15
             Layout.alignment: Qt.AlignBottom
             horizontalAlignment: Text.AlignHCenter
-            color: Style.textColor
+            color: activeTheme.textColor
         }
     }
 }

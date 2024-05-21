@@ -6,7 +6,8 @@ Rectangle {
     id: _languageSelection
     property var languageSelection: LanguageSelection
     property var idList: _listLanguages
-    color: Style.backgroundColor
+    color: activeTheme.backgroundColor
+
     Component.onCompleted: {
         languageSelection.setQmlParent(_languageSelection)
     }
@@ -28,7 +29,6 @@ Rectangle {
             _listLanguages.focus = true
         }
     }
-
     ColumnLayout {
         id: _columMainView
         spacing: 5
@@ -38,7 +38,7 @@ Rectangle {
         Text {
             text: qsTr("Select language:")
             wrapMode: Text.Wrap
-            color: Style.textColor
+            color: activeTheme.textColor
         }
 
         Rectangle {
@@ -47,13 +47,14 @@ Rectangle {
             Layout.fillHeight: true
             radius: 10
             clip: true
-            color: Style.managersBackColor
+            color: activeTheme.managersBackColor
             ListView {
                 id: _listLanguages
                 anchors.fill: parent
                 spacing: 10
                 property real lineMargin: 8
-                model: languageSelection
+                model: LanguageSelection
+
                 function getCurrentLanguage() {
                     for (var i = 0; i < languageSelection.availableLocales.length; i++) {
                         if (languageSelection.availableLocales[i] === Qt.locale(
@@ -63,34 +64,37 @@ Rectangle {
                     }
                     return 0
                 }
-
                 currentIndex: getCurrentLanguage()
-                function getLanguageIcon(language) {
-                    switch (language) {
-                    case "en":
-                        return iconsPath + "en.png"
-                    case "ru":
-                        return iconsPath + "ru.png"
-                    case "fr":
-                        return iconsPath + "fr.png"
-                    case "de":
-                        return iconsPath + "de.png"
-                    }
-                }
 
-                function getLanguage(language, index) {
-                    switch (language) {
-                    case "en":
-                        return "English"
-                    case "ru":
-                        return "Русский"
-                    case "fr":
-                        return "Française"
-                    case "de":
-                        return "Deutsch"
-                    }
-                }
+                // function getLanguageIcon(language) {
+                //     switch (language) {
+                //     case "en":
+                //         return iconsPath + "en.png"
+                //     case "ru":
+                //         return iconsPath + "ru.png"
+                //     case "fr":
+                //         return iconsPath + "fr.png"
+                //     case "de":
+                //         return iconsPath + "de.png"
+                //     default:
+                //         return ""
+                //     }
+                // }
 
+                // function getLanguage(language) {
+                //     switch (language) {
+                //     case "en":
+                //         return "English"
+                //     case "ru":
+                //         return "Русский"
+                //     case "fr":
+                //         return "Française"
+                //     case "de":
+                //         return "Deutsch"
+                //     default:
+                //         return qsTr("Unknown language")
+                //     }
+                // }
                 delegate: Item {
                     id: _delegateLanguages
                     width: _listLanguages.width
@@ -112,14 +116,29 @@ Rectangle {
                         id: _languageName
                         anchors.fill: parent
                         radius: 10
-                        color: _delegateLanguages.isCurrent ? Style.darkTrikColor : Style.managersBackColor
+                        color: _delegateLanguages.isCurrent ? activeTheme.darkTrikColor : activeTheme.managersBackColor
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 5
                             spacing: 5
                             Image {
+                                function getLanguageIcon(language) {
+                                    switch (language) {
+                                    case "en":
+                                        return "en.png"
+                                    case "ru":
+                                        return "ru.png"
+                                    case "fr":
+                                        return "fr.png"
+                                    case "de":
+                                        return "de.png"
+                                    default:
+                                        return ""
+                                    }
+                                }
                                 id: _languageIcon
-                                source: _listLanguages.getLanguageIcon(display)
+                                source: "../resourcesQml/" + getLanguageIcon(
+                                            display)
                                 Layout.preferredWidth: _languageSelection.width
                                                        < 400 ? _languageSelection.width
                                                                / 9 : _languageSelection.width / 25
@@ -129,10 +148,24 @@ Rectangle {
                                 Layout.alignment: Qt.AlignVCenter
                             }
                             Text {
+                                function getLanguage(language) {
+                                    switch (language) {
+                                    case "en":
+                                        return "English"
+                                    case "ru":
+                                        return "Русский"
+                                    case "fr":
+                                        return "Française"
+                                    case "de":
+                                        return "Deutsch"
+                                    default:
+                                        return qsTr("Unknown language")
+                                    }
+                                }
                                 id: _textName
-                                text: _listLanguages.getLanguage(display, index)
+                                text: getLanguage(display)
                                 Layout.alignment: Qt.AlignVCenter
-                                color: _delegateLanguages.isCurrent ? "white" : Style.namesColor
+                                color: _delegateLanguages.isCurrent ? "white" : activeTheme.namesColor
                                 width: _languageName.width - _languageIcon.width
                                 wrapMode: Text.Wrap
                                 Layout.fillWidth: true

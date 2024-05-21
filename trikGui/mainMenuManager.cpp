@@ -15,6 +15,7 @@
 #include "openSocketIndicator.h"
 #include "testingManager.h"
 #include "wiFiIndicator.h"
+#include "feedback.h"
 #include <QApplication>
 #include <QProcess>
 #include <QQmlContext>
@@ -135,6 +136,12 @@ void MainMenuManager::createApp(AppType appType) {
 		Information *information = new Information(this);
 		qQmlEngine->rootContext()->setContextProperty(
 		    "SystemInformation", information);
+		break;
+	}
+	case AppType::Feedback: {
+		Feedback *feedback = new Feedback(this);
+		qQmlEngine->rootContext()->setContextProperty("FeedbackServer",
+							      feedback);
 		break;
 	}
 	default:

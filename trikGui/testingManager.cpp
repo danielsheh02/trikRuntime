@@ -1,6 +1,7 @@
 #include "testingManager.h"
 #include "managers.h"
 #include <QQmlEngine>
+#include <QQmlContext>
 
 using namespace trikGui;
 using trikControl::MotorInterface;
@@ -40,7 +41,7 @@ void TestingManager::createSensors(SensorType type) {
 	Sensors *sensors =
 	    new Sensors(mController.brick(), ports,
 			static_cast<Sensors::SensorType>(type), this);
-	sensorsManager->setSensors(sensors);
+	qQmlEngine->rootContext()->setContextProperty("Sensors", sensors);
 }
 
 void TestingManager::createMotors(MotorType type) {
@@ -60,7 +61,7 @@ void TestingManager::createMotors(MotorType type) {
 		break;
 	}
 	Motors *motors = new Motors(mController.brick(), ports, this);
-	motorsManager->setMotors(motors);
+	qQmlEngine->rootContext()->setContextProperty("MotorsManager", motors);
 }
 
 void TestingManager::setQmlParent(QObject *parent) { setParent(parent); }

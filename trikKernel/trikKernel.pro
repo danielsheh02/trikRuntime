@@ -39,7 +39,8 @@ HEADERS += \
 	$$PWD/include/trikKernel/exceptions/internalErrorException.h \
 	$$PWD/include/trikKernel/exceptions/malformedConfigException.h \
 	$$PWD/include/trikKernel/exceptions/trikRuntimeException.h \
-	$$PWD/include/trikKernel/trikKernelDeclSpec.h
+	$$PWD/include/trikKernel/trikKernelDeclSpec.h \
+	include/trikKernel/exceptions/threadInterruptionException.h
 
 SOURCES += \
 	$$PWD/src/applicationInitHelper.cpp \

@@ -37,8 +37,6 @@
 
 using namespace trikGui;
 QQmlApplicationEngine *qQmlEngine = nullptr;
-MotorsManager *motorsManager = nullptr;
-SensorsManager *sensorsManager = nullptr;
 
 void setStyle(int argc, char *argv[]) {
 	QQuickStyle::setStyle("TrikStyle");
@@ -64,14 +62,6 @@ int main(int argc, char *argv[]) {
 	trikKernel::ApplicationInitHelper initHelper(app);
 
 	qQmlEngine = new QQmlApplicationEngine(&app);
-
-	motorsManager = new MotorsManager(qQmlEngine);
-	sensorsManager = new SensorsManager(qQmlEngine);
-
-	qQmlEngine->rootContext()->setContextProperty("MotorsManager",
-						      motorsManager);
-	qQmlEngine->rootContext()->setContextProperty("SensorsManager",
-						      sensorsManager);
 
 	ModeManager::initMode();
 	initHelper.commandLineParser().addApplicationDescription(QObject::tr(
