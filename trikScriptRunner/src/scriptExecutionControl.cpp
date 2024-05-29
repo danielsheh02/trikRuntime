@@ -22,8 +22,10 @@
 
 #include <QRandomGenerator>
 #include <QsLog.h>
+#include <QThread>
 
 #include <trikControl/utilities.h>
+#include <trikKernel/exceptions/threadInterruptionException.h>
 
 using namespace trikScriptRunner;
 
@@ -64,6 +66,9 @@ void ScriptExecutionControl::wait(const int &milliseconds)
 	connect(&t, &QTimer::timeout, &loop, &QEventLoop::quit);
 	t.start(milliseconds);
 	loop.exec();
+	if (QThread::currentThread()->isInterruptionRequested()) {
+		throw trikKernel::ThreadInterruptionException("Interrupt thread with cpp code");
+	}
 }
 
 qint64 ScriptExecutionControl::time() const

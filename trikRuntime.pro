@@ -17,6 +17,7 @@ SUBDIRS = \
         initvars \
         qslog \
         trikKernel \
+        trikUserCppProgram \
         trikWiFi \
         trikNetwork \
         trikHal \

@@ -43,10 +43,13 @@ HEADERS += \
 	$$PWD/src/threading.h \
 	$$PWD/src/utils.h \
 	$$PWD/src/scriptThread.h \
+        $$PWD/src/trikCppWorker.h \
 	$$PWD/include/trikScriptRunner/trikScriptRunnerInterface.h \
 	$$PWD/include/trikScriptRunner/trikJavaScriptRunner.h \
 	$$PWD/include/trikScriptRunner/trikVariablesServer.h \
-	$$PWD/include/trikScriptRunner/trikScriptRunnerDeclSpec.h
+	$$PWD/include/trikScriptRunner/trikScriptRunnerDeclSpec.h \
+        $$PWD/include/trikScriptRunner/trikCppRunner.h \
+        $$PWD/include/trikScriptRunner/userCppClassInterface.h
 
 SOURCES += \
 	$$PWD/src/scriptExecutionControl.cpp \
@@ -57,7 +60,9 @@ SOURCES += \
 	$$PWD/src/utils.cpp \
 	$$PWD/src/scriptThread.cpp \
 	$$PWD/src/trikVariablesServer.cpp \
-	$$PWD/src/trikScriptControlInterface.cpp
+	$$PWD/src/trikScriptControlInterface.cpp \
+        $$PWD/src/trikCppRunner.cpp \
+        $$PWD/src/trikCppWorker.cpp
 
 !trik_nopython {
 	HEADERS += \

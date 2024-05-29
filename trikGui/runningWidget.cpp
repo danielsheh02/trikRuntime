@@ -50,6 +50,7 @@ void RunningWidget::showError(const QString &error, int scriptId)
 
 void RunningWidget::setProgram(const QString &programName, int scriptId)
 {
+	mStatusLabel.setStyleSheet("QLabel { color : black; }");
 	mStatusLabel.setAlignment(Qt::AlignCenter);
 	mStatusLabel.setText(tr("Running ") + programName);
 	mScriptId = scriptId;

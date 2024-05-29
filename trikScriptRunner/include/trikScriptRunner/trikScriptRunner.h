@@ -16,6 +16,7 @@
 
 #include "trikScriptControlInterface.h"
 #include "trikScriptRunnerInterface.h"
+#include "trikCppRunner.h"
 #include <QFileInfo>
 #include <QMutex>
 #include <QScopedPointer>
@@ -71,6 +72,8 @@ signals:
 public slots:
 	/// See corresponding TrikScriptRunnerInterface method
 	void run(const QString &script, const QString &fileName = "") override;
+	/// Running custom code written in C++
+	void runCpp(const QString &filePath, const QString &fileName);
 	/// See corresponding TrikScriptRunnerInterface method
 	void runDirectCommand(const QString &command) override;
 	/// See corresponding TrikScriptRunnerInterface method
@@ -90,6 +93,7 @@ private:
 	QSharedPointer <TrikScriptControlInterface> mScriptControl;
 	std::vector<QSharedPointer<TrikScriptRunnerInterface>> mScriptRunnerArray;
 	ScriptType mLastRunner;
+	QScopedPointer<TrikCppRunner> mCppRunner;
 };
 
 }

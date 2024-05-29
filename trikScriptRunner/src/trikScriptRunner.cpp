@@ -120,6 +120,17 @@ void TrikScriptRunner::run(const QString &script, const QString &fileName)
 	}
 }
 
+void TrikScriptRunner::runCpp(const QString &filePath, const QString &fileName)
+{
+	abortAll();
+	if (mCppRunner.isNull()) {
+		mCppRunner.reset(new TrikCppRunner(&mBrick, mMailbox, mScriptControl.data()));
+		connect(&*mCppRunner, &TrikCppRunner::completed, this, &TrikScriptRunner::completed);
+		connect(&*mCppRunner, &TrikCppRunner::startedScript, this, &TrikScriptRunner::startedScript);
+	}
+	mCppRunner->run(filePath, fileName);
+}
+
 TrikScriptRunnerInterface * TrikScriptRunner::fetchRunner(ScriptType stype)
 {
 	auto & cell = mScriptRunnerArray[to_underlying(stype)];
@@ -167,6 +178,9 @@ void TrikScriptRunner::runDirectCommand(const QString &command)
 void TrikScriptRunner::abort()
 {
 	fetchRunner(mLastRunner)->abort();
+	if (!mCppRunner.isNull()) {
+		mCppRunner.data()->abort();
+	}
 }
 
 void TrikScriptRunner::abortAll()
@@ -175,6 +189,9 @@ void TrikScriptRunner::abortAll()
 		if (r != nullptr) {
 			r->abort();
 		}
+	}
+	if (!mCppRunner.isNull()) {
+		mCppRunner.data()->abort();
 	}
 }
 
