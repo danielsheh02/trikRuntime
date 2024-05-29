@@ -12,7 +12,7 @@ To use the tools from the SDK, you need to export the environment:
 . /opt/trik-sdk/environment-setup-arm926ejse-oe-linux-gnueabi
 ```
 
-### Step 3
+### Step 2
 Implementation of the algorithm.
 
 You need to implement this interface for your custom class:
@@ -66,7 +66,7 @@ public:
 
 You can see an example of the algorithm `along the box` implemented in C++ in the `trikUserCppProgram` module.
 
-### Step 4
+### Step 3
 To compile the implemented program, you need to generate a Makefile using the qmake tool:
 ```
 qmake .../trikRuntime/trikUserCppProgram/trikUserCppProgram.pro
