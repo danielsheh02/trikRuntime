@@ -72,7 +72,7 @@ To compile the implemented program, you need to generate a Makefile using the qm
 qmake .../trikRuntime/trikUserCppProgram/trikUserCppProgram.pro
 ```
 
-To get the dynamic library file extension .so it is necessary to perform:
+To get the dynamic library file it is necessary to perform:
 ```
 make
 ```
