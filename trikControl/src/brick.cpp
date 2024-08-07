@@ -111,14 +111,6 @@ Brick::Brick(const trikKernel::DifferentOwnerPointer<trikHal::HardwareAbstractio
 
 	mBattery.reset(new Battery(*mMspCommunicator));
 
-	if (mConfigurer.isEnabled("accelerometer")) {
-		mAccelerometer.reset(new VectorSensor("accelerometer", mConfigurer, *mHardwareAbstraction));
-	}
-
-	if (mConfigurer.isEnabled("gyroscope")) {
-		mGyroscope.reset(new GyroSensor("gyroscope", mConfigurer, *mHardwareAbstraction, mAccelerometer.data()));
-	}
-
 	mKeys.reset(new Keys(mConfigurer, *mHardwareAbstraction));
 
 	mLed.reset(new Led(mConfigurer, *mHardwareAbstraction));
@@ -590,7 +582,15 @@ void Brick::createDevice(const QString &port)
 						new CameraDevice(port, mMediaPath, mConfigurer, *mHardwareAbstraction)
 					);
 			mCamera.swap(tmp);
-		}
+        } else if (deviceClass == "iioDevice") {
+            const QString &deviceType = mConfigurer.deviceType(port);
+            if (deviceType == "accelerometer"){
+                qInfo() << "iiodevice hey hey";
+                mAccelerometer.reset(new VectorSensor(deviceType, mConfigurer, *mHardwareAbstraction, port));
+            } else if (deviceType == "gyroscope"){
+                mGyroscope.reset(new GyroSensor(deviceType, mConfigurer, *mHardwareAbstraction, mAccelerometer.data(), port));
+            }
+        }
 	} catch (MalformedConfigException &e) {
 		QLOG_ERROR() << "Config for port" << port << "is malformed:" << e.errorMessage();
 		QLOG_ERROR() << "Ignoring device";
