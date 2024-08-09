@@ -18,6 +18,7 @@
 #include <QPainter>
 
 #include <trikControl/gyroSensorInterface.h>
+#include <QDebug>
 
 using namespace trikGui;
 
@@ -30,42 +31,44 @@ GyroscopeIndicator::GyroscopeIndicator(trikControl::GyroSensorInterface *gyrosco
 	, mTitle(tr("Gyroscope"))
 	, mGyroscope(gyroscope)
 {
-	mTitle.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-	mValueX.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-	mValueY.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-	mValueZ.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-	mCircle.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    mTitle.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mValueX.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mValueY.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mValueZ.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mCircle.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-	mLayout.addWidget(&mTitle);
-	mLayout.addWidget(&mValueX);
-	mLayout.addWidget(&mValueY);
-	mLayout.addWidget(&mValueZ);
+    mLayout.addWidget(&mTitle);
+    mLayout.addWidget(&mValueX);
+    mLayout.addWidget(&mValueY);
+    mLayout.addWidget(&mValueZ);
 
-	mLayout.addWidget(&mCircle);
+    mLayout.addWidget(&mCircle);
 
-	setLayout(&mLayout);
+    setLayout(&mLayout);
 }
 
 void GyroscopeIndicator::renew()
 {
-	const auto &value = mGyroscope != nullptr ? mGyroscope->read() : QVector<int>();
+    qInfo() << "GyroscopeIndicator::renew()";
+    // const auto &value = mGyroscope != nullptr ? mGyroscope->read() : QVector<int>();
 
-	const auto &text = [&value](int i, int &out) {
-		return value.size() > i ? QString::number(out = value[i]) : tr("Error");
-	};
+    // const auto &text = [&value](int i, int &out) {
+    //     return value.size() > i ? QString::number(out = value[i]) : tr("Error");
+    // };
 
-	mValueX.setText(QString("x: ") + text(0, mX));
-	mValueY.setText(QString("y: ") + text(1, mY));
-	mValueZ.setText(QString("z: ") + text(2, mZ));
+    // mValueX.setText(QString("x: ") + text(0, mX));
+    // mValueY.setText(QString("y: ") + text(1, mY));
+    // mValueZ.setText(QString("z: ") + text(2, mZ));
 
-	update();
+    // update();
 }
 
 void GyroscopeIndicator::resizeEvent(QResizeEvent *)
 {
-	auto size = qMin(mCircle.width(), mCircle.height());
-	QPointF topleft((mCircle.width() - size) / 2, (mCircle.height() - size) / 2);
-	mBounds = QRectF(topleft, QSize(size, size));
+    qInfo() << "GyroscopeIndicator::resizeEvent";
+    // auto size = qMin(mCircle.width(), mCircle.height());
+    // QPointF topleft((mCircle.width() - size) / 2, (mCircle.height() - size) / 2);
+    // mBounds = QRectF(topleft, QSize(size, size));
 }
 
 template<typename T>
@@ -76,36 +79,38 @@ T constrain(T value, T max, T min)
 
 void GyroscopeIndicator::paintEvent(QPaintEvent *)
 {
-	QPixmap pixmap(mCircle.size());
-	pixmap.fill(Qt::transparent);
+    qInfo() << "paintEvent 1";
+    QPixmap pixmap(mCircle.size());
+    pixmap.fill(Qt::transparent);
 
-	QPainter painter(&pixmap);
+    QPainter painter(&pixmap);
+    qInfo() << "paintEvent 2";
+    painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
-	painter.setRenderHint(QPainter::HighQualityAntialiasing);
+    painter.setPen(QPen(QBrush(Qt::black), mBounds.width() * 0.003));
+    painter.setBrush(QBrush(Qt::transparent));
+    painter.drawEllipse(mBounds);
 
-	painter.setPen(QPen(QBrush(Qt::black), mBounds.width() * 0.003));
-	painter.setBrush(QBrush(Qt::transparent));
-	painter.drawEllipse(mBounds);
+    // draw crosshair
+    painter.setPen(QPen(QBrush(Qt::black), mBounds.width() * 0.001));
+    painter.drawLine(QPointF(mBounds.left(), mBounds.center().y()), QPointF(mBounds.right(), mBounds.center().y()));
+    painter.drawLine(QPointF(mBounds.center().x(), mBounds.top()), QPointF(mBounds.center().x(), mBounds.bottom()));
+    qInfo() << "paintEvent 3";
+    // draw x, y lines
+    painter.setPen(QPen(QBrush(Qt::blue), mBounds.width() * 0.02));
+    auto xShift = constrain(mX, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * mBounds.width() / (2 * MAX_GYROSCOPE_VAL);
+    painter.drawLine(mBounds.center(), QPointF(mBounds.center().x() + xShift, mBounds.center().y()));
+    qInfo() << "paintEvent 4";
+    painter.setPen(QPen(QBrush(Qt::green), mBounds.width() * 0.02));
+    auto yShift = constrain(mY, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * mBounds.width() / (2 * MAX_GYROSCOPE_VAL);
+    painter.drawLine(mBounds.center(), QPointF(mBounds.center().x(), mBounds.center().y() + yShift));
 
-	// draw crosshair
-	painter.setPen(QPen(QBrush(Qt::black), mBounds.width() * 0.001));
-	painter.drawLine(QPointF(mBounds.left(), mBounds.center().y()), QPointF(mBounds.right(), mBounds.center().y()));
-	painter.drawLine(QPointF(mBounds.center().x(), mBounds.top()), QPointF(mBounds.center().x(), mBounds.bottom()));
+    // draw z arc
+    painter.setPen(QPen(QBrush(Qt::red), mBounds.width() * 0.02));
+    int startAngle = 90 * ARC_DRAWING_CONST;
+    int spanAngle = constrain(mZ, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * ARC_DRAWING_CONST / MAX_GYROSCOPE_VAL * 180;
+    painter.drawArc(mBounds, startAngle, spanAngle);
 
-	// draw x, y lines
-	painter.setPen(QPen(QBrush(Qt::blue), mBounds.width() * 0.02));
-	auto xShift = constrain(mX, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * mBounds.width() / (2 * MAX_GYROSCOPE_VAL);
-	painter.drawLine(mBounds.center(), QPointF(mBounds.center().x() + xShift, mBounds.center().y()));
-
-	painter.setPen(QPen(QBrush(Qt::green), mBounds.width() * 0.02));
-	auto yShift = constrain(mY, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * mBounds.width() / (2 * MAX_GYROSCOPE_VAL);
-	painter.drawLine(mBounds.center(), QPointF(mBounds.center().x(), mBounds.center().y() + yShift));
-
-	// draw z arc
-	painter.setPen(QPen(QBrush(Qt::red), mBounds.width() * 0.02));
-	int startAngle = 90 * ARC_DRAWING_CONST;
-	int spanAngle = constrain(mZ, MAX_GYROSCOPE_VAL, -MAX_GYROSCOPE_VAL) * ARC_DRAWING_CONST / MAX_GYROSCOPE_VAL * 180;
-	painter.drawArc(mBounds, startAngle, spanAngle);
-
-	mCircle.setPixmap(pixmap);
+    mCircle.setPixmap(pixmap);
+    qInfo() << "paintEvent 5";
 }

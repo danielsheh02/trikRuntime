@@ -75,7 +75,7 @@ private:
 	QVBoxLayout mLayout;
 	QVector<AbstractIndicator *> mIndicators;  // Has ownership.
 	const int mInterval;
-	QTimer mTimer;
+    // QTimer mTimer;
 	SensorType mSensorType;
 };
 

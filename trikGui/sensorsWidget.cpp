@@ -34,8 +34,8 @@ SensorsWidget::SensorsWidget(trikControl::BrickInterface &brick, const QStringLi
 	, mInterval(100)
 	, mSensorType(sensorType)
 {
-	mTimer.setInterval(mInterval);
-	mTimer.setSingleShot(false);
+    // mTimer.setInterval(mInterval);
+    // mTimer.setSingleShot(false);
 
 	int i = 0;
 
@@ -47,7 +47,7 @@ SensorsWidget::SensorsWidget(trikControl::BrickInterface &brick, const QStringLi
 
 		if (indicator) {
 			mLayout.addWidget(indicator);
-			connect(&mTimer, &QTimer::timeout, indicator, &AbstractIndicator::renew);
+            // connect(&mTimer, &QTimer::timeout, indicator, &AbstractIndicator::renew);
 			mIndicators[i] = indicator;
 		}
 
@@ -58,7 +58,7 @@ SensorsWidget::SensorsWidget(trikControl::BrickInterface &brick, const QStringLi
 			AbstractIndicator *indicator = produceIndicator(port, mSensorType);
 			if (indicator) {
 				mLayout.addWidget(indicator);
-				connect(&mTimer, &QTimer::timeout, indicator, &AbstractIndicator::renew);
+                // connect(&mTimer, &QTimer::timeout, indicator, &AbstractIndicator::renew);
 				mIndicators[i] = indicator;
 				++i;
 			}
@@ -75,7 +75,7 @@ SensorsWidget::~SensorsWidget()
 
 int SensorsWidget::exec()
 {
-	mTimer.start();
+    // mTimer.start();
 	return TrikGuiDialog::exec();
 }
 
@@ -86,13 +86,13 @@ void SensorsWidget::renewFocus()
 
 void SensorsWidget::exit()
 {
-	mTimer.stop();
+    // mTimer.stop();
 	TrikGuiDialog::exit();
 }
 
 void SensorsWidget::goHome()
 {
-	mTimer.stop();
+    // mTimer.stop();
 	TrikGuiDialog::goHome();
 }
 

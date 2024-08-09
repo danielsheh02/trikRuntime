@@ -122,11 +122,11 @@ Note that device, even if listed here, may fail by itself, then it also will not
 		 commenting them out. -->
         <boardAccelPort>
             <accelerometer />
-        <boardAccelPort />
+        </boardAccelPort>
 
         <boardGyroPort>
             <gyroscope />
-        <boardGyroPort />
+        </boardGyroPort>
 
 	<!-- Optional modules -->
 	<gamepad />

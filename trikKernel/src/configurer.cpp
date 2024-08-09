@@ -55,6 +55,63 @@ Configurer::Configurer(const QString &systemConfigFileName, const QString &model
 	parseAdditionalConfigurations(systemConfig);
 
 	parseModelConfig(modelConfig);
+
+    // printModelConfiguration(mModelConfiguration);
+}
+
+void Configurer::printModelConfigurationElement(const ModelConfigurationElement& element) {
+    qInfo() << "Port:" << element.port;
+    qInfo() << "Device Type:" << element.deviceType;
+    qInfo() << "Attributes:";
+    for (auto it = element.attributes.begin(); it != element.attributes.end(); ++it) {
+        qInfo() << "  " << it.key() << ":" << it.value();
+    }
+}
+
+void Configurer::printModelConfiguration(const QHash<QString, ModelConfigurationElement>& modelConfiguration) {
+    for (auto it = modelConfiguration.begin(); it != modelConfiguration.end(); ++it) {
+        qInfo() << "Key:" << it.key();
+        printModelConfigurationElement(it.value());
+    }
+}
+
+void Configurer::printDeviceType(const DeviceType& deviceType) {
+    qInfo() << "Device Type Name:" << deviceType.name;
+    qInfo() << "Device Class:" << deviceType.deviceClass;
+    qInfo() << "Attributes:";
+    for (auto it = deviceType.attributes.begin(); it != deviceType.attributes.end(); ++it) {
+        qInfo() << "  " << it.key() << ":" << it.value();
+    }
+}
+
+void Configurer::printDeviceTypes(const QHash<QString, DeviceType>& deviceTypes) {
+    for (auto it = deviceTypes.begin(); it != deviceTypes.end(); ++it) {
+        qInfo() << "Key:" << it.key();
+        printDeviceType(it.value());
+    }
+}
+
+void Configurer::printDevice(const Device& device) {
+    qInfo() << "Device Name:" << device.name;
+    qInfo() << "Attributes:";
+    for (auto it = device.attributes.begin(); it != device.attributes.end(); ++it) {
+        qInfo() << "  " << it.key() << ":" << it.value();
+    }
+    qInfo() << "Port Specific Attributes:";
+    for (auto portIt = device.portSpecificAttributes.begin(); portIt != device.portSpecificAttributes.end(); ++portIt) {
+        qInfo() << "  Port:" << portIt.key();
+        for (auto attrIt = portIt.value().begin(); attrIt != portIt.value().end(); ++attrIt) {
+            qInfo() << "    " << attrIt.key() << ":" << attrIt.value();
+        }
+    }
+    qInfo() << "Is Optional:" << (device.isOptional ? "Yes" : "No");
+}
+
+void Configurer::printDevices(const QHash<QString, Device>& devices) {
+    for (auto it = devices.begin(); it != devices.end(); ++it) {
+        qInfo() << "Key:" << it.key();
+        printDevice(it.value());
+    }
 }
 
 QString Configurer::attributeByDevice(const QString &deviceClass, const QString &attributeName) const

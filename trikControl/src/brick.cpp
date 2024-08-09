@@ -105,9 +105,9 @@ Brick::Brick(const trikKernel::DifferentOwnerPointer<trikHal::HardwareAbstractio
 	mMspCommunicator.reset(MspBusAutoDetector::createCommunicator(mConfigurer, *mHardwareAbstraction));
 	mModuleLoader.reset(new ModuleLoader(mHardwareAbstraction->systemConsole()));
 
-	for (const QString &port : mConfigurer.ports()) {
-		createDevice(port);
-	}
+    // for (const QString &port : mConfigurer.ports()) {
+        // createDevice(port);
+    // }
 
 	mBattery.reset(new Battery(*mMspCommunicator));
 
@@ -170,11 +170,11 @@ QString Brick::configVersion() const
 
 void Brick::configure(const QString &portName, const QString &deviceName)
 {
-	shutdownDevice(portName);
+    shutdownDevice(portName);
 
-	mConfigurer.configure(portName, deviceName);
+    mConfigurer.configure(portName, deviceName);
 
-	createDevice(portName);
+    createDevice(portName);
 }
 
 void Brick::reset()
@@ -583,13 +583,13 @@ void Brick::createDevice(const QString &port)
 					);
 			mCamera.swap(tmp);
         } else if (deviceClass == "iioDevice") {
-            const QString &deviceType = mConfigurer.deviceType(port);
-            if (deviceType == "accelerometer"){
-                qInfo() << "iiodevice hey hey";
-                mAccelerometer.reset(new VectorSensor(deviceType, mConfigurer, *mHardwareAbstraction, port));
-            } else if (deviceType == "gyroscope"){
-                mGyroscope.reset(new GyroSensor(deviceType, mConfigurer, *mHardwareAbstraction, mAccelerometer.data(), port));
-            }
+            // const QString &deviceType = mConfigurer.deviceType(port);
+            // if (deviceType == "accelerometer"){
+            //     qInfo() << "iiodevice hey hey";
+            //     mAccelerometer.reset(new VectorSensor(deviceType, mConfigurer, *mHardwareAbstraction, port));
+            // } else if (deviceType == "gyroscope"){
+            //     mGyroscope.reset(new GyroSensor(deviceType, mConfigurer, *mHardwareAbstraction, mAccelerometer.data(), port));
+            // }
         }
 	} catch (MalformedConfigException &e) {
 		QLOG_ERROR() << "Config for port" << port << "is malformed:" << e.errorMessage();

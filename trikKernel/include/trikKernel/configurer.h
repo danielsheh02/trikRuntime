@@ -96,6 +96,15 @@ private:
 	void parseAdditionalConfigurations(const QDomElement &element);
 	void parseModelConfig(const QDomElement &element);
 
+    void printDevice(const Device& device);
+    void printDevices(const QHash<QString, Device>& devices);
+
+    void printDeviceType(const DeviceType& deviceType);
+    void printDeviceTypes(const QHash<QString, DeviceType>& deviceTypes);
+
+    void printModelConfigurationElement(const ModelConfigurationElement& element);
+    void printModelConfiguration(const QHash<QString, ModelConfigurationElement>& modelConfiguration);
+
 	QStringList mInitScripts;
 
 	/// Maps device class name to its configuration.
