@@ -25,6 +25,8 @@
 
 #include <trikHal/hardwareAbstractionInterface.h>
 
+#include <trikKernel/configurer.h>
+
 namespace trikControl {
 
 /// Worker object that processes Lidar output and updates stored reading. Meant to be executed in separate
@@ -35,8 +37,10 @@ class LidarWorker : public QObject, public DeviceInterface
 public:
 	/// Constructor.
 	/// @param fileName - name of a FIFO file.
-	/// @param hardwareAbstraction - interface to underlying hardware or operating system capabilities of a robot.
-	explicit LidarWorker(const QString &fileName, const trikHal::HardwareAbstractionInterface &hardwareAbstraction);
+	/// @param port - port on which this sensor is configured.
+	/// @param configurer - configurer object containing preparsed XML files with lidar parameters.
+	/// @param hardwareAbstraction - interface to underlying hardware or operating system capabilities of a robot
+	explicit LidarWorker(const QString &fileName, const QString &port, const trikKernel::Configurer &configurer, const trikHal::HardwareAbstractionInterface &hardwareAbstraction);
 	~LidarWorker();
 
 	Status status() const override;
@@ -76,6 +80,9 @@ private:
 
 	/// device state
 	DeviceState mState;
+
+	/// lidar baud rate
+	int mSerialBaudRate;
 
 	/// Releases when init() is finished
 	QSemaphore mWaitForInit {1};

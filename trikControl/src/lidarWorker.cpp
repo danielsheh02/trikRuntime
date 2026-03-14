@@ -15,6 +15,7 @@
 #include "lidarWorker.h"
 
 #include <QsLog.h>
+#include "configurerHelper.h"
 
 struct Delta2AProbe {
 	uint8_t signal;
@@ -51,12 +52,12 @@ static uint16_t get_unaligned_be16(const void *p) {
 	return (((uint16_t)data[0]) << 8) + data[1];
 }
 
-trikControl::LidarWorker::LidarWorker(const QString &fileName
-					, const trikHal::HardwareAbstractionInterface &)
+trikControl::LidarWorker::LidarWorker(const QString &fileName, const QString &port, const trikKernel::Configurer &configurer, const trikHal::HardwareAbstractionInterface &)
 	: mSerial(fileName)
 	, mLidarChunk(new uint8_t[LIDAR_DATA_CHUNK_SIZE])
 	, mResult(ANGLES_RAW_NUMBER, 0)
 	, mState("Lidar on " + fileName)
+	, mSerialBaudRate(ConfigurerHelper::configureInt(configurer, mState, port, "baudRate"))
 {
 	mState.start();
 	mWaitForInit.acquire(1);
@@ -98,7 +99,7 @@ void LidarWorker::init()
 		mWaitForInit.release(1);
 		return;
 	}
-	mSerial.setBaudRate(230400);
+	mSerial.setBaudRate(mSerialBaudRate);
 	mSerial.setDataBits(QSerialPort::Data8);
 	mSerial.setParity(QSerialPort::NoParity);
 	mSerial.setStopBits(QSerialPort::OneStop);

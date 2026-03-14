@@ -180,7 +180,7 @@ equal to its class name.
 		<fifo port="soundSensor" file="/home/root/trik/soundSensor.fifo" />
                 <iioDevice port="boardAccelPort" />
                 <iioDevice port="boardGyroPort" />
-                <lidar port="lidarPort" file="/dev/ttyUSB0" />
+                <lidar port="lidarPort" file="/dev/ttyUSB0" baudRate="230400"/>
                 <irCamera port="irCameraPort" i2cAddress="0x33" m="3" n="3" />
 	</devicePorts>
 

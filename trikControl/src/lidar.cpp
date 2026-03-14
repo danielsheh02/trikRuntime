@@ -20,7 +20,7 @@ using namespace trikControl;
 
 Lidar::Lidar(const QString &port, const trikKernel::Configurer &configurer
 		, trikHal::HardwareAbstractionInterface &hardwareAbstraction)
-	: mLidarWorker(new LidarWorker(configurer.attributeByPort(port, "file"), hardwareAbstraction))
+	: mLidarWorker(new LidarWorker(configurer.attributeByPort(port, "file"), port, configurer, hardwareAbstraction))
 {
 	mLidarWorker->moveToThread(&mWorkerThread);
 
